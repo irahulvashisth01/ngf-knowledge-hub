@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <meta name="theme-color" content="#4F46E5">
   <meta charset="UTF-8">
   <title>📚 Notes Hub</title>
 
@@ -66,6 +69,13 @@ function goBack() {
 
 </nav>
 {% endif %}
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/static/js/sw.js')
+    .then(() => console.log("PWA Ready"));
+}
+</script>
 
 </body>
 </html>

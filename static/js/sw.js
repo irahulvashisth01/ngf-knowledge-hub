@@ -1,8 +1,7 @@
-const CACHE_NAME = "notes-hub-cache-v1";
+const CACHE_NAME = "notes-hub-v1";
 
 const urlsToCache = [
   "/",
-  "/dashboard",
   "/static/css/style.css"
 ];
 
