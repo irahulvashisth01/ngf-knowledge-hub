@@ -136,6 +136,141 @@ body {
   gap: 20px;
 }
 
+/* ================= SEMESTER SECTION ================= */
+.semester-wrapper {
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+/* HEADER */
+.semester-header h1 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.semester-header p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* ================= GRID (IMPORTANT) ================= */
+/* ================= SEMESTER GRID FIX ================= */
+.semester-grid {
+  display: grid;
+
+  /* ✅ FORCE EXACT 3 COLUMNS */
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* ================= CARD ================= */
+.semester-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(12px);
+
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* TOP GRADIENT LINE */
+.semester-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+
+  background: linear-gradient(90deg, #4F46E5, #9333EA);
+}
+
+/* HOVER EFFECT */
+.semester-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* ICON */
+.sem-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+/* TITLE */
+.semester-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+/* TEXT */
+.semester-card p {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+/* BUTTON */
+.sem-btn {
+  display: inline-block;
+  padding: 7px 14px;
+
+  border-radius: 20px;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #4F46E5, #6366F1);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  transition: 0.3s;
+}
+
+.sem-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .semester-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile (IMPORTANT → 2 columns) */
+@media (max-width: 500px) {
+  .semester-grid {
+    grid-template-columns: repeat(2, 1fr); /* ✅ YOUR REQUIREMENT */
+    gap: 15px;
+  }
+
+  .semester-card {
+    padding: 14px;
+  }
+
+  .semester-card h3 {
+    font-size: 14px;
+  }
+
+  .sem-btn {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+}
+
 /* ---------------- CARDS ---------------- */
 .card, .note-card {
   background: rgba(255,255,255,0.75);
@@ -413,4 +548,138 @@ input, select {
     padding-bottom: 70px;
   }
 
+}
+
+/* ================= SEMESTER PAGE ================= */
+.semester-wrapper {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* HEADER */
+.semester-header h1 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.semester-header p {
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+/* ================= GRID ================= */
+.semester-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* ✅ Desktop 3 cards */
+  gap: 20px;
+}
+
+/* ================= CARD ================= */
+.semester-card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* TOP GRADIENT LINE */
+.semester-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+
+  background: linear-gradient(90deg, #4F46E5, #9333EA);
+}
+
+/* HOVER */
+.semester-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* ICON */
+.sem-icon {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+/* TITLE */
+.semester-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+/* TEXT */
+.semester-card p {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+/* BUTTON */
+.sem-btn {
+  display: inline-block;
+  padding: 8px 16px;
+
+  border-radius: 20px;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #4F46E5, #6366F1);
+  color: white;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  transition: 0.3s;
+}
+
+.sem-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .semester-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile (2 columns as required) */
+@media (max-width: 500px) {
+  .semester-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .semester-card {
+    padding: 15px;
+  }
+
+  .semester-card h3 {
+    font-size: 14px;
+  }
+
+  .sem-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
 }
