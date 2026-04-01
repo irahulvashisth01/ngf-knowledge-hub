@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="hero">
+  <h1>🚀 Welcome to Notes Hub</h1>
+  <p>Share & Access B.Tech Notes Easily</p>
+
+  {% if session.get('user') %}
+    
+    <a href="/dashboard" class="btn">Go to Dashboard</a>
+
+    {% if session.get('role') == 'admin' %}
+      <br><br>
+      <a href="/admin" class="btn">👑 Admin Panel</a>
+    {% endif %}
+
+  {% else %}
+    <a href="/login" class="btn">Get Started</a>
+  {% endif %}
+</div>
+
+{% endblock %}

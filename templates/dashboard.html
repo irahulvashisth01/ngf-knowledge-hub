@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Welcome {{session['user']}} 👋</h2>
+
+<div class="grid">
+  <a href="/btech" class="card big">
+    📦 B.Tech Notes
+  </a>
+</div>
+
+{% if session['role'] == 'admin' %}
+  <a href="/admin" class="btn">👑 Admin Panel</a>
+{% endif %}
+
+{% endblock %}

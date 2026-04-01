@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>📚 {{subject}} Notes</h2>
+
+<div class="grid">
+  {% for t in top_notes %}
+    <div class="note-card">
+      <h4>📄 {{t['title']}}</h4>
+      <p>📊 Downloads: {{t['downloads']}}</p>
+
+      <a href="/view/{{t['filename']}}" target="_blank" class="btn">👁 View</a>
+      <a href="/download/{{t['filename']}}" class="btn">⬇ Download</a>
+    </div>
+  {% endfor %}
+</div>
+
+<hr>
+
+<!-- SUBJECT NOTES -->
+{% if notes %}
+  <div class="grid">
+
+    {% for n in notes %}
+      <div class="note-card">
+
+        <h4>📄 {{n['title']}}</h4>
+        <p>📊 Downloads: {{n['downloads']}}</p>
+
+        <div class="actions">
+         <a href="/view/{{n['filename']}}" class="btn">
+          👁 View
+        </a>
+
+        <a href="/download/{{n['filename']}}" class="btn">
+          ⬇ Download
+        </a>
+        </div>
+
+      </div>
+    {% endfor %}
+
+  </div>
+
+{% else %}
+  <div class="empty">
+    🚧 Notes Coming Soon
+  </div>
+{% endif %}
+
+{% endblock %}

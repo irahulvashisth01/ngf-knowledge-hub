@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Semester {{sem}}</h2>
+
+<div class="grid">
+  {% for sub in subjects %}
+    <a href="/notes/{{sub}}/{{sem}}" class="card">
+      {{sub}}
+    </a>
+  {% endfor %}
+</div>
+
+{% endblock %}

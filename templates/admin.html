@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>👑 Admin Panel</h2>
+
+<!-- ---------------- PENDING NOTES ---------------- -->
+<h3>📄 Pending Notes</h3>
+
+{% if pending_notes %}
+  {% for n in pending_notes %}
+    <div class="note-card">
+      <p><b>{{n['title']}}</b> ({{n['subject']}} - Sem {{n['semester']}})</p>
+
+      <a href="/approve/{{n['id']}}" class="btn">✅ Approve</a>
+      <a href="/delete/{{n['id']}}" class="btn danger">❌ Delete</a>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>No pending notes</p>
+{% endif %}
+
+
+<!-- ---------------- APPROVED NOTES ---------------- -->
+<h3>📚 Approved Notes</h3>
+
+{% if approved_notes %}
+  {% for n in approved_notes %}
+    <div class="note-card">
+      <p>{{n['title']}}</p>
+      <a href="/delete/{{n['id']}}" class="btn danger">Delete</a>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>No approved notes</p>
+{% endif %}
+
+
+<!-- ---------------- USERS ---------------- -->
+<h3>👥 Users</h3>
+
+{% for u in users %}
+  <div class="note-card">
+    <p>
+      <b>{{u['name']}}</b> - {{u['role']}}
+    </p>
+
+    {% if u['role'] == 'user' %}
+      <a href="/make_admin/{{u['id']}}" class="btn">Make Admin</a>
+    {% elif u['role'] == 'admin' %}
+      <a href="/remove_admin/{{u['id']}}" class="btn danger">Remove Admin</a>
+    {% endif %}
+  </div>
+{% endfor %}
+
+{% endblock %}
