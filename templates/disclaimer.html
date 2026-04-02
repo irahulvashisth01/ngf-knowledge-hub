@@ -1,16 +1,206 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Disclaimer</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Disclaimer - NotesHub</title>
+
+<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta name="theme-color" content="#111827">
+
+<style>
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f9fafb;
+  color: #111827;
+  line-height: 1.6;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: #111827;
+  color: white;
+  padding: 14px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: #d1d5db;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADINGS */
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+/* TEXT */
+p {
+  margin-top: 10px;
+  color: #374151;
+}
+
+/* LIST */
+ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* ===== MOBILE NAV ===== */
+.mobile-nav {
+  display: none;
+}
+
+@media(max-width: 768px) {
+
+  .nav-links {
+    display: none;
+  }
+
+  .container {
+    margin-top: 80px;
+  }
+
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111827;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+
+  .mobile-nav a {
+    color: #9ca3af;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .mobile-nav i {
+    display: block;
+    font-size: 18px;
+  }
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>Disclaimer</h1>
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">📚 NotesHub</div>
 
-<p>
-NotesHub provides educational content only.
-We do not guarantee accuracy of materials.
-</p>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/btech">Notes</a>
+    <a href="/contact">Contact</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <div class="card">
+
+    <h1>⚠️ Disclaimer</h1>
+
+    <p>
+      Welcome to <strong>NotesHub</strong>. The information provided on this platform is for educational purposes only.
+    </p>
+
+    <h2>📚 Educational Purpose</h2>
+    <p>
+      All notes and materials available on NotesHub are shared to support student learning. We do not guarantee the completeness, accuracy, or reliability of the content.
+    </p>
+
+    <h2>⚠️ No Professional Advice</h2>
+    <p>
+      The content on this platform should not be considered as professional or official academic advice.
+    </p>
+
+    <h2>📤 User-Generated Content</h2>
+    <p>
+      Users may upload notes and materials. NotesHub is not responsible for the accuracy, originality, or legality of user-submitted content.
+    </p>
+
+    <h2>© Copyright Notice</h2>
+    <p>
+      If you believe any content violates copyright laws, please contact us. We will take appropriate action.
+    </p>
+
+    <h2>🔄 Changes</h2>
+    <p>
+      We may update this disclaimer at any time without prior notice.
+    </p>
+
+    <h2>📧 Contact</h2>
+    <p>
+      For any concerns, please reach out via the contact page.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
+</div>
 
 </body>
 </html>

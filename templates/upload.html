@@ -8,8 +8,9 @@
 <title>Upload Notes - NotesHub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta name="theme-color" content="#111827">
 
 <style>
 
@@ -21,18 +22,24 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== BODY ===== */
 body {
-  min-height: 100vh;
   background: linear-gradient(135deg, #4f46e5, #06b6d4);
   color: white;
+  padding-top: 70px;
 }
 
 /* ===== NAVBAR ===== */
 .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(17,24,39,0.9);
+  backdrop-filter: blur(10px);
+  padding: 14px 25px;
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
+  align-items: center;
+  z-index: 1000;
 }
 
 .logo {
@@ -41,9 +48,13 @@ body {
 }
 
 .nav-links a {
-  color: white;
+  color: #d1d5db;
   margin-left: 15px;
   text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: white;
 }
 
 /* ===== MAIN ===== */
@@ -57,10 +68,10 @@ body {
 /* ===== BOX ===== */
 .upload-box {
   width: 420px;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(18px);
   padding: 30px;
-  border-radius: 15px;
+  border-radius: 18px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
@@ -83,14 +94,15 @@ select {
   padding: 10px;
   border-radius: 8px;
   border: none;
+  outline: none;
 }
 
-/* ===== FILE DROP AREA ===== */
+/* DROP AREA */
 .drop-area {
   margin-top: 10px;
   padding: 25px;
   border: 2px dashed rgba(255,255,255,0.5);
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: center;
   cursor: pointer;
   transition: 0.3s;
@@ -98,6 +110,7 @@ select {
 
 .drop-area:hover {
   background: rgba(255,255,255,0.1);
+  transform: scale(1.02);
 }
 
 .drop-area i {
@@ -105,7 +118,7 @@ select {
   margin-bottom: 10px;
 }
 
-/* HIDDEN INPUT */
+/* FILE INPUT */
 input[type="file"] {
   display: none;
 }
@@ -115,6 +128,7 @@ input[type="file"] {
   margin-top: 10px;
   font-size: 14px;
   color: #e5e7eb;
+  text-align: center;
 }
 
 /* BUTTON */
@@ -122,9 +136,9 @@ input[type="file"] {
   width: 100%;
   margin-top: 20px;
   padding: 12px;
-  background: #10b981;
+  background: linear-gradient(45deg,#10b981,#059669);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -132,15 +146,51 @@ input[type="file"] {
 }
 
 .btn:hover {
-  background: #059669;
   transform: translateY(-2px);
 }
 
-/* MOBILE */
-@media(max-width: 450px) {
-  .upload-box {
-    width: 90%;
+/* ===== MOBILE APP STYLE ===== */
+.mobile-nav {
+  display: none;
+}
+
+@media(max-width: 768px) {
+
+  body {
+    padding-bottom: 70px;
   }
+
+  .upload-box {
+    width: 100%;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  /* MOBILE NAV */
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111827;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+
+  .mobile-nav a {
+    color: #9ca3af;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .mobile-nav i {
+    display: block;
+    font-size: 18px;
+  }
+
 }
 
 </style>
@@ -157,10 +207,6 @@ input[type="file"] {
     <a href="/dashboard">Dashboard</a>
     <a href="/btech">Notes</a>
     <a href="/logout">Logout</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms</a>
   </div>
 </div>
 
@@ -173,7 +219,6 @@ input[type="file"] {
 
     <form method="POST" enctype="multipart/form-data">
 
-      <!-- Semester -->
       <label>Semester</label>
       <select name="semester" id="semester" onchange="updateSubjects()">
         {% for i in range(1,9) %}
@@ -181,11 +226,9 @@ input[type="file"] {
         {% endfor %}
       </select>
 
-      <!-- Subject -->
       <label>Subject</label>
       <select name="subject" id="subject"></select>
 
-      <!-- FILE DROP -->
       <label>Upload File</label>
       <div class="drop-area" onclick="document.getElementById('fileInput').click()">
         <i class="fas fa-cloud-upload-alt"></i>
@@ -202,6 +245,14 @@ input[type="file"] {
 
   </div>
 
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
+  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
 </div>
 
 <script>
@@ -225,7 +276,7 @@ function updateSubjects() {
 
 window.onload = updateSubjects;
 
-/* FILE NAME SHOW */
+/* FILE NAME */
 document.getElementById("fileInput").addEventListener("change", function() {
   let fileName = this.files[0]?.name || "";
   document.getElementById("fileName").innerText = fileName;

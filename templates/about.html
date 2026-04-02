@@ -1,19 +1,212 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>About - NotesHub</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>About - NotesHub</title>
+
+<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta name="theme-color" content="#111827">
+
+<style>
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #111827;
+  color: white;
+  padding: 14px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: #d1d5db;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1000px;
+  margin: 100px auto 40px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADINGS */
+h1 {
+  margin-bottom: 15px;
+}
+
+h2 {
+  margin-top: 25px;
+}
+
+/* TEXT */
+p {
+  margin-top: 10px;
+  color: #374151;
+  line-height: 1.7;
+}
+
+/* FEATURES */
+.features {
+  margin-top: 15px;
+}
+
+.features li {
+  margin: 8px 0;
+}
+
+/* DEVELOPER BOX */
+.dev-box {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f3f4f6;
+  border-radius: 12px;
+}
+
+/* ===== MOBILE ===== */
+.mobile-nav {
+  display: none;
+}
+
+@media(max-width: 768px) {
+
+  .nav-links {
+    display: none;
+  }
+
+  .container {
+    margin-top: 80px;
+  }
+
+  /* MOBILE NAV */
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111827;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+
+  .mobile-nav a {
+    color: #9ca3af;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .mobile-nav i {
+    display: block;
+    font-size: 18px;
+  }
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>About NotesHub</h1>
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">📚 NotesHub</div>
 
-<p>
-NotesHub is a platform created by Rahul Vashisth to help B.Tech students access notes easily.
-</p>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/btech">Notes</a>
+    <a href="/contact">Contact</a>
+  </div>
+</div>
 
-<p>
-This platform provides semester-wise notes, PYQs, and study materials.
-</p>
+<!-- CONTENT -->
+<div class="container">
+
+  <div class="card">
+
+    <h1>📚 About NotesHub</h1>
+
+    <p>
+      <strong>NotesHub</strong> is a modern platform designed to help B.Tech students easily access, share, and download academic notes in a structured way.
+    </p>
+
+    <p>
+      Our mission is to simplify learning by providing all essential study materials in one place, making education more accessible and efficient.
+    </p>
+
+    <h2>🚀 What We Offer</h2>
+    <ul class="features">
+      <li>📘 Semester-wise notes organization</li>
+      <li>📄 Previous year questions (PYQs)</li>
+      <li>⬇ Easy download & view system</li>
+      <li>🔍 Smart subject-based navigation</li>
+      <li>📱 Mobile-friendly experience</li>
+    </ul>
+
+    <h2>🎯 Our Vision</h2>
+    <p>
+      We aim to build a community-driven platform where students can contribute and access quality educational resources anytime, anywhere.
+    </p>
+
+    <div class="dev-box">
+      <h2>👨‍💻 Developer</h2>
+      <p><strong>Rahul Vashisth</strong></p>
+      <p>B.Tech Engineering Student</p>
+      <p>Passionate about building useful web applications 🚀</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
+</div>
 
 </body>
 </html>

@@ -1,17 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Privacy Policy</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Privacy Policy - NotesHub</title>
+
+<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta name="theme-color" content="#111827">
+
+<style>
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f9fafb;
+  color: #111827;
+  line-height: 1.6;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: #111827;
+  color: white;
+  padding: 14px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: #d1d5db;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADINGS */
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+/* TEXT */
+p {
+  margin-top: 10px;
+  color: #374151;
+}
+
+/* LIST */
+ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* ===== MOBILE NAV ===== */
+.mobile-nav {
+  display: none;
+}
+
+@media(max-width: 768px) {
+
+  .nav-links {
+    display: none;
+  }
+
+  .container {
+    margin-top: 80px;
+  }
+
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111827;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+
+  .mobile-nav a {
+    color: #9ca3af;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .mobile-nav i {
+    display: block;
+    font-size: 18px;
+  }
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>Privacy Policy</h1>
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">📚 NotesHub</div>
 
-<p>
-We collect basic user data like name and email for login purposes.
-We do not share your personal data with third parties.
-Cookies may be used to improve user experience.
-</p>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/btech">Notes</a>
+    <a href="/contact">Contact</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <div class="card">
+
+    <h1>🔒 Privacy Policy</h1>
+
+    <p>
+      At <strong>NotesHub</strong>, we value your privacy and are committed to protecting your personal information.
+    </p>
+
+    <h2>📌 Information We Collect</h2>
+    <ul>
+      <li>Name and email address during registration</li>
+      <li>Basic usage data to improve our platform</li>
+    </ul>
+
+    <h2>🔐 How We Use Your Information</h2>
+    <ul>
+      <li>To provide login and account functionality</li>
+      <li>To improve user experience</li>
+      <li>To maintain platform security</li>
+    </ul>
+
+    <h2>🍪 Cookies</h2>
+    <p>
+      We may use cookies to enhance your browsing experience and remember user preferences.
+    </p>
+
+    <h2>🤝 Data Sharing</h2>
+    <p>
+      We do not sell, trade, or share your personal data with third parties.
+    </p>
+
+    <h2>🔄 Updates</h2>
+    <p>
+      This policy may be updated from time to time. Changes will be reflected on this page.
+    </p>
+
+    <h2>📧 Contact Us</h2>
+    <p>
+      If you have any questions, feel free to contact us via the contact page.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
+</div>
 
 </body>
 </html>

@@ -8,9 +8,9 @@
 <title>Register - NotesHub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
-
-<!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta name="theme-color" content="#111827">
 
 <style>
 
@@ -24,35 +24,65 @@
 
 /* ===== BACKGROUND ===== */
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
   background: linear-gradient(45deg, #4f46e5, #06b6d4, #9333ea);
   background-size: 400% 400%;
   animation: gradientMove 10s infinite;
 }
 
-/* ANIMATION */
 @keyframes gradientMove {
   0% {background-position:0%}
   50% {background-position:100%}
   100% {background-position:0%}
 }
 
-/* ===== REGISTER BOX ===== */
+/* ===== LAYOUT ===== */
+.container {
+  display: flex;
+  width: 100%;
+}
+
+/* LEFT PANEL */
+.left-panel {
+  flex: 1;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.left-panel h1 {
+  font-size: 40px;
+}
+
+.left-panel p {
+  margin-top: 15px;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* RIGHT PANEL */
+.right-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== FORM BOX ===== */
 .form-box {
   background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(20px);
   padding: 40px;
-  border-radius: 15px;
+  border-radius: 20px;
   width: 360px;
   text-align: center;
   color: white;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
 }
 
-/* TITLE */
 .form-box h2 {
   margin-bottom: 20px;
 }
@@ -68,21 +98,25 @@ body {
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #ccc;
+  color: #d1d5db;
 }
 
-/* INPUTS */
 .input-group input {
   width: 100%;
-  padding: 12px 12px 12px 38px;
+  padding: 12px 12px 12px 40px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   outline: none;
+  background: rgba(255,255,255,0.2);
+  color: white;
 }
 
-/* FOCUS EFFECT */
+.input-group input::placeholder {
+  color: #e5e7eb;
+}
+
 .input-group input:focus {
-  box-shadow: 0 0 8px rgba(59,130,246,0.6);
+  box-shadow: 0 0 10px rgba(99,102,241,0.6);
 }
 
 /* BUTTON */
@@ -91,8 +125,8 @@ body {
   padding: 12px;
   margin-top: 15px;
   border: none;
-  border-radius: 8px;
-  background: #3b82f6;
+  border-radius: 10px;
+  background: linear-gradient(45deg,#10b981,#059669);
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -100,8 +134,8 @@ body {
 }
 
 .btn:hover {
-  background: #2563eb;
   transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
 /* LINK */
@@ -114,12 +148,27 @@ body {
   text-decoration: underline;
 }
 
-/* MOBILE */
-@media(max-width: 400px) {
+/* ===== MOBILE (APP STYLE) ===== */
+@media(max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    display: none;
+  }
+
+  .right-panel {
+    width: 100%;
+    height: 100vh;
+  }
+
   .form-box {
     width: 90%;
     padding: 30px;
   }
+
 }
 
 </style>
@@ -128,35 +177,52 @@ body {
 
 <body>
 
-<div class="form-box">
+<div class="container">
 
-  <h2>📝 Create Account</h2>
+  <!-- LEFT SIDE -->
+  <div class="left-panel">
+    <div>
+      <h1>🚀 Join NotesHub</h1>
+      <p>Create your account and start learning smarter 📚</p>
+    </div>
+  </div>
 
-  <form method="POST">
+  <!-- RIGHT SIDE -->
+  <div class="right-panel">
 
-    <div class="input-group">
-      <i class="fas fa-user"></i>
-      <input type="text" name="name" placeholder="Full Name" required>
+    <div class="form-box">
+
+      <h2>📝 Register</h2>
+
+      <form method="POST">
+
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" name="name" placeholder="Full Name" required>
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" placeholder="Email Address" required>
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-phone"></i>
+          <input type="text" name="mobile" placeholder="Mobile Number" required>
+        </div>
+
+        <button class="btn">Create Account</button>
+
+      </form>
+
+      <p style="margin-top:15px;">
+        Already have an account?  
+        <a href="/login">Login</a>
+      </p>
+
     </div>
 
-    <div class="input-group">
-      <i class="fas fa-envelope"></i>
-      <input type="email" name="email" placeholder="Email Address" required>
-    </div>
-
-    <div class="input-group">
-      <i class="fas fa-phone"></i>
-      <input type="text" name="mobile" placeholder="Mobile Number" required>
-    </div>
-
-    <button class="btn">Register</button>
-
-  </form>
-
-  <p style="margin-top:15px;">
-    Already have an account?  
-    <a href="/login">Login</a>
-  </p>
+  </div>
 
 </div>
 

@@ -1,17 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Terms & Conditions</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Terms & Conditions - NotesHub</title>
+
+<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta name="theme-color" content="#111827">
+
+<style>
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f9fafb;
+  color: #111827;
+  line-height: 1.6;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: #111827;
+  color: white;
+  padding: 14px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: #d1d5db;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADINGS */
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+/* TEXT */
+p {
+  margin-top: 10px;
+  color: #374151;
+}
+
+/* LIST */
+ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* ===== MOBILE ===== */
+.mobile-nav {
+  display: none;
+}
+
+@media(max-width: 768px) {
+
+  .nav-links {
+    display: none;
+  }
+
+  .container {
+    margin-top: 80px;
+  }
+
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111827;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+
+  .mobile-nav a {
+    color: #9ca3af;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .mobile-nav i {
+    display: block;
+    font-size: 18px;
+  }
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>Terms & Conditions</h1>
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">📚 NotesHub</div>
 
-<p>
-This platform is for educational purposes only.
-Uploading copyrighted content is strictly prohibited.
-Users are responsible for their content.
-</p>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/btech">Notes</a>
+    <a href="/contact">Contact</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <div class="card">
+
+    <h1>📄 Terms & Conditions</h1>
+
+    <p>
+      Welcome to <strong>NotesHub</strong>. By using our platform, you agree to the following terms and conditions.
+    </p>
+
+    <h2>📌 Use of Platform</h2>
+    <ul>
+      <li>This platform is intended for educational purposes only</li>
+      <li>Users must use the platform responsibly and ethically</li>
+    </ul>
+
+    <h2>📤 User Content</h2>
+    <ul>
+      <li>Users are responsible for the content they upload</li>
+      <li>Uploading copyrighted or illegal content is strictly prohibited</li>
+      <li>Admin reserves the right to remove any content</li>
+    </ul>
+
+    <h2>🔐 Account Responsibility</h2>
+    <ul>
+      <li>Users must provide accurate information</li>
+      <li>Keep login credentials secure</li>
+    </ul>
+
+    <h2>⚠️ Limitation of Liability</h2>
+    <p>
+      NotesHub is not responsible for any misuse of content or any loss caused by using this platform.
+    </p>
+
+    <h2>🔄 Changes to Terms</h2>
+    <p>
+      We may update these terms at any time. Continued use of the platform means acceptance of updated terms.
+    </p>
+
+    <h2>📧 Contact</h2>
+    <p>
+      For any queries, please contact us via the contact page.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
+</div>
 
 </body>
 </html>

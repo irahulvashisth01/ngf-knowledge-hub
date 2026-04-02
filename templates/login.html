@@ -8,9 +8,9 @@
 <title>Login - NotesHub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
-
-<!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta name="theme-color" content="#111827">
 
 <style>
 
@@ -24,10 +24,8 @@
 
 /* ===== BACKGROUND ===== */
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
   background: linear-gradient(45deg, #4f46e5, #06b6d4, #9333ea);
   background-size: 400% 400%;
   animation: gradientMove 10s infinite;
@@ -40,16 +38,49 @@ body {
   100% {background-position:0%}
 }
 
-/* ===== LOGIN BOX ===== */
-.form-box {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(15px);
+/* ===== CONTAINER ===== */
+.container {
+  display: flex;
+  width: 100%;
+}
+
+/* LEFT SIDE (DESKTOP ONLY) */
+.left-panel {
+  flex: 1;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 40px;
-  border-radius: 15px;
+}
+
+.left-panel h1 {
+  font-size: 40px;
+}
+
+.left-panel p {
+  margin-top: 15px;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* ===== LOGIN BOX ===== */
+.right-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(20px);
+  padding: 40px;
+  border-radius: 20px;
   width: 350px;
   text-align: center;
   color: white;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
 }
 
 /* TITLE */
@@ -57,24 +88,42 @@ body {
   margin-bottom: 20px;
 }
 
-/* INPUTS */
-.form-box input {
+/* INPUT GROUP */
+.input-group {
+  position: relative;
+  margin: 12px 0;
+}
+
+.input-group i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d1d5db;
+}
+
+.input-group input {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
+  padding: 12px 12px 12px 40px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   outline: none;
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+
+.input-group input::placeholder {
+  color: #e5e7eb;
 }
 
 /* BUTTON */
 .btn {
   width: 100%;
   padding: 12px;
-  margin-top: 10px;
+  margin-top: 15px;
   border: none;
-  border-radius: 8px;
-  background: #3b82f6;
+  border-radius: 10px;
+  background: linear-gradient(45deg,#3b82f6,#6366f1);
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -82,7 +131,8 @@ body {
 }
 
 .btn:hover {
-  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
 /* LINK */
@@ -95,11 +145,27 @@ body {
   text-decoration: underline;
 }
 
-/* MOBILE */
-@media(max-width: 400px) {
+/* ===== MOBILE (APP STYLE) ===== */
+@media(max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    display: none;
+  }
+
+  .right-panel {
+    width: 100%;
+    height: 100vh;
+  }
+
   .form-box {
     width: 90%;
+    padding: 30px;
   }
+
 }
 
 </style>
@@ -108,21 +174,47 @@ body {
 
 <body>
 
-<div class="form-box">
+<div class="container">
 
-  <h2>🔐 Login to NotesHub</h2>
+  <!-- LEFT SIDE -->
+  <div class="left-panel">
+    <div>
+      <h1>📚 NotesHub</h1>
+      <p>Your B.Tech Notes Companion 🚀</p>
+    </div>
+  </div>
 
-  <form method="POST">
-    <input type="text" name="name" placeholder="👤 Name" required>
-    <input type="email" name="email" placeholder="📧 Email" required>
+  <!-- RIGHT SIDE -->
+  <div class="right-panel">
 
-    <button class="btn">Login</button>
-  </form>
+    <div class="form-box">
 
-  <p style="margin-top:15px;">
-    Don't have an account?  
-    <a href="/register">Create Account</a>
-  </p>
+      <h2>🔐 Login</h2>
+
+      <form method="POST">
+
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <button class="btn">Login</button>
+
+      </form>
+
+      <p style="margin-top:15px;">
+        Don't have an account?  
+        <a href="/register">Create Account</a>
+      </p>
+
+    </div>
+
+  </div>
 
 </div>
 

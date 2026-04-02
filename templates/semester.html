@@ -8,9 +8,9 @@
 <title>Semesters - NotesHub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
-
-<!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta name="theme-color" content="#111827">
 
 <style>
 
@@ -22,18 +22,24 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== BODY ===== */
 body {
-  min-height: 100vh;
   background: linear-gradient(135deg, #4f46e5, #06b6d4);
   color: white;
+  padding-top: 70px;
 }
 
 /* ===== NAVBAR ===== */
 .navbar {
-  padding: 15px 30px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(17,24,39,0.9);
+  backdrop-filter: blur(10px);
+  padding: 14px 25px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
 }
 
 .logo {
@@ -42,56 +48,59 @@ body {
 }
 
 .nav-links a {
-  color: white;
+  color: #d1d5db;
   margin-left: 15px;
   text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: white;
 }
 
 /* ===== WRAPPER ===== */
 .semester-wrapper {
   padding: 40px 20px;
   text-align: center;
+  max-width: 1200px;
+  margin: auto;
 }
 
-/* HEADER */
 .semester-header h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-size: 34px;
 }
 
 .semester-header p {
   color: #e5e7eb;
-  margin-bottom: 30px;
+  margin: 10px 0 30px;
 }
 
 /* ===== GRID ===== */
 .semester-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-  gap: 20px;
+  grid-template-columns: repeat(4,1fr);
+  gap: 25px;
 }
 
 /* ===== CARD ===== */
 .semester-card {
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(12px);
-  padding: 25px;
-  border-radius: 15px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border-radius: 18px;
   transition: 0.3s;
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 .semester-card:hover {
-  transform: translateY(-8px) scale(1.03);
+  transform: translateY(-8px) scale(1.04);
 }
 
-/* ICON */
 .sem-icon {
   font-size: 40px;
   margin-bottom: 10px;
 }
 
-/* TEXT */
 .semester-card h3 {
   margin: 10px 0;
 }
@@ -99,24 +108,65 @@ body {
 /* BUTTON */
 .sem-btn {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 12px;
   padding: 10px 18px;
-  background: #3b82f6;
+  background: linear-gradient(45deg,#3b82f6,#6366f1);
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
   transition: 0.3s;
 }
 
 .sem-btn:hover {
-  background: #2563eb;
+  transform: translateY(-2px);
 }
 
-/* ===== MOBILE ===== */
-@media(max-width: 600px) {
-  .semester-header h1 {
-    font-size: 24px;
+/* ===== MOBILE APP STYLE ===== */
+.mobile-nav {
+  display: none;
+}
+
+@media(max-width: 768px) {
+
+  body {
+    padding-bottom: 70px;
   }
+
+  .semester-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .semester-header h1 {
+    font-size: 26px;
+  }
+
+  /* MOBILE NAV */
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111827;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+
+  .mobile-nav a {
+    color: #9ca3af;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .mobile-nav i {
+    display: block;
+    font-size: 18px;
+  }
+
 }
 
 </style>
@@ -133,10 +183,6 @@ body {
     <a href="/dashboard">Dashboard</a>
     <a href="/btech">Notes</a>
     <a href="/logout">Logout</a>
-    <a href="/contact">Contact</a>
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms</a>
-    <a href="/disclaimer">Disclaimer</a>
   </div>
 </div>
 
@@ -161,6 +207,14 @@ body {
 
   </div>
 
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
+  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
 </div>
 
 </body>
