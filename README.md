@@ -1,6 +1,6 @@
 # 📚 NotesHub
 
-### 🚀 Modern Notes Sharing Platform for B.Tech Students
+🚀 **Modern Notes Sharing Platform for B.Tech Students**
 
 🌐 **Live Website:** https://btechnotes.online
 ⚙️ **Deployment:** https://notes-hub-lpxg.onrender.com
@@ -11,19 +11,20 @@
 
 **NotesHub** is a full-stack web application designed for engineering students to **browse, upload, and download academic notes** in a structured, semester-wise format.
 
-It features a clean UI, secure authentication system, admin control panel, and real-world cloud deployment with a custom domain.
+It features a **modern UI, authentication system, admin dashboard, blog system, and cloud deployment**, making it a **portfolio-ready + real-world SaaS project**.
 
 ---
 
-## ✨ Key Features
+## ✨ Features
 
 ### 👨‍🎓 User Features
 
 * 📚 Browse notes without login
-* 🔍 Search notes by subject or title
-* 👁 View notes directly in browser (PDF preview)
-* ⬇ Download notes *(login required)*
-* 📱 Install as a Progressive Web App (PWA)
+* 🔍 Search notes by subject
+* 👁 View notes in browser
+* ⬇ Download notes
+* 📱 Mobile responsive UI
+* 🖼 Visual student-based interface
 
 ---
 
@@ -31,18 +32,18 @@ It features a clean UI, secure authentication system, admin control panel, and r
 
 * User Registration (Name, Email, Mobile)
 * Secure Login (Session-based)
-* Smart redirect after login
 * Role-based access control
+* Smart redirects
 
 ---
 
 ### 🧑‍💼 Admin Panel
 
 * 📤 Upload notes
-* ✅ Approve / Reject submissions
+* ✅ Approve / Reject notes
 * 🗑 Delete notes
-* 🔄 Manage user roles (User ↔ Admin)
-* 📊 Full platform control
+* 👥 Manage users (Admin ↔ User)
+* 📊 Full control dashboard
 
 ---
 
@@ -51,23 +52,42 @@ It features a clean UI, secure authentication system, admin control panel, and r
 * 📈 Download tracking system
 * 🏆 Top downloaded notes section
 * 📂 Semester-wise organization
-* 📱 Fully responsive design
-* 🔎 Backend-powered search
+* 🔎 Backend-powered filtering
+* 🖼 Image-based UI design
+
+---
+
+### ✍️ Blog System (AdSense Ready)
+
+* 📝 Educational articles
+* 📚 SEO-friendly content
+* 🔗 Individual blog pages
+* 📈 Improves Google ranking
+
+---
+
+### ⚖️ Legal Pages (AdSense Required)
+
+* 📄 Privacy Policy
+* 📄 Terms & Conditions
+* 📄 Disclaimer
+* 📄 About Us
+* 📄 Contact Page
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category  | Technology                 |
-| --------- | -------------------------- |
-| Backend   | Python                     |
-| Framework | Flask                      |
-| Database  | SQLite                     |
-| Frontend  | HTML, CSS, JavaScript      |
-| Server    | Gunicorn                   |
-| Hosting   | Render                     |
-| Domain    | GoDaddy                    |
-| PWA       | Service Workers + Manifest |
+| Category  | Technology            |
+| --------- | --------------------- |
+| Backend   | Python                |
+| Framework | Flask                 |
+| Database  | SQLite                |
+| Frontend  | HTML, CSS, JavaScript |
+| Server    | Gunicorn              |
+| Hosting   | Render                |
+| Domain    | GoDaddy               |
+| PWA       | Service Workers       |
 
 ---
 
@@ -77,23 +97,70 @@ It features a clean UI, secure authentication system, admin control panel, and r
 NotesHub/
 │── app.py
 │── config.py
+│── db.sqlite3
 │── requirements.txt
-│
-├── database/
-│   └── db.py
-│
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── icons/
+│── runtime.txt
 │
 ├── templates/
-│   ├── base.html
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
 │   ├── dashboard.html
+│   ├── btech.html
+│   ├── semester.html
+│   ├── subjects.html
 │   ├── notes.html
-│   └── ...
+│   ├── upload.html
+│   ├── admin.html
+│   ├── blog.html
+│   ├── blog_post.html
+│   ├── about.html
+│   ├── contact.html
+│   ├── privacy.html
+│   ├── terms.html
+│   └── disclaimer.html
+│
+├── static/
+│   ├── images/
+│   ├── icons/
+│   └── js/
 │
 └── uploads/
+```
+
+---
+
+## ⚙️ Installation (Local Setup)
+
+### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/irahulvashisth01/Notes-Hub.git
+cd NotesHub
+```
+
+---
+
+### 2️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 3️⃣ Run Server
+
+```bash
+python app.py
+```
+
+---
+
+### 4️⃣ Open Browser
+
+```
+http://127.0.0.1:10000
 ```
 
 ---
@@ -102,45 +169,24 @@ NotesHub/
 
 ### 🚀 Render Deployment
 
-Backend is hosted on Render:
-👉 https://notes-hub-lpxg.onrender.com
+* Backend deployed using Render
+* Gunicorn server used for production
+
+---
 
 ### 🔗 Custom Domain
 
-Connected via GoDaddy:
-👉 https://btechnotes.online
+* Connected via GoDaddy
+* Domain: https://btechnotes.online
 
 ---
 
-## ⚙️ Local Setup
+## 📱 Progressive Web App (PWA)
 
-### 1️⃣ Clone Repository
-
-```bash
-git clone https://github.com/irahulvashisth01/NotesHub.git
-cd NotesHub
-```
-
-### 2️⃣ Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3️⃣ Run Application
-
-```bash
-python app.py
-```
-
----
-
-## 📱 PWA Support
-
-* Installable on mobile devices
-* Add to Home Screen
-* Works like a native app
-* Fast loading with offline capabilities
+* Installable on mobile
+* Works like native app
+* Offline capability
+* Fast loading
 
 ---
 
@@ -159,10 +205,21 @@ python app.py
 ## 💡 Future Enhancements
 
 * 🔔 Push Notifications
-* ⭐ Bookmark / Favorite Notes
-* ☁️ Cloud Storage Integration
-* 🤖 AI-based Recommendations
-* 📊 Advanced Analytics Dashboard
+* ⭐ Bookmark Notes
+* ☁️ Cloud Storage (AWS / Cloudinary)
+* 🧠 AI Recommendations
+* 📊 Analytics Dashboard
+* 🗄 PostgreSQL Integration
+
+---
+
+## ⚠️ Production Notes
+
+* SQLite is used for development
+* For production, recommended:
+
+  * PostgreSQL (Render DB)
+  * Cloudinary / AWS S3 for file storage
 
 ---
 
@@ -170,6 +227,12 @@ python app.py
 
 **Rahul Vashisth**
 🎓 B.Tech Engineering Student
+
+📧 Email: [rahulvashistha97@gmail.com](mailto:rahulvashistha97@gmail.com)
+📞 Phone: +91 7056212054
+
+🔗 Instagram: https://www.instagram.com/irahulvashisth
+🔗 LinkedIn: https://www.linkedin.com/in/rahul-sharma-753879352
 
 ---
 
@@ -188,9 +251,12 @@ If you like this project:
 This project demonstrates:
 
 * Full-stack web development
-* Authentication & authorization systems
-* Admin panel implementation
-* Cloud deployment with custom domain
-* Progressive Web App (PWA) architecture
+* Authentication & authorization
+* Admin dashboard system
+* Blog + SEO system
+* AdSense-ready structure
+* Cloud deployment
 
-💯 **Portfolio-ready & industry-level project**
+💯 **Portfolio-ready | Production-ready | Monetization-ready**
+
+---
