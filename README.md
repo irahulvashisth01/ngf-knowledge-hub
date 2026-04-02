@@ -9,9 +9,9 @@
 
 ## 🏆 Overview
 
-**NotesHub** is a full-stack web application designed for engineering students to **browse, upload, and download academic notes** in a structured, semester-wise format.
+**NotesHub** is a full-stack web application designed to help engineering students **access, upload, and manage academic notes** in a structured, semester-wise format.
 
-It features a **modern UI, authentication system, admin dashboard, blog system, and cloud deployment**, making it a **portfolio-ready + real-world SaaS project**.
+It provides a **clean, responsive UI, authentication system, admin dashboard, blog-ready structure, and cloud deployment**, making it a **portfolio-ready + real-world SaaS project**.
 
 ---
 
@@ -21,10 +21,10 @@ It features a **modern UI, authentication system, admin dashboard, blog system, 
 
 * 📚 Browse notes without login
 * 🔍 Search notes by subject
-* 👁 View notes in browser
+* 👁 View notes directly in browser
 * ⬇ Download notes
-* 📱 Mobile responsive UI
-* 🖼 Visual student-based interface
+* 📱 Fully responsive (Mobile + Desktop)
+* 📂 Semester-wise structured navigation
 
 ---
 
@@ -32,18 +32,17 @@ It features a **modern UI, authentication system, admin dashboard, blog system, 
 
 * User Registration (Name, Email, Mobile)
 * Secure Login (Session-based)
-* Role-based access control
+* Role-based access (Admin / User)
 * Smart redirects
 
 ---
 
 ### 🧑‍💼 Admin Panel
 
-* 📤 Upload notes
-* ✅ Approve / Reject notes
+* 📤 Approve / Reject notes
 * 🗑 Delete notes
 * 👥 Manage users (Admin ↔ User)
-* 📊 Full control dashboard
+* 📊 Dashboard-style UI
 
 ---
 
@@ -51,22 +50,19 @@ It features a **modern UI, authentication system, admin dashboard, blog system, 
 
 * 📈 Download tracking system
 * 🏆 Top downloaded notes section
-* 📂 Semester-wise organization
-* 🔎 Backend-powered filtering
-* 🖼 Image-based UI design
+* 🔎 Backend filtering
+* 🎯 Clean SaaS-style UI
 
 ---
 
-### ✍️ Blog System (AdSense Ready)
+### 📱 Responsive Design
 
-* 📝 Educational articles
-* 📚 SEO-friendly content
-* 🔗 Individual blog pages
-* 📈 Improves Google ranking
+* 💻 Desktop → Professional dashboard UI
+* 📱 Mobile → App-style interface (bottom navigation)
 
 ---
 
-### ⚖️ Legal Pages (AdSense Required)
+### ⚖️ Legal Pages (AdSense Ready)
 
 * 📄 Privacy Policy
 * 📄 Terms & Conditions
@@ -112,8 +108,6 @@ NotesHub/
 │   ├── notes.html
 │   ├── upload.html
 │   ├── admin.html
-│   ├── blog.html
-│   ├── blog_post.html
 │   ├── about.html
 │   ├── contact.html
 │   ├── privacy.html
@@ -157,7 +151,7 @@ python app.py
 
 ---
 
-### 4️⃣ Open Browser
+### 4️⃣ Open in Browser
 
 ```
 http://127.0.0.1:10000
@@ -169,24 +163,33 @@ http://127.0.0.1:10000
 
 ### 🚀 Render Deployment
 
-* Backend deployed using Render
-* Gunicorn server used for production
-
----
+* Hosted on Render
+* Uses Gunicorn for production
 
 ### 🔗 Custom Domain
 
-* Connected via GoDaddy
-* Domain: https://btechnotes.online
+* Domain connected via GoDaddy
+* 🌍 https://btechnotes.online
 
 ---
 
-## 📱 Progressive Web App (PWA)
+## ⚠️ Storage Limitation (Important)
 
-* Installable on mobile
-* Works like native app
-* Offline capability
-* Fast loading
+Currently:
+
+* Files uploaded locally are stored in `/uploads`
+
+### 🚨 Issue:
+
+* Local server ≠ deployed server storage
+
+### ✅ Recommended Solution:
+
+* Use **Cloud Storage**:
+
+  * ☁️ Cloudinary
+  * ☁️ AWS S3
+  * ☁️ Render Persistent Disk
 
 ---
 
@@ -202,24 +205,15 @@ http://127.0.0.1:10000
 
 ---
 
-## 💡 Future Enhancements
+## 📈 Future Enhancements
 
 * 🔔 Push Notifications
 * ⭐ Bookmark Notes
-* ☁️ Cloud Storage (AWS / Cloudinary)
-* 🧠 AI Recommendations
+* ☁️ Cloud Storage Integration
+* 🧠 AI Note Recommendations
 * 📊 Analytics Dashboard
-* 🗄 PostgreSQL Integration
-
----
-
-## ⚠️ Production Notes
-
-* SQLite is used for development
-* For production, recommended:
-
-  * PostgreSQL (Render DB)
-  * Cloudinary / AWS S3 for file storage
+* 🔍 Advanced Search System
+* 🗄 PostgreSQL Migration
 
 ---
 
@@ -253,10 +247,10 @@ This project demonstrates:
 * Full-stack web development
 * Authentication & authorization
 * Admin dashboard system
-* Blog + SEO system
-* AdSense-ready structure
+* Responsive SaaS UI design
 * Cloud deployment
+* AdSense-ready structure
 
-💯 **Portfolio-ready | Production-ready | Monetization-ready**
+💯 **Portfolio Ready | Production Ready | Monetization Ready**
 
 ---
