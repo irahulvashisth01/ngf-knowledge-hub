@@ -1,52 +1,60 @@
-# 📚 Notes Hub
+# 📚 NotesHub
 
-<p align="center">
-  🚀 A Modern Notes Sharing Platform for B.Tech Students  
-</p>
+### 🚀 Modern Notes Sharing Platform for B.Tech Students
 
-<p align="center">
-  🌐 <a href="https://btechnotes.online"><b>Live Website</b></a> |
-  ⚙️ <a href="https://noteshub-54i2.onrender.com"><b>Render Deployment</b></a>
-</p>
+🌐 **Live Website:** https://btechnotes.online
+⚙️ **Deployment:** https://notes-hub-lpxg.onrender.com
+
+---
 
 ## 🏆 Overview
 
-**Notes Hub** is a full-stack web application that enables students to **browse, upload, and download academic notes** in a structured semester-wise format.
+**NotesHub** is a full-stack web application designed for engineering students to **browse, upload, and download academic notes** in a structured, semester-wise format.
 
-It provides a **clean UI, secure authentication system, admin control panel, and real-world deployment**.
+It features a clean UI, secure authentication system, admin control panel, and real-world cloud deployment with a custom domain.
+
+---
 
 ## ✨ Key Features
 
 ### 👨‍🎓 User Features
 
 * 📚 Browse notes without login
-* 🔍 Search notes by title & subject
-* 👁 View notes in browser (PDF preview)
-* ⬇ Download notes *(Login required)*
-* 📱 Install as PWA (App-like experience)
+* 🔍 Search notes by subject or title
+* 👁 View notes directly in browser (PDF preview)
+* ⬇ Download notes *(login required)*
+* 📱 Install as a Progressive Web App (PWA)
+
+---
 
 ### 🔐 Authentication System
 
 * User Registration (Name, Email, Mobile)
-* Login system (Session-based)
+* Secure Login (Session-based)
 * Smart redirect after login
-* Secure access control
+* Role-based access control
+
+---
 
 ### 🧑‍💼 Admin Panel
 
 * 📤 Upload notes
-* ✅ Approve / Reject notes
+* ✅ Approve / Reject submissions
 * 🗑 Delete notes
-* 🔄 Change user roles (User ↔ Admin)
-* 📊 Manage entire platform
+* 🔄 Manage user roles (User ↔ Admin)
+* 📊 Full platform control
+
+---
 
 ### 📊 Advanced Features
 
-* 📈 Download counter
-* 🏆 Top downloaded notes
-* 📂 Semester-wise structure
-* 📱 Mobile responsive design
-* 🔎 Backend search system
+* 📈 Download tracking system
+* 🏆 Top downloaded notes section
+* 📂 Semester-wise organization
+* 📱 Fully responsive design
+* 🔎 Backend-powered search
+
+---
 
 ## 🛠️ Tech Stack
 
@@ -61,8 +69,11 @@ It provides a **clean UI, secure authentication system, admin control panel, and
 | Domain    | GoDaddy                    |
 | PWA       | Service Workers + Manifest |
 
+---
+
 ## 📂 Project Structure
 
+```
 NotesHub/
 │── app.py
 │── config.py
@@ -83,86 +94,103 @@ NotesHub/
 │   └── ...
 │
 └── uploads/
+```
+
+---
 
 ## 🌐 Deployment
 
 ### 🚀 Render Deployment
 
-Backend is deployed using Render:
-
-👉 https://noteshub-54i2.onrender.com
+Backend is hosted on Render:
+👉 https://notes-hub-lpxg.onrender.com
 
 ### 🔗 Custom Domain
 
-Connected with GoDaddy:
-
+Connected via GoDaddy:
 👉 https://btechnotes.online
 
+---
 
 ## ⚙️ Local Setup
 
-Clone the repository:
+### 1️⃣ Clone Repository
 
-bash
+```bash
 git clone https://github.com/irahulvashisth01/NotesHub.git
 cd NotesHub
+```
 
-Install dependencies:
+### 2️⃣ Install Dependencies
 
-bash
+```bash
 pip install -r requirements.txt
+```
 
+### 3️⃣ Run Application
 
-Run the app:
-
-bash
+```bash
 python app.py
+```
+
+---
 
 ## 📱 PWA Support
 
-* Installable as mobile app
+* Installable on mobile devices
 * Add to Home Screen
-* Works like native app
+* Works like a native app
+* Fast loading with offline capabilities
+
+---
 
 ## 🔒 Access Control
 
-| Feature        | Access         |
+| Feature        | Access Level   |
 | -------------- | -------------- |
-| Browse notes   | Public         |
-| View notes     | Login required |
-| Download notes | Login required |
-| Upload notes   | Login required |
-| Admin panel    | Admin only     |
+| Browse Notes   | Public         |
+| View Notes     | Login Required |
+| Download Notes | Login Required |
+| Upload Notes   | Login Required |
+| Admin Panel    | Admin Only     |
+
+---
 
 ## 💡 Future Enhancements
 
 * 🔔 Push Notifications
 * ⭐ Bookmark / Favorite Notes
 * ☁️ Cloud Storage Integration
-* 🤖 AI-based Recommendation System
-* 📊 Analytics Dashboard
+* 🤖 AI-based Recommendations
+* 📊 Advanced Analytics Dashboard
+
+---
 
 ## 👨‍💻 Developer
 
 **Rahul Vashisth**
 🎓 B.Tech Engineering Student
 
+---
+
 ## ⭐ Support & Contribution
 
 If you like this project:
 
-⭐ Star this repository
-🔁 Share with others
-💡 Contribute improvements
+* ⭐ Star this repository
+* 🔁 Share with others
+* 💡 Contribute improvements
+
+---
 
 ## 🚀 Final Note
 
 This project demonstrates:
 
-* Full-stack development
-* Authentication & authorization
-* Admin panel system
-* Deployment with custom domain
-* Progressive Web App (PWA)
+* Full-stack web development
+* Authentication & authorization systems
+* Admin panel implementation
+* Cloud deployment with custom domain
+* Progressive Web App (PWA) architecture
 
 💯 **Portfolio-ready & industry-level project**
