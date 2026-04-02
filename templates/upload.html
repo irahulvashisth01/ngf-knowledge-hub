@@ -1,51 +1,237 @@
-{% extends "base.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-<h2>Upload Notes</h2>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<form method="POST" enctype="multipart/form-data" class="form-box">
+<title>Upload Notes - NotesHub</title>
 
-  <!-- Semester -->
-  <label>Semester</label>
-  <select name="semester" id="semester" onchange="updateSubjects()">
-    {% for i in range(1,9) %}
-      <option value="{{i}}">Semester {{i}}</option>
-    {% endfor %}
-  </select>
+<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 
-  <!-- Subject -->
-  <label>Subject</label>
-  <select name="subject" id="subject">
-    <option>Select Subject</option>
-  </select>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- File -->
-  <label>Upload File</label>
-  <input type="file" name="file" required>
+<style>
 
-  <button class="btn">Upload</button>
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-</form>
+/* ===== BODY ===== */
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+/* ===== MAIN ===== */
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* ===== BOX ===== */
+.upload-box {
+  width: 420px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* TITLE */
+.upload-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* LABEL */
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+/* INPUT */
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+/* ===== FILE DROP AREA ===== */
+.drop-area {
+  margin-top: 10px;
+  padding: 25px;
+  border: 2px dashed rgba(255,255,255,0.5);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.drop-area:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.drop-area i {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+/* HIDDEN INPUT */
+input[type="file"] {
+  display: none;
+}
+
+/* FILE NAME */
+.file-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #10b981;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+/* MOBILE */
+@media(max-width: 450px) {
+  .upload-box {
+    width: 90%;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">📚 NotesHub</div>
+
+  <div class="nav-links">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/btech">Notes</a>
+    <a href="/logout">Logout</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="upload-box">
+
+    <h2>⬆ Upload Notes</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+      <!-- Semester -->
+      <label>Semester</label>
+      <select name="semester" id="semester" onchange="updateSubjects()">
+        {% for i in range(1,9) %}
+          <option value="{{i}}">Semester {{i}}</option>
+        {% endfor %}
+      </select>
+
+      <!-- Subject -->
+      <label>Subject</label>
+      <select name="subject" id="subject"></select>
+
+      <!-- FILE DROP -->
+      <label>Upload File</label>
+      <div class="drop-area" onclick="document.getElementById('fileInput').click()">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Click or Drag & Drop file</p>
+      </div>
+
+      <input type="file" name="file" id="fileInput" required>
+
+      <div class="file-name" id="fileName"></div>
+
+      <button class="btn">Upload</button>
+
+    </form>
+
+  </div>
+
+</div>
 
 <script>
-  const SUBJECTS = {{ subjects | tojson }};
 
-  function updateSubjects() {
-    let sem = document.getElementById("semester").value;
-    let subjectDropdown = document.getElementById("subject");
+/* SUBJECT LOGIC */
+const SUBJECTS = {{ subjects | tojson }};
 
-    subjectDropdown.innerHTML = "";
+function updateSubjects() {
+  let sem = document.getElementById("semester").value;
+  let subjectDropdown = document.getElementById("subject");
 
-    SUBJECTS[sem].forEach(sub => {
-      let option = document.createElement("option");
-      option.value = sub;
-      option.text = sub;
-      subjectDropdown.appendChild(option);
-    });
-  }
+  subjectDropdown.innerHTML = "";
 
-  // Load default subjects on page load
-  window.onload = updateSubjects;
+  SUBJECTS[sem].forEach(sub => {
+    let option = document.createElement("option");
+    option.value = sub;
+    option.text = sub;
+    subjectDropdown.appendChild(option);
+  });
+}
+
+window.onload = updateSubjects;
+
+/* FILE NAME SHOW */
+document.getElementById("fileInput").addEventListener("change", function() {
+  let fileName = this.files[0]?.name || "";
+  document.getElementById("fileName").innerText = fileName;
+});
+
 </script>
 
-{% endblock %}
+</body>
+</html>

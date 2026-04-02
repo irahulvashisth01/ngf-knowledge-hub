@@ -1,17 +1,130 @@
-{% extends "base.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Login - NotesHub</title>
+
+<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
+
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== BACKGROUND ===== */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #4f46e5, #06b6d4, #9333ea);
+  background-size: 400% 400%;
+  animation: gradientMove 10s infinite;
+}
+
+/* ANIMATION */
+@keyframes gradientMove {
+  0% {background-position:0%}
+  50% {background-position:100%}
+  100% {background-position:0%}
+}
+
+/* ===== LOGIN BOX ===== */
+.form-box {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 15px;
+  width: 350px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+/* TITLE */
+.form-box h2 {
+  margin-bottom: 20px;
+}
+
+/* INPUTS */
+.form-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #2563eb;
+}
+
+/* LINK */
+.form-box a {
+  color: #dbeafe;
+  text-decoration: none;
+}
+
+.form-box a:hover {
+  text-decoration: underline;
+}
+
+/* MOBILE */
+@media(max-width: 400px) {
+  .form-box {
+    width: 90%;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
 
 <div class="form-box">
-  <h2>Login</h2>
+
+  <h2>🔐 Login to NotesHub</h2>
 
   <form method="POST">
-    <input name="name" placeholder="Name" required>
-    <input name="email" placeholder="Email" required>
+    <input type="text" name="name" placeholder="👤 Name" required>
+    <input type="email" name="email" placeholder="📧 Email" required>
 
     <button class="btn">Login</button>
   </form>
 
-  <p><a href="/register">Create Account</a></p>
+  <p style="margin-top:15px;">
+    Don't have an account?  
+    <a href="/register">Create Account</a>
+  </p>
+
 </div>
 
-{% endblock %}
+</body>
+</html>

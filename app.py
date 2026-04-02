@@ -353,6 +353,44 @@ def page_not_found(e):
     return "<h2>404 - Page Not Found</h2>", 404
 
 
+# ---------------- LEGAL & INFO PAGES ----------------
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+
+@app.route('/disclaimer')
+def disclaimer():
+    return render_template('disclaimer.html')
+
+
+# ---------------- ERROR HANDLING ----------------
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return "<h2>404 - Page Not Found</h2>", 404
+
+
+@app.errorhandler(500)
+def internal_error(e):
+    return "<h2>500 - Internal Server Error (Check templates)</h2>", 500
+
 # ---------------- RUN ----------------
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)

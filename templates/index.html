@@ -1,22 +1,314 @@
-{% extends "base.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-<div class="hero">
-  <h1>🚀 Welcome to Notes Hub</h1>
-  <p>Share & Access B.Tech Notes Easily</p>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {% if session.get('user') %}
-    
-    <a href="/dashboard" class="btn">Go to Dashboard</a>
+<title>NotesHub - B.Tech Notes Platform</title>
 
-    {% if session.get('role') == 'admin' %}
-      <br><br>
-      <a href="/admin" class="btn">👑 Admin Panel</a>
+<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
+
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: rgba(17,24,39,0.8);
+  backdrop-filter: blur(10px);
+  padding: 12px 30px;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #d1d5db;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+/* ===== HERO ===== */
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.hero-overlay {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #4f46e5, #06b6d4, #9333ea);
+  background-size: 400% 400%;
+  animation: gradient 10s infinite;
+  z-index: -1;
+}
+
+@keyframes gradient {
+  0% {background-position:0%}
+  50% {background-position:100%}
+  100% {background-position:0%}
+}
+
+.hero h1 {
+  font-size: 48px;
+}
+
+.hero p {
+  margin: 15px 0;
+}
+
+.btn {
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px;
+}
+
+.primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.secondary {
+  background: #10b981;
+  color: white;
+}
+
+/* ===== FEATURES ===== */
+.features {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  padding: 30px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== STUDENTS ===== */
+.students-section {
+  padding: 60px 20px;
+  background: #f3f4f6;
+  text-align: center;
+}
+
+.students-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+.student-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.student-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #111827;
+  color: white;
+  padding: 40px 20px;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+}
+
+.footer a {
+  color: #9ca3af;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ===== SPACING FIX ===== */
+body {
+  padding-top: 70px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">📚 NotesHub</div>
+
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/btech">Notes</a></li>
+
+      {% if session.get('user') %}
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/upload">Upload</a></li>
+        <li><a href="/logout">Logout</a></li>
+      {% else %}
+        <li><a href="/login">Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+
+  <div>
+    <h1>🚀 NotesHub</h1>
+    <p>Access, Share & Download B.Tech Notes Easily</p>
+
+    {% if session.get('user') %}
+      <a href="/dashboard" class="btn primary">Go to Dashboard</a>
+      {% if session.get('role') == 'admin' %}
+        <a href="/admin" class="btn secondary">Admin Panel</a>
+      {% endif %}
+    {% else %}
+      <a href="/login" class="btn primary">Get Started</a>
     {% endif %}
+  </div>
+</section>
 
-  {% else %}
-    <a href="/login" class="btn">Get Started</a>
-  {% endif %}
-</div>
+<!-- FEATURES -->
+<section class="features">
+  <h2>Why Choose NotesHub?</h2>
 
-{% endblock %}
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>📚 All Notes</h3>
+      <p>All semester notes in one place</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🔍 Smart Search</h3>
+      <p>Find notes instantly</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>⚡ Fast & Secure</h3>
+      <p>Quick access with secure login</p>
+    </div>
+  </div>
+</section>
+
+<!-- STUDENTS -->
+<section class="students-section">
+  <h2>Student Life at NotesHub</h2>
+
+  <div class="students-container">
+    <div class="student-card">
+      <img src="{{ url_for('static', filename='images/study1.jpg') }}">
+      <p>Focused Self Study</p>
+    </div>
+
+    <div class="student-card">
+      <img src="{{ url_for('static', filename='images/group.jpg') }}">
+      <p>Group Discussions</p>
+    </div>
+
+    <div class="student-card">
+      <img src="{{ url_for('static', filename='images/friendly.jpg') }}">
+      <p>Learn with Friends</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div>
+      <h3>📚 NotesHub</h3>
+      <p>B.Tech notes platform</p>
+    </div>
+
+    <div>
+      <h3>Links</h3>
+      <a href="/">Home</a><br>
+      <a href="/btech">Notes</a>
+    </div>
+
+    <div>
+      <h3>legal</h3>
+      <a href="/contact">Contact</a><br>
+      <a href="/privacy">Privacy</a><br>
+      <a href="/terms">Terms</a>><br>
+      <a href="/about">About</a><br>
+      <a href="/disclaimer">Disclaimer</a>
+    </div><br>
+
+    <div>
+      <h3>Contact</h3>
+      <p>Rahul Vashisth</p>
+      <p>+91 7056212054</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 NotesHub 🚀 |  Built  by Rahul Sharma 
+  </div>
+</footer>
+
+</body>
+</html>

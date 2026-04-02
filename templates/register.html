@@ -1,17 +1,164 @@
-{% extends "base.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Register - NotesHub</title>
+
+<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
+
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== BACKGROUND ===== */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #4f46e5, #06b6d4, #9333ea);
+  background-size: 400% 400%;
+  animation: gradientMove 10s infinite;
+}
+
+/* ANIMATION */
+@keyframes gradientMove {
+  0% {background-position:0%}
+  50% {background-position:100%}
+  100% {background-position:0%}
+}
+
+/* ===== REGISTER BOX ===== */
+.form-box {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 15px;
+  width: 360px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* TITLE */
+.form-box h2 {
+  margin-bottom: 20px;
+}
+
+/* INPUT GROUP */
+.input-group {
+  position: relative;
+  margin: 12px 0;
+}
+
+.input-group i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ccc;
+}
+
+/* INPUTS */
+.input-group input {
+  width: 100%;
+  padding: 12px 12px 12px 38px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* FOCUS EFFECT */
+.input-group input:focus {
+  box-shadow: 0 0 8px rgba(59,130,246,0.6);
+}
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+/* LINK */
+.form-box a {
+  color: #dbeafe;
+  text-decoration: none;
+}
+
+.form-box a:hover {
+  text-decoration: underline;
+}
+
+/* MOBILE */
+@media(max-width: 400px) {
+  .form-box {
+    width: 90%;
+    padding: 30px;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
 
 <div class="form-box">
-  <h2>Register</h2>
+
+  <h2>📝 Create Account</h2>
 
   <form method="POST">
-    <input name="name" placeholder="Name" required>
-    <input name="email" placeholder="Email" required>
-    <input name="mobile" placeholder="Mobile" required>
+
+    <div class="input-group">
+      <i class="fas fa-user"></i>
+      <input type="text" name="name" placeholder="Full Name" required>
+    </div>
+
+    <div class="input-group">
+      <i class="fas fa-envelope"></i>
+      <input type="email" name="email" placeholder="Email Address" required>
+    </div>
+
+    <div class="input-group">
+      <i class="fas fa-phone"></i>
+      <input type="text" name="mobile" placeholder="Mobile Number" required>
+    </div>
 
     <button class="btn">Register</button>
+
   </form>
+
+  <p style="margin-top:15px;">
+    Already have an account?  
+    <a href="/login">Login</a>
+  </p>
 
 </div>
 
-{% endblock %}
+</body>
+</html>
