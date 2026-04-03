@@ -22,6 +22,7 @@ def init_db():
         email TEXT UNIQUE NOT NULL,
         mobile TEXT NOT NULL,
         role TEXT NOT NULL DEFAULT 'user',
+        profile_image TEXT DEFAULT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
@@ -33,11 +34,12 @@ def init_db():
         title TEXT NOT NULL,
         filename TEXT NOT NULL,
         subject TEXT NOT NULL,
-        semester INTEGER NOT NULL,
-        uploaded_by TEXT NOT NULL,
+        semester TEXT NOT NULL,
+        user_id INTEGER NOT NULL,
         status TEXT NOT NULL DEFAULT 'pending',
         downloads INTEGER DEFAULT 0,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(user_id) REFERENCES users(id)
     )
     """)
 
@@ -49,6 +51,10 @@ def init_db():
         allow_upload INTEGER DEFAULT 1
     )
     """)
+
+    # ---------------- INDEXES (PERFORMANCE) ----------------
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_notes_subject ON notes(subject)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_notes_semester ON notes(semester)")
 
     # ---------------- DEFAULT ADMIN ----------------
     cur.execute("SELECT * FROM users WHERE email=?", ("admin@gmail.com",))
