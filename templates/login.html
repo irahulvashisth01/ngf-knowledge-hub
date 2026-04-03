@@ -168,6 +168,39 @@ body {
 
 }
 
+/* ===== MOBILE ===== */
+.mobile-nav{display:none;}
+
+@media(max-width:768px){
+
+  .grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+
+  body{padding-bottom:70px;}
+
+  .mobile-nav{
+    display:flex;
+    position:fixed;
+    bottom:0;width:100%;
+    background:#111827;
+    justify-content:space-around;
+    padding:10px 0;
+  }
+
+  .mobile-nav a{
+    color:#9ca3af;
+    font-size:12px;
+    text-decoration:none;
+    text-align:center;
+  }
+
+  .mobile-nav i{
+    display:block;
+    font-size:18px;
+  }
+
+}
+
 </style>
 
 </head>
@@ -216,6 +249,13 @@ body {
 
   </div>
 
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
+  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 
 </body>

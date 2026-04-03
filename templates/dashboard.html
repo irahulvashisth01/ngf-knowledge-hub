@@ -159,6 +159,39 @@ body::after{
 }
 
 /* ===== MOBILE ===== */
+.mobile-nav{display:none;}
+
+@media(max-width:768px){
+
+  .grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+
+  body{padding-bottom:70px;}
+
+  .mobile-nav{
+    display:flex;
+    position:fixed;
+    bottom:0;width:100%;
+    background:#111827;
+    justify-content:space-around;
+    padding:10px 0;
+  }
+
+  .mobile-nav a{
+    color:#9ca3af;
+    font-size:12px;
+    text-decoration:none;
+    text-align:center;
+  }
+
+  .mobile-nav i{
+    display:block;
+    font-size:18px;
+  }
+
+}
+
+/* ===== MOBILE ===== */
 @media(max-width:768px){
 
   .grid{grid-template-columns:1fr;}
@@ -202,9 +235,7 @@ body::after{
         <h3>📚 B.Tech Notes</h3>
       </a>
 
-      <a href="/upload" class="card">
-        <h3>⬆ Upload Notes</h3>
-      </a>
+      
 
       {% if session.get('role') == 'admin' %}
       <a href="/admin" class="card" style="background:#111827;color:white;">
@@ -280,6 +311,13 @@ body::after{
   </div>
 
 </footer>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
+  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/login"><i class="fas fa-user"></i>Login</a>
+</div>
 
 </body>
 </html>
