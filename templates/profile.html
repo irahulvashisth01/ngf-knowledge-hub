@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Profile - NotesHub</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== GLOBAL ===== */
+body{
+  font-family:'Segoe UI';
+  background:#f8fafc;
+  margin:0;
+}
+
+/* NAVBAR */
+.navbar{
+  padding:15px 25px;
+  background:white;
+  display:flex;
+  justify-content:space-between;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.navbar a{
+  margin-left:15px;
+  text-decoration:none;
+  color:#333;
+}
+
+/* PROFILE CARD */
+.profile-container{
+  max-width:500px;
+  margin:50px auto;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+.profile-img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:15px;
+}
+
+input[type="file"]{
+  margin-top:10px;
+}
+
+button{
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  background:#6366f1;
+  color:white;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div>📚 NotesHub</div>
+  <div>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/logout">Logout</a>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="profile-container">
+
+  {% if user['profile_image'] %}
+    <img src="{{ url_for('static', filename='profile/' + user['profile_image']) }}" class="profile-img">
+  {% else %}
+    <img src="https://via.placeholder.com/120" class="profile-img">
+  {% endif %}
+
+  <h2>{{ user['name'] }}</h2>
+  <p>{{ user['email'] }}</p>
+  <p>{{ user['mobile'] }}</p>
+
+  <!-- Upload Form -->
+  <form action="/update_profile" method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required>
+    <br>
+    <button type="submit">Upload Photo</button>
+  </form>
+
+</div>
+
+</body>
+</html>
