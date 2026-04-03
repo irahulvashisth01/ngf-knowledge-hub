@@ -10,182 +10,164 @@
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<meta name="theme-color" content="#111827">
-
 <style>
 
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+/* ===== GLOBAL ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:#f8fafc;
+  color:#0f172a;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
 
-body {
-  background: linear-gradient(135deg, #4f46e5, #06b6d4);
-  min-height: 100vh;
-  color: white;
-  padding-top: 70px;
+/* ===== MAIN WRAPPER (IMPORTANT) ===== */
+.main{
+  flex:1;
+  padding-top:70px;
+}
+
+/* BACKGROUND GLOW */
+body::before{
+  content:"";
+  position:fixed;
+  width:400px;height:400px;
+  background:radial-gradient(circle,#6366f1,transparent);
+  top:-100px;left:-100px;
+  opacity:0.2;
+  z-index:-1;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:400px;height:400px;
+  background:radial-gradient(circle,#06b6d4,transparent);
+  bottom:-100px;right:-100px;
+  opacity:0.2;
+  z-index:-1;
 }
 
 /* ===== NAVBAR ===== */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(17,24,39,0.9);
-  backdrop-filter: blur(10px);
-  padding: 14px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
+.navbar{
+  position:fixed;
+  top:0;width:100%;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(12px);
+  padding:14px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: bold;
+.logo{font-size:22px;font-weight:600;}
+
+.nav-links a{
+  color:#334155;
+  margin-left:15px;
+  text-decoration:none;
 }
 
-.nav-links a {
-  color: #d1d5db;
-  margin-left: 15px;
-  text-decoration: none;
-  transition: 0.3s;
-}
+.nav-links a:hover{color:#000;}
 
-.nav-links a:hover {
-  color: white;
-}
-
-/* ===== CONTAINER ===== */
-.container {
-  padding: 30px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* HEADER */
-.header h2 {
-  margin-bottom: 25px;
-  font-size: 28px;
+/* ===== HERO ===== */
+.hero{
+  margin:20px;
+  padding:40px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#6366f1,#06b6d4);
+  color:white;
 }
 
 /* ===== GRID ===== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 25px;
+.container{padding:20px;}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
 /* ===== CARD ===== */
-.card {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(15px);
-  padding: 35px;
-  border-radius: 18px;
-  text-align: center;
-  text-decoration: none;
-  color: white;
-  transition: 0.3s;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+.card{
+  background:white;
+  border-radius:16px;
+  padding:30px;
+  text-align:center;
+  text-decoration:none;
+  color:#0f172a;
+  border:1px solid rgba(0,0,0,0.05);
+  transition:.3s;
 }
 
-.card i {
-  font-size: 30px;
-  margin-bottom: 10px;
+.card:hover{
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
 }
 
-.card h3 {
-  margin-top: 10px;
+/* ===== GALLERY ===== */
+.gallery{
+  padding:40px 20px;
 }
 
-.card:hover {
-  transform: translateY(-8px) scale(1.03);
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
 }
 
-/* MAIN CARD */
-.big {
-  grid-column: span 2;
-  font-size: 22px;
-  font-weight: bold;
+.img-card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
 }
 
-/* BUTTON */
-.btn {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 12px 25px;
-  background: linear-gradient(45deg,#10b981,#059669);
-  color: white;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: 0.3s;
+/* ===== FOOTER ===== */
+.footer{
+  background:#0f172a;
+  color:white;
+  padding:50px 20px;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  max-width:1200px;
+  margin:auto;
 }
 
-/* ===== MOBILE APP STYLE ===== */
-.mobile-nav {
-  display: none;
+.footer a{
+  display:block;
+  color:#94a3b8;
+  margin:6px 0;
+  text-decoration:none;
 }
 
-@media(max-width: 768px) {
+.footer a:hover{color:white;}
 
-  body {
-    padding-bottom: 70px;
-  }
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:10px;
+}
 
-  .grid {
-    grid-template-columns: 1fr;
-  }
+/* ===== MOBILE ===== */
+@media(max-width:768px){
 
-  .big {
-    grid-column: span 1;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .container {
-    padding: 20px;
-  }
-
-  .header h2 {
-    font-size: 22px;
-  }
-
-  /* MOBILE NAV */
-  .mobile-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #111827;
-    justify-content: space-around;
-    padding: 10px 0;
-  }
-
-  .mobile-nav a {
-    color: #9ca3af;
-    text-align: center;
-    font-size: 12px;
-    text-decoration: none;
-  }
-
-  .mobile-nav i {
-    display: block;
-    font-size: 18px;
-  }
+  .grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
 
 }
 
 </style>
-
 </head>
 
 <body>
@@ -195,51 +177,104 @@ body {
   <div class="logo">📚 NotesHub</div>
 
   <div class="nav-links">
+    <a href="/dashboard">Home</a>
     <a href="/btech">Notes</a>
     <a href="/upload">Upload</a>
     <a href="/logout">Logout</a>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="container">
+<!-- MAIN CONTENT -->
+<div class="main">
 
-  <div class="header">
+  <!-- HERO -->
+  <div class="hero">
     <h2>Welcome {{session['user']}} 👋</h2>
+    <p>Explore, upload and manage your notes easily</p>
   </div>
 
-  <div class="grid">
+  <!-- CARDS -->
+  <div class="container">
 
-    <a href="/btech" class="card big">
-      <i class="fas fa-book"></i>
-      <h3>B.Tech Notes</h3>
-    </a>
+    <div class="grid">
 
-    <a href="/upload" class="card">
-      <i class="fas fa-upload"></i>
-      <h3>Upload Notes</h3>
-    </a>
+      <a href="/btech" class="card">
+        <h3>📚 B.Tech Notes</h3>
+      </a>
 
-    <a href="/notes" class="card">
-      <i class="fas fa-file-alt"></i>
-      <h3>All Notes</h3>
-    </a>
+      <a href="/upload" class="card">
+        <h3>⬆ Upload Notes</h3>
+      </a>
+
+    </div>
 
   </div>
 
-  {% if session['role'] == 'admin' %}
-    <a href="/admin" class="btn">👑 Admin Panel</a>
-  {% endif %}
+  <!-- GALLERY -->
+  <div class="gallery">
+    <h3>📸 Student Experience</h3>
+
+    <div class="gallery-grid">
+      <div class="img-card"><img src="{{ url_for('static', filename='images/study1.jpg') }}"></div>
+      <div class="img-card"><img src="{{ url_for('static', filename='images/group.jpg') }}"></div>
+      <div class="img-card"><img src="{{ url_for('static', filename='images/laptop.jpg') }}"></div>
+      <div class="img-card"><img src="{{ url_for('static', filename='images/student.jpg') }}"></div>
+    </div>
+  </div>
 
 </div>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav">
-  <a href="/"><i class="fas fa-home"></i>Home</a>
-  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
-  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
-  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
-</div>
+<!-- FOOTER -->
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- ABOUT -->
+    <div>
+      <h3>📚 NotesHub</h3>
+      <p style="color:#94a3b8;">
+        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
+      </p>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div>
+      <h3>Quick Links</h3>
+      <a href="{{ url_for('dashboard') }}">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
+    </div>
+
+    <!-- LEGAL -->
+    <div>
+      <h3>Legal</h3>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+
+    <!-- SOCIAL -->
+    <div>
+      <h3>Connect With Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 NotesHub 🚀 | All Rights Reserved
+  </div>
+
+</footer>
 
 </body>
 </html>

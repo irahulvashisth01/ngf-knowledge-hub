@@ -10,166 +10,149 @@
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<meta name="theme-color" content="#111827">
-
 <style>
 
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+/* ===== GLOBAL ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+  background:#f8fafc;
+  color:#0f172a;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
 
-body {
-  background: #f9fafb;
-  color: #111827;
+/* ===== MAIN WRAPPER ===== */
+.main{
+  flex:1;
 }
 
 /* ===== NAVBAR ===== */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #111827;
-  color: white;
-  padding: 14px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
+.navbar{
+  position:fixed;
+  top:0;width:100%;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(12px);
+  padding:14px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: bold;
+.logo{font-size:20px;font-weight:600;}
+
+.nav-links a{
+  color:#334155;
+  margin-left:15px;
+  text-decoration:none;
 }
 
-.nav-links a {
-  color: #d1d5db;
-  margin-left: 15px;
-  text-decoration: none;
-}
-
-.nav-links a:hover {
-  color: white;
-}
+.nav-links a:hover{color:#000;}
 
 /* ===== CONTAINER ===== */
-.container {
-  max-width: 1100px;
-  margin: 100px auto 40px;
-  padding: 20px;
+.container{
+  max-width:1100px;
+  margin:100px auto 40px;
+  padding:20px;
 }
 
 /* ===== GRID ===== */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
 }
 
 /* ===== CARD ===== */
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+.card{
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-/* HEADINGS */
-h1 {
-  margin-bottom: 20px;
-}
+h1{margin-bottom:20px;}
+h2{margin-bottom:15px;}
 
-h2 {
-  margin-bottom: 15px;
-}
-
-/* INFO ITEMS */
-.info p {
-  margin: 10px 0;
-  color: #374151;
+.info p{
+  margin:10px 0;
+  color:#374151;
 }
 
 /* FORM */
-input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  outline: none;
+input,textarea{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
 }
 
-textarea {
-  resize: none;
-  height: 120px;
+textarea{
+  height:120px;
+  resize:none;
 }
 
-/* BUTTON */
-.btn {
-  margin-top: 15px;
-  padding: 12px;
-  background: linear-gradient(45deg,#3b82f6,#6366f1);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
+.btn{
+  margin-top:15px;
+  padding:12px;
+  background:linear-gradient(135deg,#6366f1,#06b6d4);
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  background:#0f172a;
+  color:white;
+  padding:50px 20px;
+}
+
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  max-width:1200px;
+  margin:auto;
+}
+
+.footer a{
+  display:block;
+  color:#94a3b8;
+  margin:6px 0;
+  text-decoration:none;
+}
+
+.footer a:hover{color:white;}
+
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:10px;
 }
 
 /* ===== MOBILE ===== */
-.mobile-nav {
-  display: none;
-}
+@media(max-width:768px){
 
-@media(max-width: 768px) {
+  .contact-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
 
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .container {
-    margin-top: 80px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  /* MOBILE NAV */
-  .mobile-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #111827;
-    justify-content: space-around;
-    padding: 10px 0;
-  }
-
-  .mobile-nav a {
-    color: #9ca3af;
-    text-align: center;
-    font-size: 12px;
-    text-decoration: none;
-  }
-
-  .mobile-nav i {
-    display: block;
-    font-size: 18px;
+  .footer-container{
+    grid-template-columns:1fr;
+    text-align:center;
   }
 
 }
 
 </style>
-
 </head>
 
 <body>
@@ -179,59 +162,101 @@ textarea {
   <div class="logo">📚 NotesHub</div>
 
   <div class="nav-links">
-    <a href="/">Home</a>
+    <a href="/dashboard">Home</a>
     <a href="/btech">Notes</a>
     <a href="/privacy">Privacy</a>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="container">
+<!-- MAIN CONTENT -->
+<div class="main">
 
-  <h1>📬 Contact Us</h1>
+  <div class="container">
 
-  <div class="contact-grid">
+    <h1>📬 Contact Us</h1>
 
-    <!-- CONTACT INFO -->
-    <div class="card info">
-      <h2>📍 Get in Touch</h2>
+    <div class="contact-grid">
 
-      <p><strong>👤 Name:</strong> Rahul Vashisth</p>
-      <p><strong>📧 Email:</strong> rahulvashistha97@gmail.com</p>
-      <p><strong>📞 Phone:</strong> +91 7056212054</p>
-      <p><strong>📍 Location:</strong> Haryana, India</p>
+      <!-- INFO -->
+      <div class="card info">
+        <h2>📍 Get in Touch</h2>
 
-      <p style="margin-top:15px;">
-        Have questions, feedback, or suggestions?  
-        Feel free to reach out anytime 🚀
-      </p>
-    </div>
+        <p><strong>👤 Name:</strong> Rahul Vashisth</p>
+        <p><strong>📧 Email:</strong> rahulvashistha97@gmail.com</p>
+        <p><strong>📞 Phone:</strong> +91 7056212054</p>
+        <p><strong>📍 Location:</strong> Haryana, India</p>
 
-    <!-- CONTACT FORM -->
-    <div class="card">
-      <h2>✉️ Send Message</h2>
+      </div>
 
-      <form method="POST">
+      <!-- FORM -->
+      <div class="card">
+        <h2>✉️ Send Message</h2>
 
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Write your message..." required></textarea>
+        <form method="POST">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Write your message..." required></textarea>
 
-        <button class="btn">Send Message</button>
+          <button class="btn">Send Message</button>
+        </form>
+      </div>
 
-      </form>
     </div>
 
   </div>
 
 </div>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav">
-  <a href="/"><i class="fas fa-home"></i>Home</a>
-  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
-  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
-</div>
+<!-- FOOTER -->
+<!-- FOOTER -->
+<footer class="footer">
 
+  <div class="footer-container">
+
+    <!-- ABOUT -->
+    <div>
+      <h3>📚 NotesHub</h3>
+      <p style="color:#94a3b8;">
+        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
+      </p>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div>
+      <h3>Quick Links</h3>
+      <a href="{{ url_for('dashboard') }}">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
+    </div>
+
+    <!-- LEGAL -->
+    <div>
+      <h3>Legal</h3>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+
+    <!-- SOCIAL -->
+    <div>
+      <h3>Connect With Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 NotesHub 🚀 | All Rights Reserved
+  </div>
+
+</footer>
 </body>
 </html>

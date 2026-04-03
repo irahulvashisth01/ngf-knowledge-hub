@@ -10,167 +10,164 @@
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<meta name="theme-color" content="#111827">
-
 <style>
 
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
+/* ===== GLOBAL ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
-body {
-  background: linear-gradient(135deg, #4f46e5, #06b6d4);
-  color: white;
-  padding-top: 70px;
+body{
+  background:#f8fafc;
+  color:#0f172a;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  padding-top:70px;
 }
 
 /* ===== NAVBAR ===== */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(17,24,39,0.9);
-  backdrop-filter: blur(10px);
-  padding: 14px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
+.navbar{
+  position:fixed;
+  top:0;width:100%;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(12px);
+  padding:14px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: bold;
+.logo{font-size:22px;font-weight:600;}
+
+.nav-links a{
+  color:#334155;
+  margin-left:15px;
+  text-decoration:none;
 }
 
-.nav-links a {
-  color: #d1d5db;
-  margin-left: 15px;
-  text-decoration: none;
-  transition: 0.3s;
+.nav-links a:hover{color:#000;}
+
+/* ===== MAIN ===== */
+.main{
+  flex:1;
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+  text-align:center;
 }
 
-.nav-links a:hover {
-  color: white;
+.main h1{
+  font-size:32px;
 }
 
-/* ===== WRAPPER ===== */
-.semester-wrapper {
-  padding: 40px 20px;
-  text-align: center;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.semester-header h1 {
-  font-size: 34px;
-}
-
-.semester-header p {
-  color: #e5e7eb;
-  margin: 10px 0 30px;
+.main p{
+  color:#64748b;
+  margin:10px 0 30px;
 }
 
 /* ===== GRID ===== */
-.semester-grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 25px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
 }
 
 /* ===== CARD ===== */
-.semester-card {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(15px);
-  padding: 30px;
-  border-radius: 18px;
-  transition: 0.3s;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+.card{
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  border:1px solid rgba(0,0,0,0.05);
+  transition:.3s;
 }
 
-.semester-card:hover {
-  transform: translateY(-8px) scale(1.04);
+.card:hover{
+  transform:translateY(-8px) scale(1.05);
+  box-shadow:0 15px 40px rgba(0,0,0,0.1);
 }
 
-.sem-icon {
-  font-size: 40px;
-  margin-bottom: 10px;
+.card h3{
+  margin:10px 0;
 }
 
-.semester-card h3 {
-  margin: 10px 0;
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 15px;
+  background:linear-gradient(135deg,#6366f1,#06b6d4);
+  color:white;
+  border-radius:8px;
+  text-decoration:none;
 }
 
-/* BUTTON */
-.sem-btn {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 10px 18px;
-  background: linear-gradient(45deg,#3b82f6,#6366f1);
-  color: white;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: 0.3s;
+/* ===== FOOTER ===== */
+.footer{
+  background:#0f172a;
+  color:white;
+  padding:50px 20px;
 }
 
-.sem-btn:hover {
-  transform: translateY(-2px);
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  max-width:1200px;
+  margin:auto;
 }
 
-/* ===== MOBILE APP STYLE ===== */
-.mobile-nav {
-  display: none;
+.footer a{
+  display:block;
+  color:#94a3b8;
+  margin:6px 0;
+  text-decoration:none;
 }
 
-@media(max-width: 768px) {
+.footer a:hover{color:white;}
 
-  body {
-    padding-bottom: 70px;
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:10px;
+}
+
+/* ===== MOBILE ===== */
+.mobile-nav{display:none;}
+
+@media(max-width:768px){
+
+  .grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+
+  .footer-container{
+    grid-template-columns:1fr;
+    text-align:center;
   }
 
-  .semester-grid {
-    grid-template-columns: 1fr;
+  body{padding-bottom:70px;}
+
+  .mobile-nav{
+    display:flex;
+    position:fixed;
+    bottom:0;width:100%;
+    background:#111827;
+    justify-content:space-around;
+    padding:10px 0;
   }
 
-  .nav-links {
-    display: none;
+  .mobile-nav a{
+    color:#9ca3af;
+    font-size:12px;
+    text-decoration:none;
+    text-align:center;
   }
 
-  .semester-header h1 {
-    font-size: 26px;
+  .mobile-nav i{
+    display:block;
+    font-size:18px;
   }
-
-  /* MOBILE NAV */
-  .mobile-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #111827;
-    justify-content: space-around;
-    padding: 10px 0;
-  }
-
-  .mobile-nav a {
-    color: #9ca3af;
-    text-align: center;
-    font-size: 12px;
-    text-decoration: none;
-  }
-
-  .mobile-nav i {
-    display: block;
-    font-size: 18px;
-  }
-
 }
 
 </style>
-
 </head>
 
 <body>
@@ -180,28 +177,25 @@ body {
   <div class="logo">📚 NotesHub</div>
 
   <div class="nav-links">
-    <a href="/dashboard">Dashboard</a>
+    <a href="/dashboard">Home</a>
     <a href="/btech">Notes</a>
     <a href="/logout">Logout</a>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="semester-wrapper">
+<!-- MAIN CONTENT -->
+<div class="main">
 
-  <div class="semester-header">
-    <h1>🎓 B.Tech CSE Notes</h1>
-    <p>Select your semester to explore notes</p>
-  </div>
+  <h1>🎓 B.Tech CSE Notes</h1>
+  <p>Select your semester to explore notes</p>
 
-  <div class="semester-grid">
+  <div class="grid">
 
     {% for i in range(1,9) %}
-    <div class="semester-card">
-      <div class="sem-icon">📘</div>
-      <h3>Semester {{ i }}</h3>
+    <div class="card">
+      <h3>📘 Semester {{ i }}</h3>
       <p>Explore subjects & notes</p>
-      <a href="/semester/{{i}}" class="sem-btn">Explore</a>
+      <a href="/semester/{{i}}" class="btn">Explore</a>
     </div>
     {% endfor %}
 
@@ -209,12 +203,51 @@ body {
 
 </div>
 
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <div>
+      <h3>📚 NotesHub</h3>
+      <p style="color:#94a3b8;">Modern platform for B.Tech notes</p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <a href="/dashboard">Home</a>
+      <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
+    </div>
+
+    <div>
+      <h3>Legal</h3>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+
+    <div>
+      <h3>Social</h3>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 NotesHub 🚀
+  </div>
+
+</footer>
+
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
-  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
   <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
-  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
+  <a href="/profile"><i class="fas fa-user"></i>Profile</a>
 </div>
 
 </body>

@@ -10,142 +10,152 @@
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<meta name="theme-color" content="#111827">
-
 <style>
 
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+/* ===== GLOBAL ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+  background:#f8fafc;
+  color:#0f172a;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
 
-body {
-  background: #f9fafb;
-  color: #111827;
+/* ===== MAIN WRAPPER ===== */
+.main{
+  flex:1;
 }
 
 /* ===== NAVBAR ===== */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #111827;
-  color: white;
-  padding: 14px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
+.navbar{
+  position:fixed;
+  top:0;width:100%;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(12px);
+  padding:14px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: bold;
+.logo{
+  font-size:20px;
+  font-weight:600;
 }
 
-.nav-links a {
-  color: #d1d5db;
-  margin-left: 15px;
-  text-decoration: none;
+.nav-links a{
+  color:#334155;
+  margin-left:15px;
+  text-decoration:none;
 }
 
-.nav-links a:hover {
-  color: white;
+.nav-links a:hover{
+  color:#000;
 }
 
 /* ===== CONTAINER ===== */
-.container {
-  max-width: 1000px;
-  margin: 100px auto 40px;
-  padding: 20px;
+.container{
+  max-width:1000px;
+  margin:100px auto 40px;
+  padding:20px;
 }
 
-/* CARD */
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-/* HEADINGS */
-h1 {
-  margin-bottom: 15px;
-}
-
-h2 {
-  margin-top: 25px;
+/* ===== CARD ===== */
+.card{
+  background:white;
+  padding:35px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 /* TEXT */
-p {
-  margin-top: 10px;
-  color: #374151;
-  line-height: 1.7;
+h1{margin-bottom:15px;}
+h2{margin-top:25px;}
+p{
+  margin-top:10px;
+  color:#374151;
+  line-height:1.7;
 }
 
 /* FEATURES */
-.features {
-  margin-top: 15px;
+.features li{
+  margin:8px 0;
 }
 
-.features li {
-  margin: 8px 0;
+/* DEV BOX */
+.dev-box{
+  margin-top:30px;
+  padding:20px;
+  background:#f1f5f9;
+  border-radius:12px;
 }
 
-/* DEVELOPER BOX */
-.dev-box {
-  margin-top: 30px;
-  padding: 20px;
-  background: #f3f4f6;
-  border-radius: 12px;
+/* ===== FOOTER ===== */
+.footer{
+  background:#0f172a;
+  color:white;
+  padding:50px 20px;
+}
+
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  max-width:1200px;
+  margin:auto;
+}
+
+.footer a{
+  display:block;
+  color:#94a3b8;
+  margin:6px 0;
+  text-decoration:none;
+}
+
+.footer a:hover{color:white;}
+
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:10px;
 }
 
 /* ===== MOBILE ===== */
-.mobile-nav {
-  display: none;
-}
+.mobile-nav{display:none;}
 
-@media(max-width: 768px) {
+@media(max-width:768px){
 
-  .nav-links {
-    display: none;
+  .nav-links{display:none;}
+
+  body{padding-bottom:70px;}
+
+  .mobile-nav{
+    display:flex;
+    position:fixed;
+    bottom:0;width:100%;
+    background:#111827;
+    justify-content:space-around;
+    padding:10px 0;
   }
 
-  .container {
-    margin-top: 80px;
+  .mobile-nav a{
+    color:#9ca3af;
+    font-size:12px;
+    text-decoration:none;
+    text-align:center;
   }
 
-  /* MOBILE NAV */
-  .mobile-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #111827;
-    justify-content: space-around;
-    padding: 10px 0;
-  }
-
-  .mobile-nav a {
-    color: #9ca3af;
-    text-align: center;
-    font-size: 12px;
-    text-decoration: none;
-  }
-
-  .mobile-nav i {
-    display: block;
-    font-size: 18px;
+  .mobile-nav i{
+    display:block;
+    font-size:18px;
   }
 
 }
 
 </style>
-
 </head>
 
 <body>
@@ -155,57 +165,113 @@ p {
   <div class="logo">📚 NotesHub</div>
 
   <div class="nav-links">
-    <a href="/">Home</a>
+    <a href="/dashboard">Home</a>
     <a href="/btech">Notes</a>
     <a href="/contact">Contact</a>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="container">
+<!-- MAIN -->
+<div class="main">
 
-  <div class="card">
+  <div class="container">
 
-    <h1>📚 About NotesHub</h1>
+    <div class="card">
 
-    <p>
-      <strong>NotesHub</strong> is a modern platform designed to help B.Tech students easily access, share, and download academic notes in a structured way.
-    </p>
+      <h1>📚 About NotesHub</h1>
 
-    <p>
-      Our mission is to simplify learning by providing all essential study materials in one place, making education more accessible and efficient.
-    </p>
+      <p>
+        <strong>NotesHub</strong> is a modern platform designed to help B.Tech students easily access, share, and download academic notes in a structured way.
+      </p>
 
-    <h2>🚀 What We Offer</h2>
-    <ul class="features">
-      <li>📘 Semester-wise notes organization</li>
-      <li>📄 Previous year questions (PYQs)</li>
-      <li>⬇ Easy download & view system</li>
-      <li>🔍 Smart subject-based navigation</li>
-      <li>📱 Mobile-friendly experience</li>
-    </ul>
+      <p>
+        Our mission is to simplify learning by providing all essential study materials in one place, making education more accessible and efficient.
+      </p>
 
-    <h2>🎯 Our Vision</h2>
-    <p>
-      We aim to build a community-driven platform where students can contribute and access quality educational resources anytime, anywhere.
-    </p>
+      <h2>🚀 What We Offer</h2>
+      <ul class="features">
+        <li>📘 Semester-wise notes organization</li>
+        <li>📄 Previous year questions (PYQs)</li>
+        <li>⬇ Easy download & view system</li>
+        <li>🔍 Smart subject-based navigation</li>
+        <li>📱 Mobile-friendly experience</li>
+      </ul>
 
-    <div class="dev-box">
-      <h2>👨‍💻 Developer</h2>
-      <p><strong>Rahul Vashisth</strong></p>
-      <p>B.Tech Engineering Student</p>
-      <p>Passionate about building useful web applications 🚀</p>
+      <h2>🎯 Our Vision</h2>
+      <p>
+        We aim to build a community-driven platform where students can contribute and access quality educational resources anytime, anywhere.
+      </p>
+
+      <div class="dev-box">
+        <h2>👨‍💻 Developer</h2>
+        <p><strong>Rahul Vashisth</strong></p>
+        <p>B.Tech Engineering Student</p>
+        <p>Passionate about building useful web applications 🚀</p>
+      </div>
+
     </div>
 
   </div>
 
 </div>
 
+<!-- FOOTER -->
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- ABOUT -->
+    <div>
+      <h3>📚 NotesHub</h3>
+      <p style="color:#94a3b8;">
+        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
+      </p>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div>
+      <h3>Quick Links</h3>
+      <a href="{{ url_for('dashboard') }}">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
+    </div>
+
+    <!-- LEGAL -->
+    <div>
+      <h3>Legal</h3>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+
+    <!-- SOCIAL -->
+    <div>
+      <h3>Connect With Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 NotesHub 🚀 | All Rights Reserved
+  </div>
+
+</footer>
+
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
-  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
-  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
+  <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 
 </body>

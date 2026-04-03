@@ -10,131 +10,132 @@
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<meta name="theme-color" content="#111827">
-
 <style>
 
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
+/* ===== GLOBAL ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
-body {
-  background: #f9fafb;
-  color: #111827;
-  line-height: 1.6;
+body{
+  background:#f8fafc;
+  color:#0f172a;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
 
 /* ===== NAVBAR ===== */
-.navbar {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  background: #111827;
-  color: white;
-  padding: 14px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
+.navbar{
+  position:fixed;
+  top:0;width:100%;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(12px);
+  padding:14px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: bold;
+.logo{font-size:20px;font-weight:600;}
+
+.nav-links a{
+  color:#334155;
+  margin-left:15px;
+  text-decoration:none;
 }
 
-.nav-links a {
-  color: #d1d5db;
-  margin-left: 15px;
-  text-decoration: none;
-}
+.nav-links a:hover{color:#000;}
 
-.nav-links a:hover {
-  color: white;
-}
-
-/* ===== CONTAINER ===== */
-.container {
-  max-width: 900px;
-  margin: 100px auto 40px;
-  padding: 20px;
+/* ===== MAIN ===== */
+.main{
+  flex:1;
+  max-width:900px;
+  margin:100px auto 40px;
+  padding:20px;
 }
 
 /* CARD */
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-/* HEADINGS */
-h1 {
-  margin-bottom: 20px;
-}
-
-h2 {
-  margin-top: 20px;
-  font-size: 20px;
+.card{
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 /* TEXT */
-p {
-  margin-top: 10px;
-  color: #374151;
+h1{margin-bottom:20px;}
+h2{margin-top:20px;font-size:20px;}
+p{margin-top:10px;color:#374151;}
+ul{margin-top:10px;padding-left:20px;}
+
+/* ===== FOOTER ===== */
+.footer{
+  background:#0f172a;
+  color:white;
+  padding:50px 20px;
 }
 
-/* LIST */
-ul {
-  margin-top: 10px;
-  padding-left: 20px;
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  max-width:1200px;
+  margin:auto;
 }
 
-/* ===== MOBILE NAV ===== */
-.mobile-nav {
-  display: none;
+.footer a{
+  display:block;
+  color:#94a3b8;
+  margin:6px 0;
+  text-decoration:none;
 }
 
-@media(max-width: 768px) {
+.footer a:hover{color:white;}
 
-  .nav-links {
-    display: none;
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:10px;
+}
+
+/* ===== MOBILE ===== */
+.mobile-nav{display:none;}
+
+@media(max-width:768px){
+
+  .nav-links{display:none;}
+
+  .footer-container{
+    grid-template-columns:1fr;
+    text-align:center;
   }
 
-  .container {
-    margin-top: 80px;
+  body{padding-bottom:70px;}
+
+  .mobile-nav{
+    display:flex;
+    position:fixed;
+    bottom:0;width:100%;
+    background:#111827;
+    justify-content:space-around;
+    padding:10px 0;
   }
 
-  .mobile-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #111827;
-    justify-content: space-around;
-    padding: 10px 0;
+  .mobile-nav a{
+    color:#9ca3af;
+    font-size:12px;
+    text-decoration:none;
+    text-align:center;
   }
 
-  .mobile-nav a {
-    color: #9ca3af;
-    text-align: center;
-    font-size: 12px;
-    text-decoration: none;
+  .mobile-nav i{
+    display:block;
+    font-size:18px;
   }
-
-  .mobile-nav i {
-    display: block;
-    font-size: 18px;
-  }
-
 }
 
 </style>
-
 </head>
 
 <body>
@@ -144,14 +145,14 @@ ul {
   <div class="logo">📚 NotesHub</div>
 
   <div class="nav-links">
-    <a href="/">Home</a>
+    <a href="/dashboard">Home</a>
     <a href="/btech">Notes</a>
     <a href="/contact">Contact</a>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="container">
+<!-- MAIN CONTENT -->
+<div class="main">
 
   <div class="card">
 
@@ -171,14 +172,14 @@ ul {
       The content on this platform should not be considered as professional or official academic advice.
     </p>
 
-    <h2>📤 User-Generated Content</h2>
+    <h2>📤 User Content</h2>
     <p>
       Users may upload notes and materials. NotesHub is not responsible for the accuracy, originality, or legality of user-submitted content.
     </p>
 
     <h2>© Copyright Notice</h2>
     <p>
-      If you believe any content violates copyright laws, please contact us. We will take appropriate action.
+      If you believe any content violates copyright laws, please contact us.
     </p>
 
     <h2>🔄 Changes</h2>
@@ -195,11 +196,63 @@ ul {
 
 </div>
 
+<!-- FOOTER -->
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- ABOUT -->
+    <div>
+      <h3>📚 NotesHub</h3>
+      <p style="color:#94a3b8;">
+        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
+      </p>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div>
+      <h3>Quick Links</h3>
+      <a href="{{ url_for('dashboard') }}">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
+    </div>
+
+    <!-- LEGAL -->
+    <div>
+      <h3>Legal</h3>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+
+    <!-- SOCIAL -->
+    <div>
+      <h3>Connect With Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 NotesHub 🚀 | All Rights Reserved
+  </div>
+
+</footer>
+
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
-  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
-  <a href="/dashboard"><i class="fas fa-user"></i>Profile</a>
+  <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 
 </body>

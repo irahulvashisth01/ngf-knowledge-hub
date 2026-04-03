@@ -10,262 +10,233 @@
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<meta name="theme-color" content="#0f172a">
-
 <style>
 
 /* ===== GLOBAL ===== */
-html, body {
-  overflow-x: hidden;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+  background:#f8fafc;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  padding-top:70px;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+/* BACKGROUND GLOW */
+body::before{
+  content:"";
+  position:fixed;
+  width:400px;height:400px;
+  background:rgba(99,102,241,0.2);
+  filter:blur(120px);
+  top:-100px;left:-100px;
+  z-index:-1;
 }
 
-body {
-  background: #f8fafc;
-  padding-top: 70px;
+body::after{
+  content:"";
+  position:fixed;
+  width:400px;height:400px;
+  background:rgba(6,182,212,0.2);
+  filter:blur(120px);
+  bottom:-100px;right:-100px;
+  z-index:-1;
 }
 
-/* ===== NAVBAR (GLASS) ===== */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  backdrop-filter: blur(14px);
-  background: rgba(15,23,42,0.7);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding: 14px 30px;
-  z-index: 1000;
+/* ===== NAVBAR ===== */
+.navbar{
+  position:fixed;top:0;width:100%;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(12px);
+  padding:14px 30px;
+  z-index:1000;
 }
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.logo {
-  color: white;
-  font-size: 22px;
-  font-weight: 600;
+.logo{
+  font-size:22px;
+  font-weight:600;
 }
 
-.nav-links {
-  display: flex;
-  gap: 25px;
-  list-style: none;
+.menu-toggle{
+  display:none;
+  font-size:24px;
+  cursor:pointer;
 }
 
-.nav-links a {
-  color: #cbd5f5;
-  text-decoration: none;
-  transition: 0.3s;
+.nav-links{
+  display:flex;
+  gap:25px;
+  list-style:none;
 }
 
-.nav-links a:hover {
-  color: white;
+.nav-links a{
+  color:#334155;
+  text-decoration:none;
 }
 
-.menu-toggle {
-  display: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
+.nav-links a:hover{
+  color:#000;
 }
 
 /* ===== HERO ===== */
-.hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  color: white;
-  padding: 20px;
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  background:
+  linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+  url('{{ url_for("static", filename="images/library.jpg") }}');
+  background-size:cover;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at top left, #6366f1, transparent),
-              radial-gradient(circle at bottom right, #06b6d4, transparent);
-  z-index: -1;
+.hero h1{font-size:48px;}
+.hero p{margin:15px 0;font-size:18px;}
+
+.btn{
+  padding:12px 28px;
+  border-radius:12px;
+  text-decoration:none;
+  margin:10px;
+  display:inline-block;
 }
 
-.hero h1 {
-  font-size: 52px;
-  font-weight: 700;
+.primary{
+  background:linear-gradient(135deg,#6366f1,#06b6d4);
+  color:white;
 }
 
-.hero p {
-  margin: 15px 0;
-  font-size: 18px;
-  color: #e2e8f0;
+/* ===== STATS ===== */
+.stats{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  padding:50px 20px;
 }
 
-/* BUTTONS */
-.btn {
-  padding: 12px 28px;
-  border-radius: 12px;
-  text-decoration: none;
-  margin: 10px;
-  display: inline-block;
-  transition: 0.3s;
+.stat-box{
+  background:white;
+  padding:25px 40px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-.primary {
-  background: linear-gradient(135deg,#6366f1,#3b82f6);
-  color: white;
+/* ===== GALLERY ===== */
+.gallery{
+  padding:80px 20px;
+  text-align:center;
 }
 
-.primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(99,102,241,0.4);
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.img-card{
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.img-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
 }
 
 /* ===== FEATURES ===== */
-.features {
-  padding: 90px 20px;
-  text-align: center;
+.features{
+  padding:80px 20px;
+  text-align:center;
 }
 
-.features h2 {
-  font-size: 32px;
-  margin-bottom: 40px;
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
 }
 
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 25px;
+.feature-card{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-.feature-card {
-  background: white;
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  transition: 0.3s;
-}
-
-.feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-
-/* ===== STUDENTS ===== */
-.students-section {
-  padding: 80px 20px;
-  background: #f1f5f9;
-  text-align: center;
-}
-
-.students-container {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 20px;
-}
-
-.student-card {
-  border-radius: 20px;
-  overflow: hidden;
-  background: white;
-  transition: 0.3s;
-}
-
-.student-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.student-card:hover {
-  transform: scale(1.04);
+/* ===== CTA ===== */
+.cta{
+  text-align:center;
+  padding:80px 20px;
+  background:linear-gradient(135deg,#6366f1,#06b6d4);
+  color:white;
 }
 
 /* ===== FOOTER ===== */
-.footer {
-  background: #0f172a;
-  color: white;
-  padding: 60px 20px;
+.footer{
+  margin-top:auto;
+  background:#0f172a;
+  color:white;
+  padding:50px 20px;
 }
 
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 20px;
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  max-width:1200px;
+  margin:auto;
 }
 
-.footer a {
-  color: #94a3b8;
-  text-decoration: none;
+.footer a{
+  display:block;
+  color:#94a3b8;
+  margin:6px 0;
+  text-decoration:none;
 }
 
-.footer a:hover {
-  color: white;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 25px;
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
 }
 
 /* ===== MOBILE ===== */
-@media (max-width: 768px) {
+@media(max-width:768px){
 
-  .menu-toggle {
-    display: block;
+  .menu-toggle{display:block;}
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    background:white;
+    position:absolute;
+    top:70px;
+    right:10px;
+    padding:20px;
   }
 
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    right: 10px;
-    width: 85%;
-    background: rgba(15,23,42,0.95);
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 14px;
-    display: none;
-  }
+  .nav-links.active{display:flex;}
 
-  .nav-links.active {
-    display: flex;
-  }
+  .gallery-grid{grid-template-columns:1fr;}
+  .feature-grid{grid-template-columns:1fr;}
+  .stats{flex-direction:column;}
 
-  .feature-grid,
-  .students-container {
-    grid-template-columns: repeat(2,1fr);
-  }
-
-  .footer-container {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .hero h1 {
-    font-size: 34px;
-  }
-}
-
-/* SMALL MOBILE */
-@media (max-width: 500px) {
-  .feature-grid,
-  .students-container {
-    grid-template-columns: 1fr;
+  .footer-container{
+    grid-template-columns:1fr;
+    text-align:center;
   }
 }
 
 </style>
-
 </head>
 
 <body>
@@ -278,7 +249,7 @@ body {
     <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="/">Home</a></li>
+      <li><a href="{{ url_for('dashboard') }}">Home</a></li>
       <li><a href="/btech">Notes</a></li>
       <li><a href="/login">Login</a></li>
     </ul>
@@ -289,90 +260,97 @@ body {
 <section class="hero">
   <div>
     <h1>🚀 Study Smarter with NotesHub</h1>
-    <p>Your all-in-one platform for B.Tech notes & resources</p>
-    <a href="/login" class="btn primary">Get Started</a>
+    <p>Your all-in-one platform for B.Tech notes</p>
+    <a href="{{ url_for('dashboard') }}" class="btn primary">Explore Notes</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat-box"><h2>500+</h2><p>Notes</p></div>
+  <div class="stat-box"><h2>100+</h2><p>Subjects</p></div>
+  <div class="stat-box"><h2>10K+</h2><p>Downloads</p></div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <h2>📸 Student Experience</h2>
+  <div class="gallery-grid">
+    <div class="img-card"><img src="{{ url_for('static', filename='images/study1.jpg') }}"></div>
+    <div class="img-card"><img src="{{ url_for('static', filename='images/group.jpg') }}"></div>
+    <div class="img-card"><img src="{{ url_for('static', filename='images/library.jpg') }}"></div>
+    <div class="img-card"><img src="{{ url_for('static', filename='images/laptop.jpg') }}"></div>
   </div>
 </section>
 
 <!-- FEATURES -->
 <section class="features">
-  <h2>Why NotesHub?</h2>
-
+  <h2>Why Choose NotesHub?</h2>
   <div class="feature-grid">
-    <div class="feature-card">
-      <h3>📚 Centralized Notes</h3>
-      <p>All subjects in one place</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>⚡ Fast Access</h3>
-      <p>Instant downloads & search</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🔐 Secure Platform</h3>
-      <p>Safe & reliable system</p>
-    </div>
+    <div class="feature-card">📚 All Subjects</div>
+    <div class="feature-card">⚡ Fast Access</div>
+    <div class="feature-card">🔐 Secure</div>
   </div>
 </section>
 
-<!-- STUDENTS -->
-<section class="students-section">
-  <h2>Built for Students</h2>
-
-  <div class="students-container">
-    <div class="student-card">
-      <img src="{{ url_for('static', filename='images/study1.jpg') }}">
-      <p>Focused Study</p>
-    </div>
-
-    <div class="student-card">
-      <img src="{{ url_for('static', filename='images/group.jpg') }}">
-      <p>Collaborative Learning</p>
-    </div>
-
-    <div class="student-card">
-      <img src="{{ url_for('static', filename='images/friendly.jpg') }}">
-      <p>Smart Preparation</p>
-    </div>
-  </div>
+<!-- CTA -->
+<section class="cta">
+  <h2>Start Your Journey 🚀</h2>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
+
   <div class="footer-container">
 
+    <!-- ABOUT -->
     <div>
       <h3>📚 NotesHub</h3>
-      <p>Modern study platform</p>
+      <p style="color:#94a3b8;">
+        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
+      </p>
     </div>
 
+    <!-- QUICK LINKS -->
     <div>
-      <h3>Links</h3>
-      <a href="/">Home</a><br>
+      <h3>Quick Links</h3>
+      <a href="{{ url_for('dashboard') }}">Home</a>
+      <a href="/dashboard">Dashboard</a>
       <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
     </div>
 
+    <!-- LEGAL -->
     <div>
       <h3>Legal</h3>
-      <a href="/privacy">Privacy</a><br>
-      <a href="/terms">Terms</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
+      <a href="/disclaimer">Disclaimer</a>
     </div>
 
+    <!-- SOCIAL -->
     <div>
-      <h3>Contact</h3>
-      <p>Rahul Vashisth</p>
+      <h3>Connect With Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
     </div>
 
   </div>
 
   <div class="footer-bottom">
-    © 2026 NotesHub 🚀
+    © 2026 NotesHub 🚀 | All Rights Reserved
   </div>
+
 </footer>
 
 <script>
-function toggleMenu() {
+function toggleMenu(){
   document.getElementById("navLinks").classList.toggle("active");
 }
 </script>

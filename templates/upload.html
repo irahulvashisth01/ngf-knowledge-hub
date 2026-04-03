@@ -10,175 +10,189 @@
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<meta name="theme-color" content="#0f172a">
-
 <style>
 
 /* ===== GLOBAL ===== */
-html, body {
-  overflow-x: hidden;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+  background:#f8fafc;
+  color:#0f172a;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  padding-top:70px;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-body {
-  background: linear-gradient(135deg, #4f46e5, #06b6d4);
-  padding-top: 70px;
-  color: white;
+/* BACKGROUND GLOW */
+body::before{
+  content:"";
+  position:fixed;
+  width:300px;height:300px;
+  background:radial-gradient(circle,#6366f1,transparent);
+  top:-80px;left:-80px;
+  opacity:0.15;
+  z-index:-1;
 }
 
 /* ===== NAVBAR ===== */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  backdrop-filter: blur(12px);
-  background: rgba(15,23,42,0.7);
-  padding: 14px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
+.navbar{
+  position:fixed;
+  top:0;width:100%;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(12px);
+  padding:14px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: 600;
+.logo{font-size:20px;font-weight:600;}
+
+.nav-links a{
+  color:#334155;
+  margin-left:15px;
+  text-decoration:none;
 }
 
-.nav-links a {
-  color: #cbd5f5;
-  margin-left: 15px;
-  text-decoration: none;
-}
+.nav-links a:hover{color:#000;}
 
 /* ===== MAIN ===== */
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 15px;
+.main{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 15px;
 }
 
 /* ===== CARD ===== */
-.upload-card {
-  width: 100%;
-  max-width: 450px;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+.upload-card{
+  width:100%;
+  max-width:450px;
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.1);
 }
 
-.upload-card h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.upload-card h2{
+  text-align:center;
+  margin-bottom:20px;
 }
 
-/* ===== INPUT ===== */
-label {
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 6px;
-  font-size: 14px;
+/* INPUT */
+label{
+  margin-top:15px;
+  display:block;
+  font-size:14px;
 }
 
-select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
+select{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #e2e8f0;
 }
 
-/* ===== DROP AREA ===== */
-.drop-area {
-  position: relative;
-  margin-top: 10px;
-  padding: 30px;
-  border: 2px dashed rgba(255,255,255,0.6);
-  border-radius: 12px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.3s;
+/* DROP AREA */
+.drop-area{
+  margin-top:10px;
+  padding:25px;
+  border:2px dashed #cbd5f5;
+  border-radius:12px;
+  text-align:center;
+  cursor:pointer;
 }
 
-.drop-area:hover {
-  background: rgba(255,255,255,0.1);
+.drop-area:hover{
+  background:#f1f5f9;
 }
 
-.drop-area i {
-  font-size: 30px;
-  margin-bottom: 10px;
+.drop-area i{
+  font-size:28px;
+  margin-bottom:10px;
 }
 
-/* FILE INPUT FIX */
-.drop-area input {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-  top: 0;
-  left: 0;
+/* FILE INPUT */
+.drop-area input{
+  position:absolute;
+  width:100%;
+  height:100%;
+  opacity:0;
 }
 
 /* FILE INFO */
-.file-info {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #e5e7eb;
-  text-align: center;
+.file-info{
+  margin-top:10px;
+  text-align:center;
+  font-size:14px;
 }
 
-/* PROGRESS BAR */
-.progress-container {
-  margin-top: 15px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 10px;
-  overflow: hidden;
-  display: none;
+/* PROGRESS */
+.progress-container{
+  margin-top:15px;
+  background:#e2e8f0;
+  border-radius:10px;
+  overflow:hidden;
+  display:none;
 }
 
-.progress-bar {
-  height: 10px;
-  width: 0%;
-  background: #10b981;
-  transition: 0.3s;
+.progress-bar{
+  height:10px;
+  width:0%;
+  background:#10b981;
 }
 
 /* BUTTON */
-.btn {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  background: linear-gradient(135deg,#10b981,#059669);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+.btn{
+  width:100%;
+  margin-top:20px;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#6366f1,#06b6d4);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
+.btn:hover{
+  transform:translateY(-2px);
 }
 
-/* MOBILE */
-@media(max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
+/* ===== FOOTER ===== */
+.footer{
+  background:#0f172a;
+  color:white;
+  padding:50px 20px;
+}
+
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  max-width:1200px;
+  margin:auto;
+}
+
+.footer a{
+  display:block;
+  color:#94a3b8;
+  margin:6px 0;
+  text-decoration:none;
+}
+
+.footer a:hover{color:white;}
+
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:10px;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -214,11 +228,10 @@ select {
 
       <label>Upload File</label>
 
-      <!-- SAFE MOBILE FILE INPUT -->
       <div class="drop-area">
         <i class="fas fa-cloud-upload-alt"></i>
         <p>Click to Upload File</p>
-        <input type="file" name="file" id="fileInput" accept=".pdf,.doc,.docx" required>
+        <input type="file" name="file" id="fileInput" required>
       </div>
 
       <div class="file-info" id="fileInfo"></div>
@@ -235,18 +248,67 @@ select {
 
 </div>
 
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- ABOUT -->
+    <div>
+      <h3>📚 NotesHub</h3>
+      <p style="color:#94a3b8;">
+        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
+      </p>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div>
+      <h3>Quick Links</h3>
+      <a href="{{ url_for('dashboard') }}">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
+    </div>
+
+    <!-- LEGAL -->
+    <div>
+      <h3>Legal</h3>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+
+    <!-- SOCIAL -->
+    <div>
+      <h3>Connect With Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 NotesHub 🚀 | All Rights Reserved
+  </div>
+
+</footer>
+
 <script>
 
-/* SUBJECTS */
 const SUBJECTS = {{ subjects | tojson }};
 
-function updateSubjects() {
+function updateSubjects(){
   let sem = document.getElementById("semester").value;
   let subject = document.getElementById("subject");
-
   subject.innerHTML = "";
 
-  SUBJECTS[sem].forEach(sub => {
+  SUBJECTS[sem].forEach(sub=>{
     let option = document.createElement("option");
     option.value = sub;
     option.text = sub;
@@ -256,31 +318,29 @@ function updateSubjects() {
 
 window.onload = updateSubjects;
 
-/* FILE INFO */
 const fileInput = document.getElementById("fileInput");
 const fileInfo = document.getElementById("fileInfo");
 
-fileInput.addEventListener("change", () => {
+fileInput.addEventListener("change", ()=>{
   let file = fileInput.files[0];
-  if(file) {
+  if(file){
     fileInfo.innerText = "Selected: " + file.name;
   }
 });
 
-/* PROGRESS (FAKE UI FOR UX) */
 const form = document.getElementById("uploadForm");
 const progressBar = document.getElementById("progressBar");
 const progressContainer = document.getElementById("progressContainer");
 
-form.addEventListener("submit", function() {
-  progressContainer.style.display = "block";
+form.addEventListener("submit", function(){
+  progressContainer.style.display="block";
 
-  let width = 0;
-  let interval = setInterval(() => {
-    if(width >= 90) clearInterval(interval);
-    width += 10;
-    progressBar.style.width = width + "%";
-  }, 200);
+  let width=0;
+  let interval=setInterval(()=>{
+    if(width>=90) clearInterval(interval);
+    width+=10;
+    progressBar.style.width=width+"%";
+  },200);
 });
 
 </script>
