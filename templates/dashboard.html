@@ -206,6 +206,12 @@ body::after{
         <h3>⬆ Upload Notes</h3>
       </a>
 
+      {% if session.get('role') == 'admin' %}
+      <a href="/admin" class="card" style="background:#111827;color:white;">
+        <h3>👑 Admin Panel</h3>
+      </a>
+      {% endif %}
+
     </div>
 
   </div>
