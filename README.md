@@ -1,7 +1,6 @@
 # 🚀 NGF Knowledge Hub
 
-> 🌐 Live Website: https://btechnotes.online
-> 🌐 Render  Deployed Site: ngf-knowledge-hub.onrender.com
+> 🌐 Live Website: https://btechnotes.online and https://ngf-knowledge-hub.onrender.com/
 > 💻 GitHub Repo: https://github.com/irahulvashisth01/ngf-knowledge-hub
 
 ---
