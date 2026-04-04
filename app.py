@@ -228,7 +228,7 @@ def download_file(filename):
 
 
 # ---------------- SHARE (PUBLIC) ----------------
-from flask import redirect
+from flask import send_from_directory
 
 @app.route('/share/<share_id>')
 def share_note(share_id):
@@ -241,7 +241,11 @@ def share_note(share_id):
     ).fetchone()
 
     if note:
-        return redirect(url_for('static', filename='uploads/' + note['filename']))
+        return send_from_directory(
+            'static/uploads',   # folder
+            note['filename'],   # file
+            as_attachment=False
+        )
     else:
         return "Note not found", 404
 
