@@ -228,7 +228,8 @@ def download_file(filename):
 
 
 # ---------------- SHARE (PUBLIC) ----------------
-from flask import send_from_directory
+import os
+from flask import send_file
 
 @app.route('/share/<share_id>')
 def share_note(share_id):
@@ -240,14 +241,19 @@ def share_note(share_id):
         (share_id,)
     ).fetchone()
 
-    if note:
-        return send_from_directory(
-            'static/uploads',   # folder
-            note['filename'],   # file
-            as_attachment=False
-        )
-    else:
+    if not note:
         return "Note not found", 404
+
+    # 🔥 Absolute file path
+    file_path = os.path.join("static", "uploads", note['filename'])
+
+    # Debug (check logs)
+    print("FILE PATH:", file_path)
+
+    if not os.path.exists(file_path):
+        return "File not found on server", 404
+
+    return send_file(file_path)
 
 # ---------------- UPLOAD (LOGIN REQUIRED) ----------------
 @app.route("/upload", methods=["GET", "POST"])
