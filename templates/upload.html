@@ -235,7 +235,7 @@ select{
 
       <div class="drop-area" id="dropArea">
         <i class="fas fa-cloud-upload-alt"></i>
-        <p>Click or Drag & Drop your file</p>
+        <p>Click or Upload File</p>
         <input type="file" name="file" id="fileInput" required>
       </div>
 
@@ -283,8 +283,8 @@ fileInput.addEventListener("change",()=>{
   let file=fileInput.files[0];
 
   if(file){
-    if(file.size > 10*1024*1024){
-      errorMsg.innerText="File too large (Max 10MB)";
+    if(file.size > 100*1024*1024){
+      errorMsg.innerText="File too large (Max 100MB)";
       fileInput.value="";
       return;
     }
