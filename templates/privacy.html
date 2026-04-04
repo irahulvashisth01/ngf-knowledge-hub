@@ -5,98 +5,120 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Privacy Policy - NotesHub</title>
+<title>Privacy Policy - NGF Knowledge Hub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 /* ===== GLOBAL ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
 body{
-  background:#f8fafc;
-  color:#0f172a;
-  display:flex;
-  flex-direction:column;
+  background:#F8FAFC;
+  color:#111827;
   min-height:100vh;
 }
 
 /* ===== NAVBAR ===== */
 .navbar{
   position:fixed;
-  top:0;width:100%;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(12px);
-  padding:14px 25px;
+  top:0;
+  width:100%;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  padding:15px 5%;
   display:flex;
   justify-content:space-between;
   align-items:center;
   z-index:1000;
 }
 
-.logo{font-size:20px;font-weight:600;}
-
-.nav-links a{
-  color:#334155;
-  margin-left:15px;
-  text-decoration:none;
+.logo{
+  font-size:22px;
+  font-weight:700;
+  color:#1E88E5;
 }
 
-.nav-links a:hover{color:#000;}
+.logo span{
+  color:#FF6F00;
+}
+
+.nav-links a{
+  margin-left:15px;
+  text-decoration:none;
+  color:#374151;
+}
 
 /* ===== MAIN ===== */
 .main{
-  flex:1;
   max-width:900px;
-  margin:100px auto 40px;
+  margin:120px auto 40px;
   padding:20px;
 }
 
 /* CARD */
 .card{
   background:white;
-  padding:30px;
-  border-radius:15px;
+  padding:35px;
+  border-radius:18px;
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-/* TEXT */
-h1{margin-bottom:20px;}
-h2{margin-top:20px;font-size:20px;}
-p{margin-top:10px;color:#374151;}
-ul{margin-top:10px;padding-left:20px;}
+/* HEADINGS */
+h1{
+  margin-bottom:20px;
+  font-size:28px;
+}
+
+h2{
+  margin-top:25px;
+  font-size:18px;
+  color:#1E88E5;
+}
+
+p{
+  margin-top:10px;
+  color:#374151;
+  line-height:1.6;
+}
+
+ul{
+  margin-top:10px;
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:8px;
+}
 
 /* ===== FOOTER ===== */
 .footer{
-  background:#0f172a;
+  background:#111827;
   color:white;
-  padding:50px 20px;
+  padding:40px;
+  margin-top:40px;
 }
 
 .footer-container{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:30px;
-  max-width:1200px;
-  margin:auto;
+  gap:20px;
 }
 
 .footer a{
   display:block;
-  color:#94a3b8;
+  color:#9ca3af;
   margin:6px 0;
   text-decoration:none;
-}
-
-.footer a:hover{color:white;}
-
-.footer-bottom{
-  text-align:center;
-  margin-top:20px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:10px;
 }
 
 /* ===== MOBILE ===== */
@@ -116,7 +138,8 @@ ul{margin-top:10px;padding-left:20px;}
   .mobile-nav{
     display:flex;
     position:fixed;
-    bottom:0;width:100%;
+    bottom:0;
+    width:100%;
     background:#111827;
     justify-content:space-around;
     padding:10px 0;
@@ -142,16 +165,18 @@ ul{margin-top:10px;padding-left:20px;}
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">📚 NotesHub</div>
+  <div class="logo">NGF <span>Knowledge Hub</span></div>
 
   <div class="nav-links">
     <a href="/dashboard">Home</a>
     <a href="/btech">Notes</a>
     <a href="/contact">Contact</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms & Conditions</a>
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div class="main">
 
   <div class="card">
@@ -159,40 +184,40 @@ ul{margin-top:10px;padding-left:20px;}
     <h1>🔒 Privacy Policy</h1>
 
     <p>
-      At <strong>NotesHub</strong>, we value your privacy and are committed to protecting your personal information.
+      At <strong>NGF Knowledge Hub</strong>, your privacy is our priority. We are committed to protecting your personal data and ensuring a safe user experience.
     </p>
 
     <h2>📌 Information We Collect</h2>
     <ul>
-      <li>Name and email address during registration</li>
-      <li>Basic usage data to improve our platform</li>
+      <li>Name and email address during account registration</li>
+      <li>Usage data to improve performance and experience</li>
     </ul>
 
     <h2>🔐 How We Use Your Information</h2>
     <ul>
-      <li>To provide login and account functionality</li>
-      <li>To improve user experience</li>
-      <li>To maintain platform security</li>
+      <li>To provide secure login and account access</li>
+      <li>To improve platform functionality</li>
+      <li>To maintain security and prevent misuse</li>
     </ul>
 
     <h2>🍪 Cookies</h2>
     <p>
-      We may use cookies to enhance your browsing experience.
+      We use cookies to enhance user experience and analyze traffic.
     </p>
 
     <h2>🤝 Data Sharing</h2>
     <p>
-      We do not sell or share your personal data.
+      We do not sell, trade, or share your personal information with third parties.
     </p>
 
     <h2>🔄 Updates</h2>
     <p>
-      Policy may change anytime.
+      This privacy policy may be updated periodically. Please review it regularly.
     </p>
 
     <h2>📧 Contact</h2>
     <p>
-      Use contact page for queries.
+      For any questions, please use the contact page.
     </p>
 
   </div>
@@ -205,8 +230,8 @@ ul{margin-top:10px;padding-left:20px;}
   <div class="footer-container">
 
     <div>
-      <h3>📚 NotesHub</h3>
-      <p style="color:#94a3b8;">Modern platform for B.Tech notes</p>
+      <h3>NGF Knowledge Hub</h3>
+      <p>Smart platform for academic resources</p>
     </div>
 
     <div>
@@ -214,13 +239,17 @@ ul{margin-top:10px;padding-left:20px;}
       <a href="/dashboard">Home</a>
       <a href="/btech">Notes</a>
       <a href="/upload">Upload</a>
+      <a href="/login">Login</a>
+      <a href="/admin">Admin</a>
     </div>
 
     <div>
       <h3>Legal</h3>
-      <a href="/privacy">Privacy</a>
-      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
       <a href="/disclaimer">Disclaimer</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/about">About</a>
     </div>
 
     <div>
@@ -228,12 +257,15 @@ ul{margin-top:10px;padding-left:20px;}
       <a href="#">Instagram</a>
       <a href="#">LinkedIn</a>
       <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+      <a href="#">Facebook</a>
+      <a href="#">YouTube</a>
     </div>
 
   </div>
 
-  <div class="footer-bottom">
-    © 2026 NotesHub 🚀
+  <div style="text-align:center;margin-top:20px;">
+    © 2026 NGF Knowledge Hub 📚
   </div>
 
 </footer>
@@ -242,6 +274,7 @@ ul{margin-top:10px;padding-left:20px;}
 <div class="mobile-nav">
   <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
   <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 

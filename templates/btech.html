@@ -5,130 +5,143 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>B.Tech CSE - NotesHub</title>
+<title>B.Tech CSE - NGF Knowledge Hub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 /* ===== GLOBAL ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-
-body{
-  background:#f8fafc;
-  color:#0f172a;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-/* ===== MAIN WRAPPER ===== */
-.main{
-  flex:1;
+body{
+  background:#F8FAFC;
+  color:#111827;
 }
 
 /* ===== NAVBAR ===== */
 .navbar{
   position:fixed;
-  top:0;width:100%;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(12px);
-  padding:14px 25px;
+  top:0;
+  width:100%;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  padding:15px 5%;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  z-index:1000;
 }
 
-.logo{font-size:22px;font-weight:600;}
+.logo{
+  font-size:22px;
+  font-weight:700;
+  color:#1E88E5;
+}
+
+.logo span{
+  color:#FF6F00;
+}
 
 .nav-links a{
-  color:#334155;
   margin-left:15px;
   text-decoration:none;
+  color:#374151;
 }
 
-.nav-links a:hover{color:#000;}
-
-/* ===== CONTAINER ===== */
-.container{
-  padding:100px 20px 40px;
-  max-width:1200px;
-  margin:auto;
+/* ===== HERO ===== */
+.hero{
+  margin-top:80px;
+  padding:40px;
+  background:linear-gradient(135deg,#1E88E5,#0D47A1);
+  color:white;
   text-align:center;
 }
 
-.container h2{
-  margin-bottom:25px;
-  font-size:30px;
+.hero h2{
+  font-size:32px;
+}
+
+.hero p{
+  margin-top:10px;
+  opacity:0.9;
+}
+
+/* ===== CONTAINER ===== */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
 }
 
 /* ===== GRID ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:25px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
 }
 
 /* ===== CARD ===== */
 .card{
   background:white;
   padding:30px;
-  border-radius:16px;
+  border-radius:18px;
   text-decoration:none;
-  color:#0f172a;
-  border:1px solid rgba(0,0,0,0.05);
-  transition:.3s;
+  color:#111827;
+  box-shadow:0 10px 25px rgba(0,0,0,0.05);
+  transition:0.3s;
+  text-align:center;
 }
 
 .card i{
   font-size:30px;
+  color:#1E88E5;
   margin-bottom:10px;
 }
 
 .card:hover{
-  transform:translateY(-8px) scale(1.05);
+  transform:translateY(-8px);
   box-shadow:0 15px 40px rgba(0,0,0,0.1);
 }
 
 /* ===== FOOTER ===== */
 .footer{
-  background:#0f172a;
+  background:#111827;
   color:white;
-  padding:50px 20px;
+  padding:40px;
 }
 
 .footer-container{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:30px;
-  max-width:1200px;
-  margin:auto;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
 }
 
 .footer a{
   display:block;
-  color:#94a3b8;
+  color:#9ca3af;
   margin:6px 0;
   text-decoration:none;
 }
 
-.footer a:hover{color:white;}
-
 .footer-bottom{
   text-align:center;
   margin-top:20px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:10px;
 }
-
 
 /* ===== MOBILE ===== */
 .mobile-nav{display:none;}
 
 @media(max-width:768px){
 
-  .grid{grid-template-columns:1fr;}
   .nav-links{display:none;}
 
   body{padding-bottom:70px;}
@@ -136,7 +149,8 @@ body{
   .mobile-nav{
     display:flex;
     position:fixed;
-    bottom:0;width:100%;
+    bottom:0;
+    width:100%;
     background:#111827;
     justify-content:space-around;
     padding:10px 0;
@@ -145,7 +159,6 @@ body{
   .mobile-nav a{
     color:#9ca3af;
     font-size:12px;
-    text-decoration:none;
     text-align:center;
   }
 
@@ -163,83 +176,74 @@ body{
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">📚 NotesHub</div>
+  <div class="logo">NGF <span>Knowledge Hub</span></div>
 
   <div class="nav-links">
-    <a href="/dashboard">Home</a>
+    <a href="/dashboard">Dashboard</a>
     <a href="/upload">Upload</a>
     <a href="/logout">Logout</a>
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="main">
+<!-- HERO -->
+<div class="hero">
+  <h2>🎓 B.Tech CSE</h2>
+  <p>Select your semester and explore all study resources 📚</p>
+</div>
 
-  <div class="container">
+<!-- MAIN -->
+<div class="container">
 
-    <h2>🎓 B.Tech CSE - All Semesters</h2>
-
-    <div class="grid">
-      {% for i in range(1,9) %}
-        <a href="/semester/{{i}}" class="card">
-          <i class="fas fa-book"></i>
-          Semester {{i}}
-        </a>
-      {% endfor %}
-    </div>
-
+  <div class="grid">
+    {% for i in range(1,9) %}
+      <a href="/semester/{{i}}" class="card">
+        <i class="fas fa-book-open"></i>
+        <h3>Semester {{i}}</h3>
+      </a>
+    {% endfor %}
   </div>
 
 </div>
 
 <!-- FOOTER -->
-<!-- FOOTER -->
 <footer class="footer">
 
   <div class="footer-container">
 
-    <!-- ABOUT -->
     <div>
-      <h3>📚 NotesHub</h3>
-      <p style="color:#94a3b8;">
-        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
-      </p>
+      <h3>NGF Knowledge Hub</h3>
+      <p>Smart platform for academic resources</p>
     </div>
 
-    <!-- QUICK LINKS -->
     <div>
       <h3>Quick Links</h3>
-      <a href="{{ url_for('dashboard') }}">Home</a>
-      <a href="/dashboard">Dashboard</a>
+      <a href="/dashboard">Home</a>
       <a href="/btech">Notes</a>
       <a href="/upload">Upload</a>
     </div>
 
-    <!-- LEGAL -->
     <div>
       <h3>Legal</h3>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/disclaimer">Disclaimer</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms & Conditions</a>
-      <a href="/disclaimer">Disclaimer</a>
     </div>
 
-    <!-- SOCIAL -->
     <div>
-      <h3>Connect With Us</h3>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
+      <h3>Social</h3>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+      <a href="#">Facebook</a>
     </div>
 
   </div>
 
   <div class="footer-bottom">
-    © 2026 NotesHub 🚀 | All Rights Reserved
+    © 2026 NGF Knowledge Hub 📚 | All Rights Reserved
   </div>
 
 </footer>
@@ -248,6 +252,7 @@ body{
 <div class="mobile-nav">
   <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
   <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 

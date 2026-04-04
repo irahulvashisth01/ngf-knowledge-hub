@@ -5,98 +5,120 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Terms & Conditions - NotesHub</title>
+<title>Terms & Conditions - NGF Knowledge Hub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 /* ===== GLOBAL ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
 body{
-  background:#f8fafc;
-  color:#0f172a;
-  display:flex;
-  flex-direction:column;
+  background:#F8FAFC;
+  color:#111827;
   min-height:100vh;
 }
 
 /* ===== NAVBAR ===== */
 .navbar{
   position:fixed;
-  top:0;width:100%;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(12px);
-  padding:14px 25px;
+  top:0;
+  width:100%;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  padding:15px 5%;
   display:flex;
   justify-content:space-between;
   align-items:center;
   z-index:1000;
 }
 
-.logo{font-size:20px;font-weight:600;}
-
-.nav-links a{
-  color:#334155;
-  margin-left:15px;
-  text-decoration:none;
+.logo{
+  font-size:22px;
+  font-weight:700;
+  color:#1E88E5;
 }
 
-.nav-links a:hover{color:#000;}
+.logo span{
+  color:#FF6F00;
+}
+
+.nav-links a{
+  margin-left:15px;
+  text-decoration:none;
+  color:#374151;
+}
 
 /* ===== MAIN ===== */
 .main{
-  flex:1;
   max-width:900px;
-  margin:100px auto 40px;
+  margin:120px auto 40px;
   padding:20px;
 }
 
 /* CARD */
 .card{
   background:white;
-  padding:30px;
-  border-radius:15px;
+  padding:35px;
+  border-radius:18px;
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 /* TEXT */
-h1{margin-bottom:20px;}
-h2{margin-top:20px;font-size:20px;}
-p{margin-top:10px;color:#374151;}
-ul{margin-top:10px;padding-left:20px;}
+h1{
+  margin-bottom:20px;
+  font-size:28px;
+}
+
+h2{
+  margin-top:25px;
+  font-size:18px;
+  color:#1E88E5;
+}
+
+p{
+  margin-top:10px;
+  color:#374151;
+  line-height:1.6;
+}
+
+ul{
+  margin-top:10px;
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:8px;
+}
 
 /* ===== FOOTER ===== */
 .footer{
-  background:#0f172a;
+  background:#111827;
   color:white;
-  padding:50px 20px;
+  padding:40px;
+  margin-top:40px;
 }
 
 .footer-container{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:30px;
-  max-width:1200px;
-  margin:auto;
+  gap:20px;
 }
 
 .footer a{
   display:block;
-  color:#94a3b8;
+  color:#9ca3af;
   margin:6px 0;
   text-decoration:none;
-}
-
-.footer a:hover{color:white;}
-
-.footer-bottom{
-  text-align:center;
-  margin-top:20px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:10px;
 }
 
 /* ===== MOBILE ===== */
@@ -105,8 +127,6 @@ ul{margin-top:10px;padding-left:20px;}
 @media(max-width:768px){
 
   .nav-links{display:none;}
-
-  .main{margin-top:80px;}
 
   .footer-container{
     grid-template-columns:1fr;
@@ -118,7 +138,8 @@ ul{margin-top:10px;padding-left:20px;}
   .mobile-nav{
     display:flex;
     position:fixed;
-    bottom:0;width:100%;
+    bottom:0;
+    width:100%;
     background:#111827;
     justify-content:space-around;
     padding:10px 0;
@@ -144,7 +165,7 @@ ul{margin-top:10px;padding-left:20px;}
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">📚 NotesHub</div>
+  <div class="logo">NGF <span>Knowledge Hub</span></div>
 
   <div class="nav-links">
     <a href="/dashboard">Home</a>
@@ -153,54 +174,62 @@ ul{margin-top:10px;padding-left:20px;}
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div class="main">
 
   <div class="card">
 
     <h1>📄 Terms & Conditions</h1>
 
-    <p>Welcome to <strong>NotesHub</strong>. By using our platform, you agree to the following terms and conditions.</p>
+    <p>
+      Welcome to <strong>NGF Knowledge Hub</strong>. By accessing or using our platform, you agree to comply with the following terms and conditions.
+    </p>
 
     <h2>📌 Use of Platform</h2>
     <ul>
-      <li>Educational use only</li>
-      <li>Use responsibly</li>
+      <li>Platform is intended for educational purposes only</li>
+      <li>Users must use resources responsibly</li>
     </ul>
 
     <h2>📤 User Content</h2>
     <ul>
-      <li>User is responsible for uploads</li>
-      <li>No illegal/copyright content</li>
+      <li>Users are responsible for uploaded content</li>
+      <li>Uploading illegal or copyrighted material is prohibited</li>
     </ul>
 
     <h2>🔐 Account Responsibility</h2>
     <ul>
-      <li>Provide correct info</li>
-      <li>Keep account secure</li>
+      <li>Provide accurate information</li>
+      <li>Maintain account security</li>
     </ul>
 
     <h2>⚠️ Liability</h2>
-    <p>NotesHub is not responsible for misuse of content.</p>
+    <p>
+      NGF Knowledge Hub is not responsible for misuse of uploaded or downloaded content.
+    </p>
 
     <h2>🔄 Updates</h2>
-    <p>Terms may change anytime.</p>
+    <p>
+      These terms may be updated at any time without prior notice.
+    </p>
 
     <h2>📧 Contact</h2>
-    <p>Use contact page for queries.</p>
+    <p>
+      For any questions, please use the contact page.
+    </p>
 
   </div>
 
 </div>
 
-<!-- FOOTER (FIXED POSITION) -->
+<!-- FOOTER -->
 <footer class="footer">
 
   <div class="footer-container">
 
     <div>
-      <h3>📚 NotesHub</h3>
-      <p style="color:#94a3b8;">Modern platform for B.Tech notes</p>
+      <h3>NGF Knowledge Hub</h3>
+      <p>Smart platform for academic resources</p>
     </div>
 
     <div>
@@ -212,9 +241,11 @@ ul{margin-top:10px;padding-left:20px;}
 
     <div>
       <h3>Legal</h3>
-      <a href="/privacy">Privacy</a>
-      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions </a>
       <a href="/disclaimer">Disclaimer</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/about">About</a>
     </div>
 
     <div>
@@ -222,12 +253,14 @@ ul{margin-top:10px;padding-left:20px;}
       <a href="#">Instagram</a>
       <a href="#">LinkedIn</a>
       <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+      <a href="#">Facebook</a>
     </div>
 
   </div>
 
-  <div class="footer-bottom">
-    © 2026 NotesHub 🚀
+  <div style="text-align:center;margin-top:20px;">
+    © 2026 NGF Knowledge Hub 📚
   </div>
 
 </footer>
@@ -236,6 +269,7 @@ ul{margin-top:10px;padding-left:20px;}
 <div class="mobile-nav">
   <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
   <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 

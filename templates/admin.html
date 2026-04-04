@@ -5,149 +5,117 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Admin Panel - NotesHub</title>
+<title>Admin Dashboard - NGF Knowledge Hub</title>
 
-<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 /* ===== GLOBAL ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
-  background:#f8fafc;
-  color:#0f172a;
   display:flex;
-  flex-direction:column;
-  min-height:100vh;
+  background:#F8FAFC;
 }
 
-/* ===== MAIN WRAPPER ===== */
-.main{
-  flex:1;
-}
-
-/* ===== NAVBAR ===== */
-.navbar{
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:250px;
+  height:100vh;
+  background:#111827;
+  color:white;
+  padding:20px;
   position:fixed;
-  top:0;width:100%;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(12px);
-  padding:14px 25px;
+}
+
+.sidebar h2{
+  margin-bottom:30px;
+}
+
+.sidebar a{
+  display:block;
+  color:#9ca3af;
+  padding:10px;
+  margin:8px 0;
+  text-decoration:none;
+  border-radius:8px;
+}
+
+.sidebar a:hover{
+  background:#1f2937;
+  color:white;
+}
+
+/* ===== MAIN ===== */
+.main{
+  margin-left:250px;
+  padding:20px;
+  width:100%;
+}
+
+/* ===== HEADER ===== */
+.header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:600;
-}
-
-.nav-links a{
-  color:#334155;
-  margin-left:15px;
-  text-decoration:none;
-}
-
-.nav-links a:hover{
-  color:#000;
-}
-
-/* ===== CONTAINER ===== */
-.container{
-  padding:100px 20px 40px;
-  max-width:1200px;
-  margin:auto;
-}
-
-h2{
   margin-bottom:20px;
 }
 
-/* ===== SECTION ===== */
-.section{
-  margin-top:35px;
+.header h2{
+  font-size:24px;
 }
 
-.section h3{
-  margin-bottom:15px;
-}
-
-/* ===== GRID ===== */
-.grid{
+/* ===== STATS ===== */
+.stats{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:20px;
+  margin-bottom:30px;
 }
 
-/* ===== CARD ===== */
-.note-card{
+.stat{
   background:white;
   padding:20px;
-  border-radius:15px;
-  border:1px solid rgba(0,0,0,0.05);
-  transition:0.3s;
+  border-radius:12px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
 }
 
-.note-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 15px 40px rgba(0,0,0,0.1);
+/* ===== TABLE ===== */
+.table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+.table th,.table td{
+  padding:12px;
+  text-align:left;
+  border-bottom:1px solid #eee;
 }
 
 /* ===== BUTTONS ===== */
 .btn{
-  display:inline-block;
-  margin-top:10px;
-  padding:8px 14px;
-  border-radius:8px;
-  text-decoration:none;
-  font-size:14px;
+  padding:6px 10px;
+  border:none;
+  border-radius:6px;
   color:white;
+  cursor:pointer;
+  font-size:12px;
 }
 
 .approve{background:#10b981;}
 .delete{background:#ef4444;}
 .admin{background:#3b82f6;}
 
-/* ===== EMPTY ===== */
-.empty{
-  padding:20px;
+/* ===== CARD SECTION ===== */
+.section{
   background:white;
-  border-radius:10px;
-  text-align:center;
-}
-
-/* ===== FOOTER ===== */
-.footer{
-  background:#0f172a;
-  color:white;
-  padding:50px 20px;
-}
-
-.footer-container{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:30px;
-  max-width:1200px;
-  margin:auto;
-}
-
-.footer a{
-  display:block;
-  color:#94a3b8;
-  margin:6px 0;
-  text-decoration:none;
-}
-
-.footer a:hover{color:white;}
-
-.footer-bottom{
-  text-align:center;
-  margin-top:20px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:10px;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
 }
 
 /* ===== MOBILE ===== */
@@ -183,149 +151,129 @@ h2{
 
 }
 
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+
+  .sidebar{display:none;}
+  .main{margin-left:0;}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-  <div class="logo">👑 Admin Panel</div>
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>👑 Admin</h2>
 
-  <div class="nav-links">
-    <a href="/dashboard">Home</a>
-    <a href="/btech">Notes</a>
-    <a href="/logout">Logout</a>
-  </div>
+  <a href="#">Dashboard</a>
+  <a href="#pending">Pending Notes</a>
+  <a href="#approved">Approved Notes</a>
+  <a href="#users">Users</a>
+  <a href="/dashboard">Back to Site</a>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div class="main">
 
-  <div class="container">
+  <!-- HEADER -->
+  <div class="header">
+    <h2>Admin Dashboard</h2>
+  </div>
 
-    <h2>👑 Admin Dashboard</h2>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">📄 Pending: {{pending_notes|length}}</div>
+    <div class="stat">📚 Approved: {{approved_notes|length}}</div>
+    <div class="stat">👥 Users: {{users|length}}</div>
+  </div>
 
-    <!-- PENDING -->
-    <div class="section">
-      <h3>📄 Pending Notes</h3>
+  <!-- PENDING -->
+  <div class="section" id="pending">
+    <h3>📄 Pending Notes</h3>
 
-      {% if pending_notes %}
-      <div class="grid">
-        {% for n in pending_notes %}
-        <div class="note-card">
-          <p><b>{{n['title']}}</b></p>
-          <p>{{n['subject']}} | Semester {{n['semester']}}</p>
+    <table class="table">
+      <tr>
+        <th>Title</th>
+        <th>Subject</th>
+        <th>Semester</th>
+        <th>Actions</th>
+      </tr>
 
+      {% for n in pending_notes %}
+      <tr>
+        <td>{{n['title']}}</td>
+        <td>{{n['subject']}}</td>
+        <td>{{n['semester']}}</td>
+        <td>
           <a href="/approve/{{n['id']}}" class="btn approve">Approve</a>
           <a href="/delete/{{n['id']}}" class="btn delete">Delete</a>
-        </div>
-        {% endfor %}
-      </div>
-      {% else %}
-        <div class="empty">No pending notes</div>
-      {% endif %}
-    </div>
+        </td>
+      </tr>
+      {% endfor %}
 
-    <!-- APPROVED -->
-    <div class="section">
-      <h3>📚 Approved Notes</h3>
+    </table>
+  </div>
 
-      {% if approved_notes %}
-      <div class="grid">
-        {% for n in approved_notes %}
-        <div class="note-card">
-          <p>{{n['title']}}</p>
+  <!-- APPROVED -->
+  <div class="section" id="approved">
+    <h3>📚 Approved Notes</h3>
+
+    <table class="table">
+      <tr>
+        <th>Title</th>
+        <th>Actions</th>
+      </tr>
+
+      {% for n in approved_notes %}
+      <tr>
+        <td>{{n['title']}}</td>
+        <td>
           <a href="/delete/{{n['id']}}" class="btn delete">Delete</a>
-        </div>
-        {% endfor %}
-      </div>
-      {% else %}
-        <div class="empty">No approved notes</div>
-      {% endif %}
-    </div>
+        </td>
+      </tr>
+      {% endfor %}
 
-    <!-- USERS -->
-    <div class="section">
-      <h3>👥 Users</h3>
+    </table>
+  </div>
 
-      <div class="grid">
-        {% for u in users %}
-        <div class="note-card">
-          <p><b>{{u['name']}}</b></p>
-          <p>Role: {{u['role']}}</p>
+  <!-- USERS -->
+  <div class="section" id="users">
+    <h3>👥 Users</h3>
 
-          {% if u['role'] == 'user' %}
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+
+      {% for u in users %}
+      <tr>
+        <td>{{u['name']}}</td>
+        <td>{{u['role']}}</td>
+        <td>
+          {% if u['role']=='user' %}
             <a href="/make_admin/{{u['id']}}" class="btn admin">Make Admin</a>
           {% else %}
-            <a href="/remove_admin/{{u['id']}}" class="btn delete">Remove Admin</a>
+            <a href="/remove_admin/{{u['id']}}" class="btn delete">Remove</a>
           {% endif %}
-        </div>
-        {% endfor %}
-      </div>
+        </td>
+      </tr>
+      {% endfor %}
 
-    </div>
-
+    </table>
   </div>
 
 </div>
-
-<!-- FOOTER -->
-<!-- FOOTER -->
-<footer class="footer">
-
-  <div class="footer-container">
-
-    <!-- ABOUT -->
-    <div>
-      <h3>📚 NotesHub</h3>
-      <p style="color:#94a3b8;">
-        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
-      </p>
-    </div>
-
-    <!-- QUICK LINKS -->
-    <div>
-      <h3>Quick Links</h3>
-      <a href="{{ url_for('dashboard') }}">Home</a>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/btech">Notes</a>
-      <a href="/upload">Upload</a>
-    </div>
-
-    <!-- LEGAL -->
-    <div>
-      <h3>Legal</h3>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms & Conditions</a>
-      <a href="/disclaimer">Disclaimer</a>
-    </div>
-
-    <!-- SOCIAL -->
-    <div>
-      <h3>Connect With Us</h3>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    © 2026 NotesHub 🚀 | All Rights Reserved
-  </div>
-
-</footer>
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
   <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
   <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 

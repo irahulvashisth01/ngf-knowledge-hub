@@ -5,122 +5,124 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>About - NotesHub</title>
+<title>About - NGF Knowledge Hub</title>
 
-<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 /* ===== GLOBAL ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
-  background:#f8fafc;
-  color:#0f172a;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-}
-
-/* ===== MAIN WRAPPER ===== */
-.main{
-  flex:1;
+  background:#F8FAFC;
+  color:#111827;
 }
 
 /* ===== NAVBAR ===== */
 .navbar{
   position:fixed;
-  top:0;width:100%;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(12px);
-  padding:14px 25px;
+  top:0;
+  width:100%;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  padding:15px 5%;
   display:flex;
   justify-content:space-between;
-  align-items:center;
 }
 
 .logo{
-  font-size:20px;
-  font-weight:600;
+  font-size:22px;
+  font-weight:700;
+  color:#1E88E5;
 }
 
-.nav-links a{
-  color:#334155;
-  margin-left:15px;
-  text-decoration:none;
+.logo span{
+  color:#FF6F00;
 }
 
-.nav-links a:hover{
-  color:#000;
+/* ===== HERO ===== */
+.hero{
+  margin-top:80px;
+  padding:60px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#1E88E5,#0D47A1);
+  color:white;
+}
+
+.hero h1{
+  font-size:36px;
+}
+
+.hero p{
+  margin-top:10px;
+  opacity:0.9;
 }
 
 /* ===== CONTAINER ===== */
 .container{
-  max-width:1000px;
-  margin:100px auto 40px;
-  padding:20px;
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
 }
 
-/* ===== CARD ===== */
-.card{
+/* ===== SECTION ===== */
+.section{
+  margin-bottom:40px;
+}
+
+/* ===== FEATURES ===== */
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.feature-card{
   background:white;
-  padding:35px;
+  padding:25px;
   border-radius:16px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.feature-card i{
+  font-size:28px;
+  color:#1E88E5;
+  margin-bottom:10px;
+}
+
+/* ===== DEV CARD ===== */
+.dev-card{
+  background:white;
+  padding:30px;
+  border-radius:16px;
+  text-align:center;
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-/* TEXT */
-h1{margin-bottom:15px;}
-h2{margin-top:25px;}
-p{
+.dev-card h3{
   margin-top:10px;
-  color:#374151;
-  line-height:1.7;
-}
-
-/* FEATURES */
-.features li{
-  margin:8px 0;
-}
-
-/* DEV BOX */
-.dev-box{
-  margin-top:30px;
-  padding:20px;
-  background:#f1f5f9;
-  border-radius:12px;
 }
 
 /* ===== FOOTER ===== */
 .footer{
-  background:#0f172a;
+  background:#111827;
   color:white;
-  padding:50px 20px;
+  padding:40px;
 }
 
 .footer-container{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:30px;
-  max-width:1200px;
-  margin:auto;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
 }
 
 .footer a{
   display:block;
-  color:#94a3b8;
+  color:#9ca3af;
   margin:6px 0;
-  text-decoration:none;
-}
-
-.footer a:hover{color:white;}
-
-.footer-bottom{
-  text-align:center;
-  margin-top:20px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:10px;
 }
 
 /* ===== MOBILE ===== */
@@ -128,6 +130,7 @@ p{
 
 @media(max-width:768px){
 
+  .grid{grid-template-columns:1fr;}
   .nav-links{display:none;}
 
   body{padding-bottom:70px;}
@@ -155,6 +158,11 @@ p{
 
 }
 
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  body{padding-bottom:70px;}
+}
+
 </style>
 </head>
 
@@ -162,60 +170,72 @@ p{
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">📚 NotesHub</div>
+  <div class="logo">NGF <span>Knowledge Hub</span></div>
+</div>
 
-  <div class="nav-links">
-    <a href="/dashboard">Home</a>
-    <a href="/btech">Notes</a>
-    <a href="/contact">Contact</a>
-  </div>
+<!-- HERO -->
+<div class="hero">
+  <h1>About NGF Knowledge Hub</h1>
+  <p>Empowering students with smart learning resources 📚</p>
 </div>
 
 <!-- MAIN -->
-<div class="main">
+<div class="container">
 
-  <div class="container">
+  <!-- INTRO -->
+  <div class="section">
+    <p>
+      <strong>NGF Knowledge Hub</strong> is a modern academic platform designed to help B.Tech students access, share, and manage study materials efficiently.
+    </p>
+  </div>
 
-    <div class="card">
+  <!-- FEATURES -->
+  <div class="section">
+    <h2>🚀 What We Offer</h2>
 
-      <h1>📚 About NotesHub</h1>
-
-      <p>
-        <strong>NotesHub</strong> is a modern platform designed to help B.Tech students easily access, share, and download academic notes in a structured way.
-      </p>
-
-      <p>
-        Our mission is to simplify learning by providing all essential study materials in one place, making education more accessible and efficient.
-      </p>
-
-      <h2>🚀 What We Offer</h2>
-      <ul class="features">
-        <li>📘 Semester-wise notes organization</li>
-        <li>📄 Previous year questions (PYQs)</li>
-        <li>⬇ Easy download & view system</li>
-        <li>🔍 Smart subject-based navigation</li>
-        <li>📱 Mobile-friendly experience</li>
-      </ul>
-
-      <h2>🎯 Our Vision</h2>
-      <p>
-        We aim to build a community-driven platform where students can contribute and access quality educational resources anytime, anywhere.
-      </p>
-
-      <div class="dev-box">
-        <h2>👨‍💻 Developer</h2>
-        <p><strong>Rahul Vashisth</strong></p>
-        <p>B.Tech Engineering Student</p>
-        <p>Passionate about building useful web applications 🚀</p>
+    <div class="features">
+      <div class="feature-card">
+        <i class="fas fa-book"></i>
+        <h3>Semester Notes</h3>
       </div>
 
-    </div>
+      <div class="feature-card">
+        <i class="fas fa-file-alt"></i>
+        <h3>PYQs</h3>
+      </div>
 
+      <div class="feature-card">
+        <i class="fas fa-download"></i>
+        <h3>Easy Downloads</h3>
+      </div>
+
+      <div class="feature-card">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>Mobile Friendly</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISION -->
+  <div class="section">
+    <h2>🎯 Our Vision</h2>
+    <p>
+      To create a centralized, community-driven learning platform where students can access quality resources anytime.
+    </p>
+  </div>
+
+  <!-- DEVELOPER -->
+  <div class="section">
+    <div class="dev-card">
+      <i class="fas fa-user-circle" style="font-size:60px;color:#1E88E5;"></i>
+      <h3>Rahul Vashisth</h3>
+      <p>B.Tech Engineering Student</p>
+      <p>Passionate Full Stack Developer 🚀</p>
+    </div>
   </div>
 
 </div>
 
-<!-- FOOTER -->
 <!-- FOOTER -->
 <footer class="footer">
 
@@ -267,10 +287,16 @@ p{
 
 </footer>
 
+  <div style="text-align:center;margin-top:20px;">
+    © 2026 NGF Knowledge Hub 📚
+  </div>
+</footer>
+
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
   <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
   <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 

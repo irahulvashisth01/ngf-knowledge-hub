@@ -3,53 +3,38 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NotesHub - Smart Notes Platform</title>
+<title>NGF Knowledge Hub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 /* ===== GLOBAL ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
 body{
-  background:#f8fafc;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-  padding-top:70px;
-}
-
-/* BACKGROUND GLOW */
-body::before{
-  content:"";
-  position:fixed;
-  width:400px;height:400px;
-  background:rgba(99,102,241,0.2);
-  filter:blur(120px);
-  top:-100px;left:-100px;
-  z-index:-1;
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  width:400px;height:400px;
-  background:rgba(6,182,212,0.2);
-  filter:blur(120px);
-  bottom:-100px;right:-100px;
-  z-index:-1;
+  background:#F8FAFC;
+  color:#111827;
 }
 
 /* ===== NAVBAR ===== */
 .navbar{
-  position:fixed;top:0;width:100%;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(12px);
-  padding:14px 30px;
+  position:fixed;
+  top:0;
+  width:100%;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  padding:15px 5%;
   z-index:1000;
 }
 
@@ -61,57 +46,101 @@ body::after{
 
 .logo{
   font-size:22px;
-  font-weight:600;
+  font-weight:700;
+  color:#1E88E5;
 }
 
-.menu-toggle{
-  display:none;
-  font-size:24px;
-  cursor:pointer;
+.logo span{
+  color:#FF6F00;
 }
 
 .nav-links{
   display:flex;
-  gap:25px;
+  gap:20px;
   list-style:none;
 }
 
 .nav-links a{
-  color:#334155;
   text-decoration:none;
-}
-
-.nav-links a:hover{
-  color:#000;
+  color:#333;
 }
 
 /* ===== HERO ===== */
 .hero{
-  height:100vh;
+  height:90vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   color:white;
+
   background:
-  linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+  linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
   url('{{ url_for("static", filename="images/library.jpg") }}');
   background-size:cover;
 }
 
-.hero h1{font-size:48px;}
-.hero p{margin:15px 0;font-size:18px;}
+.hero h1{
+  font-size:48px;
+}
 
+.hero p{
+  margin:15px 0;
+}
+
+/* BUTTON */
 .btn{
-  padding:12px 28px;
-  border-radius:12px;
+  padding:12px 22px;
+  border-radius:10px;
   text-decoration:none;
   margin:10px;
   display:inline-block;
 }
 
 .primary{
-  background:linear-gradient(135deg,#6366f1,#06b6d4);
+  background:#FF6F00;
+  color:white;
+}
+
+.outline{
+  border:2px solid white;
+  color:white;
+}
+
+/* ===== GRID ===== */
+.container{
+  padding:80px 5%;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+/* CARD */
+.card{
+  background:white;
+  padding:30px;
+  text-align:center;
+  border-radius:15px;
+  transition:0.3s;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.card i{
+  font-size:30px;
+  color:#1E88E5;
+  margin-bottom:10px;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+/* ADMIN */
+.admin{
+  background:#111827;
   color:white;
 }
 
@@ -119,20 +148,19 @@ body::after{
 .stats{
   display:flex;
   justify-content:center;
-  gap:40px;
-  padding:50px 20px;
+  gap:30px;
+  padding:40px;
 }
 
 .stat-box{
   background:white;
-  padding:25px 40px;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  padding:20px;
+  border-radius:10px;
 }
 
 /* ===== GALLERY ===== */
 .gallery{
-  padding:80px 20px;
+  padding:60px;
   text-align:center;
 }
 
@@ -142,98 +170,48 @@ body::after{
   gap:20px;
 }
 
-.img-card{
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
-
-.img-card img{
+.gallery img{
   width:100%;
-  height:180px;
-  object-fit:cover;
+  border-radius:10px;
 }
 
 /* ===== FEATURES ===== */
 .features{
-  padding:80px 20px;
+  padding:60px;
   text-align:center;
 }
 
 .feature-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:25px;
+  gap:20px;
 }
 
 .feature-card{
   background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  padding:25px;
+  border-radius:12px;
 }
 
 /* ===== CTA ===== */
 .cta{
-  text-align:center;
-  padding:80px 20px;
-  background:linear-gradient(135deg,#6366f1,#06b6d4);
+  background:linear-gradient(135deg,#1E88E5,#0D47A1);
   color:white;
+  padding:60px;
+  text-align:center;
 }
 
 /* ===== FOOTER ===== */
 .footer{
-  margin-top:auto;
-  background:#0f172a;
+  background:#101218;
   color:white;
-  padding:50px 20px;
+  padding:40px;
 }
 
 .footer-container{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:30px;
-  max-width:1200px;
-  margin:auto;
-}
-
-.footer a{
-  display:block;
-  color:#94a3b8;
-  margin:6px 0;
-  text-decoration:none;
-}
-
-.footer-bottom{
-  text-align:center;
-  margin-top:20px;
-}
-
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-
-  .menu-toggle{display:block;}
-
-  .nav-links{
-    display:none;
-    flex-direction:column;
-    background:white;
-    position:absolute;
-    top:70px;
-    right:10px;
-    padding:20px;
-  }
-
-  .nav-links.active{display:flex;}
-
-  .gallery-grid{grid-template-columns:1fr;}
-  .feature-grid{grid-template-columns:1fr;}
-  .stats{flex-direction:column;}
-
-  .footer-container{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
+  gap:20px;
 }
 
 /* ===== MOBILE ===== */
@@ -269,7 +247,17 @@ body::after{
 
 }
 
+/* MOBILE */
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr;}
+  .feature-grid{grid-template-columns:1fr;}
+  .stats{flex-direction:column;}
+  .nav-links{display:none;}
+}
+
 </style>
+
 </head>
 
 <body>
@@ -277,13 +265,12 @@ body::after{
 <!-- NAVBAR -->
 <nav class="navbar">
   <div class="nav-container">
-    <div class="logo">📚 NotesHub</div>
+    <div class="logo">NGF <span>Knowledge Hub</span></div>
 
-    <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
-
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links">
       <li><a href="{{ url_for('dashboard') }}">Home</a></li>
       <li><a href="/btech">Notes</a></li>
+      <li><a href="/upload">Upload</a></li>
       <li><a href="/login">Login</a></li>
     </ul>
   </div>
@@ -292,11 +279,37 @@ body::after{
 <!-- HERO -->
 <section class="hero">
   <div>
-    <h1>🚀 Study Smarter with NotesHub</h1>
-    <p>Your all-in-one platform for B.Tech notes</p>
-    <a href="{{ url_for('dashboard') }}" class="btn primary">Explore Notes</a>
+    <h1>NGF Knowledge Hub</h1>
+    <p>Learn Smart. Grow Faster 📚</p>
+
+    <a href="/btech" class="btn primary">Explore Notes</a>
+    <a href="/upload" class="btn outline">Upload Notes</a>
   </div>
 </section>
+
+<!-- CARDS -->
+<div class="container">
+  <div class="grid">
+
+    <a href="/btech" class="card">
+      <i class="fas fa-book"></i>
+      <h3>B.Tech Notes</h3>
+    </a>
+
+    <a href="/upload" class="card">
+      <i class="fas fa-upload"></i>
+      <h3>Upload Notes</h3>
+    </a>
+
+    {% if session.get('role') == 'admin' %}
+    <a href="/admin" class="card admin">
+      <i class="fas fa-user-shield"></i>
+      <h3>Admin Panel</h3>
+    </a>
+    {% endif %}
+
+  </div>
+</div>
 
 <!-- STATS -->
 <section class="stats">
@@ -307,29 +320,32 @@ body::after{
 
 <!-- GALLERY -->
 <section class="gallery">
-  <h2>📸 Student Experience</h2>
-  <div class="gallery-grid">
-    <div class="img-card"><img src="{{ url_for('static', filename='images/study1.jpg') }}"></div>
-    <div class="img-card"><img src="{{ url_for('static', filename='images/group.jpg') }}"></div>
-    <div class="img-card"><img src="{{ url_for('static', filename='images/library.jpg') }}"></div>
-    <div class="img-card"><img src="{{ url_for('static', filename='images/laptop.jpg') }}"></div>
+  <h2>Campus Life 📸</h2>
 
+  <div class="gallery-grid">
+    <img src="{{ url_for('static', filename='images/Radio_NGF.jpg') }}">
+    <img src="{{ url_for('static', filename='images/study1.jpg') }}">
+    <img src="{{ url_for('static', filename='images/group.jpg') }}">
+    <img src="{{ url_for('static', filename='images/library.jpg') }}">
+    <img src="{{ url_for('static', filename='images/laptop.jpg') }}">
   </div>
 </section>
 
 <!-- FEATURES -->
 <section class="features">
-  <h2>Why Choose NotesHub?</h2>
+  <h2>Why NGF Knowledge Hub?</h2>
+
   <div class="feature-grid">
     <div class="feature-card">📚 All Subjects</div>
     <div class="feature-card">⚡ Fast Access</div>
-    <div class="feature-card">🔐 Secure</div>
+    <div class="feature-card">🔐 Secure Platform</div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta">
-  <h2>Start Your Journey 🚀</h2>
+  <h2>Start Learning Today 🚀</h2>
+  <a href="/btech" class="btn primary">Get Started</a>
 </section>
 
 <!-- FOOTER -->
@@ -337,48 +353,45 @@ body::after{
 
   <div class="footer-container">
 
-    <!-- ABOUT -->
     <div>
-      <h3>📚 NotesHub</h3>
-      <p style="color:#94a3b8;">
-        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
-      </p>
+      <h3>NGF Knowledge Hub</h3>
+      <p>Your central platform for academic resources.</p>
+      <p>© 2026 NGF Knowledge Hub. All rights reserved.</p>
     </div>
 
-    <!-- QUICK LINKS -->
     <div>
       <h3>Quick Links</h3>
-      <a href="{{ url_for('dashboard') }}">Home</a>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/btech">Notes</a>
-      <a href="/upload">Upload</a>
+      <a href="/dashboard">Home</a><br>
+      <a href="/btech">Notes</a><br>
+      <a href="/upload">Upload</a><br>
+      <a href="/login">Login</a><br>
+      <a href="/admin">Admin</a><br>
     </div>
 
-    <!-- LEGAL -->
     <div>
       <h3>Legal</h3>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms & Conditions</a>
-      <a href="/disclaimer">Disclaimer</a>
+      <a href="/privacy">Privacy</a><br>
+      <a href="/terms">Terms</a><br>
+      <a href="/disclaimer">Disclaimer</a><br>
+      <a href="/contact">Contact</a><br>
+      <a href="/about">About</a><br>
+      <a href="/contact">Contact</a><br>
     </div>
 
-    <!-- SOCIAL -->
     <div>
-      <h3>Connect With Us</h3>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
+      <h3>Follow</h3>
+      <i class="fab fa-instagram"></i><br>
+      <i class="fab fa-github"></i><br>
+      <i class="fab fa-linkedin"></i><br>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-facebook"></i>
+      <i class="fab fa-youtube"></i>
     </div>
 
   </div>
 
-  <div class="footer-bottom">
-    © 2026 NotesHub 🚀 | All Rights Reserved
+  <div style="text-align:center;margin-top:20px;">
+    © 2026 NGF Knowledge Hub 📚 | All Rights Reserved
   </div>
 
 </footer>
@@ -387,14 +400,9 @@ body::after{
 <div class="mobile-nav">
   <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
   <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
-
-<script>
-function toggleMenu(){
-  document.getElementById("navLinks").classList.toggle("active");
-}
-</script>
 
 </body>
 </html>

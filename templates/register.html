@@ -5,186 +5,191 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Register - NotesHub</title>
+<title>Register - NGF Knowledge Hub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <meta name="theme-color" content="#111827">
 
 <style>
 
 /* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
 /* ===== BACKGROUND ===== */
-body {
-  min-height: 100vh;
-  display: flex;
-  background: linear-gradient(45deg, #4f46e5, #06b6d4, #9333ea);
-  background-size: 400% 400%;
-  animation: gradientMove 10s infinite;
+body{
+  min-height:100vh;
+  display:flex;
+  background:linear-gradient(135deg,#1E88E5,#0D47A1,#FF6F00);
+  background-size:400% 400%;
+  animation:gradientMove 10s ease infinite;
 }
 
-@keyframes gradientMove {
-  0% {background-position:0%}
-  50% {background-position:100%}
-  100% {background-position:0%}
+@keyframes gradientMove{
+  0%{background-position:0%}
+  50%{background-position:100%}
+  100%{background-position:0%}
 }
 
 /* ===== LAYOUT ===== */
-.container {
-  display: flex;
-  width: 100%;
+.container{
+  display:flex;
+  width:100%;
 }
 
 /* LEFT PANEL */
-.left-panel {
-  flex: 1;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
+.left-panel{
+  flex:1;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px;
 }
 
-.left-panel h1 {
-  font-size: 40px;
+.left-panel h1{
+  font-size:42px;
+  font-weight:700;
 }
 
-.left-panel p {
-  margin-top: 15px;
-  font-size: 18px;
-  opacity: 0.9;
+.left-panel p{
+  margin-top:10px;
+  font-size:18px;
+  opacity:0.9;
 }
 
 /* RIGHT PANEL */
-.right-panel {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.right-panel{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-/* ===== FORM BOX ===== */
-.form-box {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(20px);
-  padding: 40px;
-  border-radius: 20px;
-  width: 360px;
-  text-align: center;
-  color: white;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+/* ===== FORM ===== */
+.form-box{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(25px);
+  padding:40px;
+  border-radius:20px;
+  width:360px;
+  text-align:center;
+  color:white;
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
 }
 
-.form-box h2 {
-  margin-bottom: 20px;
+.form-box h2{
+  margin-bottom:20px;
+  font-weight:600;
 }
 
-/* INPUT GROUP */
-.input-group {
-  position: relative;
-  margin: 12px 0;
+/* INPUT */
+.input-group{
+  position:relative;
+  margin:15px 0;
 }
 
-.input-group i {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #d1d5db;
+.input-group i{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#e5e7eb;
 }
 
-.input-group input {
-  width: 100%;
-  padding: 12px 12px 12px 40px;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  background: rgba(255,255,255,0.2);
-  color: white;
+.input-group input{
+  width:100%;
+  padding:12px 12px 12px 40px;
+  border:none;
+  border-radius:10px;
+  outline:none;
+  background:rgba(255,255,255,0.2);
+  color:white;
+  transition:0.3s;
 }
 
-.input-group input::placeholder {
-  color: #e5e7eb;
+.input-group input:focus{
+  background:rgba(255,255,255,0.3);
+  box-shadow:0 0 0 2px rgba(255,255,255,0.3);
 }
 
-.input-group input:focus {
-  box-shadow: 0 0 10px rgba(99,102,241,0.6);
+.input-group input::placeholder{
+  color:#e5e7eb;
 }
 
 /* BUTTON */
-.btn {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(45deg,#10b981,#059669);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+.btn{
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border:none;
+  border-radius:10px;
+  background:#FF6F00;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
 
 /* LINK */
-.form-box a {
-  color: #dbeafe;
-  text-decoration: none;
+.form-box a{
+  color:#dbeafe;
+  text-decoration:none;
 }
 
-.form-box a:hover {
-  text-decoration: underline;
-}
-
-/* ===== MOBILE (APP STYLE) ===== */
-@media(max-width: 768px) {
-
-  .container {
-    flex-direction: column;
-  }
-
-  .left-panel {
-    display: none;
-  }
-
-  .right-panel {
-    width: 100%;
-    height: 100vh;
-  }
-
-  .form-box {
-    width: 90%;
-    padding: 30px;
-  }
-
+.form-box a:hover{
+  text-decoration:underline;
 }
 
 /* ===== MOBILE ===== */
-.mobile-nav{display:none;}
-
 @media(max-width:768px){
 
-  .grid{grid-template-columns:1fr;}
-  .nav-links{display:none;}
+  .container{
+    flex-direction:column;
+  }
+
+  .left-panel{
+    display:none;
+  }
+
+  .right-panel{
+    width:100%;
+    height:100vh;
+  }
+
+  .form-box{
+    width:90%;
+    padding:30px;
+  }
+}
+
+/* ===== MOBILE NAV ===== */
+.mobile-nav{
+  display:none;
+}
+
+@media(max-width:768px){
 
   body{padding-bottom:70px;}
 
   .mobile-nav{
     display:flex;
     position:fixed;
-    bottom:0;width:100%;
+    bottom:0;
+    width:100%;
     background:#111827;
     justify-content:space-around;
     padding:10px 0;
@@ -201,7 +206,6 @@ body {
     display:block;
     font-size:18px;
   }
-
 }
 
 </style>
@@ -212,15 +216,15 @@ body {
 
 <div class="container">
 
-  <!-- LEFT SIDE -->
+  <!-- LEFT -->
   <div class="left-panel">
     <div>
-      <h1>🚀 Join NotesHub</h1>
-      <p>Create your account and start learning smarter 📚</p>
+      <h1>NGF Knowledge Hub</h1>
+      <p>Create your account & start learning 📚</p>
     </div>
   </div>
 
-  <!-- RIGHT SIDE -->
+  <!-- RIGHT -->
   <div class="right-panel">
 
     <div class="form-box">
@@ -263,6 +267,7 @@ body {
 <div class="mobile-nav">
   <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
   <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 

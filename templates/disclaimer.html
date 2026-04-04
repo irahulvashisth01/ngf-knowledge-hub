@@ -5,98 +5,116 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Disclaimer - NotesHub</title>
+<title>Disclaimer - NGF Knowledge Hub</title>
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 /* ===== GLOBAL ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
 body{
-  background:#f8fafc;
-  color:#0f172a;
-  display:flex;
-  flex-direction:column;
+  background:#F8FAFC;
+  color:#111827;
   min-height:100vh;
 }
 
 /* ===== NAVBAR ===== */
 .navbar{
   position:fixed;
-  top:0;width:100%;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(12px);
-  padding:14px 25px;
+  top:0;
+  width:100%;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  padding:15px 5%;
   display:flex;
   justify-content:space-between;
   align-items:center;
   z-index:1000;
 }
 
-.logo{font-size:20px;font-weight:600;}
-
-.nav-links a{
-  color:#334155;
-  margin-left:15px;
-  text-decoration:none;
+.logo{
+  font-size:22px;
+  font-weight:700;
+  color:#1E88E5;
 }
 
-.nav-links a:hover{color:#000;}
+.logo span{
+  color:#FF6F00;
+}
+
+.nav-links a{
+  margin-left:15px;
+  text-decoration:none;
+  color:#374151;
+}
 
 /* ===== MAIN ===== */
 .main{
-  flex:1;
   max-width:900px;
-  margin:100px auto 40px;
+  margin:120px auto 40px;
   padding:20px;
 }
 
 /* CARD */
 .card{
   background:white;
-  padding:30px;
-  border-radius:15px;
+  padding:35px;
+  border-radius:18px;
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 /* TEXT */
-h1{margin-bottom:20px;}
-h2{margin-top:20px;font-size:20px;}
-p{margin-top:10px;color:#374151;}
-ul{margin-top:10px;padding-left:20px;}
+h1{
+  margin-bottom:20px;
+  font-size:28px;
+}
+
+h2{
+  margin-top:25px;
+  font-size:18px;
+  color:#1E88E5;
+}
+
+p{
+  margin-top:10px;
+  color:#374151;
+  line-height:1.6;
+}
 
 /* ===== FOOTER ===== */
 .footer{
-  background:#0f172a;
+  background:#111827;
   color:white;
-  padding:50px 20px;
+  padding:40px;
+  margin-top:40px;
 }
 
 .footer-container{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:30px;
-  max-width:1200px;
-  margin:auto;
+  gap:20px;
 }
 
 .footer a{
   display:block;
-  color:#94a3b8;
+  color:#9ca3af;
   margin:6px 0;
   text-decoration:none;
 }
 
-.footer a:hover{color:white;}
-
 .footer-bottom{
   text-align:center;
   margin-top:20px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:10px;
 }
 
 /* ===== MOBILE ===== */
@@ -116,7 +134,8 @@ ul{margin-top:10px;padding-left:20px;}
   .mobile-nav{
     display:flex;
     position:fixed;
-    bottom:0;width:100%;
+    bottom:0;
+    width:100%;
     background:#111827;
     justify-content:space-around;
     padding:10px 0;
@@ -133,6 +152,7 @@ ul{margin-top:10px;padding-left:20px;}
     display:block;
     font-size:18px;
   }
+
 }
 
 </style>
@@ -142,7 +162,7 @@ ul{margin-top:10px;padding-left:20px;}
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">📚 NotesHub</div>
+  <div class="logo">NGF <span>Knowledge Hub</span></div>
 
   <div class="nav-links">
     <a href="/dashboard">Home</a>
@@ -151,7 +171,7 @@ ul{margin-top:10px;padding-left:20px;}
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div class="main">
 
   <div class="card">
@@ -159,37 +179,37 @@ ul{margin-top:10px;padding-left:20px;}
     <h1>⚠️ Disclaimer</h1>
 
     <p>
-      Welcome to <strong>NotesHub</strong>. The information provided on this platform is for educational purposes only.
+      Welcome to <strong>NGF Knowledge Hub</strong>. All content provided on this platform is intended solely for educational purposes.
     </p>
 
     <h2>📚 Educational Purpose</h2>
     <p>
-      All notes and materials available on NotesHub are shared to support student learning. We do not guarantee the completeness, accuracy, or reliability of the content.
+      Notes and study materials are shared to assist students. We do not guarantee completeness, accuracy, or reliability.
     </p>
 
     <h2>⚠️ No Professional Advice</h2>
     <p>
-      The content on this platform should not be considered as professional or official academic advice.
+      Content should not be considered official or professional academic advice.
     </p>
 
     <h2>📤 User Content</h2>
     <p>
-      Users may upload notes and materials. NotesHub is not responsible for the accuracy, originality, or legality of user-submitted content.
+      Users are responsible for their uploads. NGF Knowledge Hub is not liable for accuracy or legality of user-submitted content.
     </p>
 
     <h2>© Copyright Notice</h2>
     <p>
-      If you believe any content violates copyright laws, please contact us.
+      If any content violates copyright laws, please contact us for removal.
     </p>
 
     <h2>🔄 Changes</h2>
     <p>
-      We may update this disclaimer at any time without prior notice.
+      This disclaimer may be updated at any time without prior notice.
     </p>
 
     <h2>📧 Contact</h2>
     <p>
-      For any concerns, please reach out via the contact page.
+      For any concerns, please use the contact page.
     </p>
 
   </div>
@@ -197,53 +217,44 @@ ul{margin-top:10px;padding-left:20px;}
 </div>
 
 <!-- FOOTER -->
-<!-- FOOTER -->
 <footer class="footer">
 
   <div class="footer-container">
 
-    <!-- ABOUT -->
     <div>
-      <h3>📚 NotesHub</h3>
-      <p style="color:#94a3b8;">
-        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
-      </p>
+      <h3>NGF Knowledge Hub</h3>
+      <p>Smart platform for academic resources</p>
     </div>
 
-    <!-- QUICK LINKS -->
     <div>
       <h3>Quick Links</h3>
-      <a href="{{ url_for('dashboard') }}">Home</a>
-      <a href="/dashboard">Dashboard</a>
+      <a href="/dashboard">Home</a>
       <a href="/btech">Notes</a>
       <a href="/upload">Upload</a>
     </div>
 
-    <!-- LEGAL -->
     <div>
       <h3>Legal</h3>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/disclaimer">Disclaimer</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms & Conditions</a>
-      <a href="/disclaimer">Disclaimer</a>
     </div>
 
-    <!-- SOCIAL -->
     <div>
-      <h3>Connect With Us</h3>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
+      <h3>Social</h3>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+      <a href="#">Facebook</a>
     </div>
 
   </div>
 
   <div class="footer-bottom">
-    © 2026 NotesHub 🚀 | All Rights Reserved
+    © 2026 NGF Knowledge Hub 📚 | All Rights Reserved
   </div>
 
 </footer>
@@ -252,6 +263,7 @@ ul{margin-top:10px;padding-left:20px;}
 <div class="mobile-nav">
   <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a> 
   <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
 
