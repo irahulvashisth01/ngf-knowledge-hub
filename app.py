@@ -227,6 +227,24 @@ def download_file(filename):
     )
 
 
+# ---------------- SHARE (PUBLIC) ----------------
+from flask import redirect
+
+@app.route('/share/<share_id>')
+def share_note(share_id):
+    conn = get_db()
+    cur = conn.cursor()
+
+    note = cur.execute(
+        "SELECT * FROM notes WHERE share_id = ?",
+        (share_id,)
+    ).fetchone()
+
+    if note:
+        return redirect(url_for('static', filename='uploads/' + note['filename']))
+    else:
+        return "Note not found", 404
+
 # ---------------- UPLOAD (LOGIN REQUIRED) ----------------
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
