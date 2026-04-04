@@ -1,17 +1,16 @@
-# 📚 NotesHub
+# 🚀 NGF Knowledge Hub
 
-🚀 **Modern Notes Sharing Platform for B.Tech Students**
-
-🌐 **Live Website:** https://btechnotes.online
-⚙️ **Deployment:** https://notes-hub-lpxg.onrender.com
+> 🌐 Live Website: https://btechnotes.online
+> 🌐 Render  Deployed Site: ngf-knowledge-hub.onrender.com
+> 💻 GitHub Repo: https://github.com/irahulvashisth01/ngf-knowledge-hub
 
 ---
 
-## 🏆 Overview
+## 📌 Overview
 
-**NotesHub** is a full-stack web application designed to help engineering students **access, upload, and manage academic notes** in a structured, semester-wise format.
+**NGF Knowledge Hub** is a modern full-stack web application designed for B.Tech students to access, upload, and manage academic resources like notes, PYQs, and study materials.
 
-It provides a **clean, responsive UI, authentication system, admin dashboard, blog-ready structure, and cloud deployment**, making it a **portfolio-ready + real-world SaaS project**.
+It provides a centralized platform for efficient learning with a clean UI, admin controls, and real-time access to resources.
 
 ---
 
@@ -19,121 +18,85 @@ It provides a **clean, responsive UI, authentication system, admin dashboard, bl
 
 ### 👨‍🎓 User Features
 
-* 📚 Browse notes without login
-* 🔍 Search notes by subject
-* 👁 View notes directly in browser
-* ⬇ Download notes
-* 📱 Fully responsive (Mobile + Desktop)
-* 📂 Semester-wise structured navigation
+* 🔐 Secure Login & Registration
+* 📚 Semester-wise Notes Access
+* 📂 Subject-wise Organization
+* 📥 Download Notes
+* 📤 Upload Notes
+* 👤 Profile Management
 
 ---
 
-### 🔐 Authentication System
+### 👑 Admin Features
 
-* User Registration (Name, Email, Mobile)
-* Secure Login (Session-based)
-* Role-based access (Admin / User)
-* Smart redirects
-
----
-
-### 🧑‍💼 Admin Panel
-
-* 📤 Approve / Reject notes
-* 🗑 Delete notes
-* 👥 Manage users (Admin ↔ User)
-* 📊 Dashboard-style UI
+* 📊 Admin Dashboard
+* 📄 Approve / Reject Notes
+* 🗑 Delete Notes
+* 👥 Manage Users
+* 🔒 Role-based Access (Admin/User)
 
 ---
 
-### 📊 Advanced Features
+### 🌐 System Features
 
-* 📈 Download tracking system
-* 🏆 Top downloaded notes section
-* 🔎 Backend filtering
-* 🎯 Clean SaaS-style UI
-
----
-
-### 📱 Responsive Design
-
-* 💻 Desktop → Professional dashboard UI
-* 📱 Mobile → App-style interface (bottom navigation)
-
----
-
-### ⚖️ Legal Pages (AdSense Ready)
-
-* 📄 Privacy Policy
-* 📄 Terms & Conditions
-* 📄 Disclaimer
-* 📄 About Us
-* 📄 Contact Page
+* 📱 Fully Responsive Design
+* ⚡ Fast Loading (Render Deployment)
+* 🔒 HTTPS Secure Website
+* 🔍 SEO Optimized (Google Indexed)
+* 🌍 Custom Domain (btechnotes.online)
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category  | Technology            |
-| --------- | --------------------- |
-| Backend   | Python                |
-| Framework | Flask                 |
-| Database  | SQLite                |
-| Frontend  | HTML, CSS, JavaScript |
-| Server    | Gunicorn              |
-| Hosting   | Render                |
-| Domain    | GoDaddy               |
-| PWA       | Service Workers       |
+| Category        | Technology            |
+| --------------- | --------------------- |
+| Frontend        | HTML, CSS, JavaScript |
+| Backend         | Python (Flask)        |
+| Database        | SQLite                |
+| Deployment      | Render                |
+| Version Control | Git & GitHub          |
 
 ---
 
 ## 📂 Project Structure
 
 ```
-NotesHub/
-│── app.py
-│── config.py
-│── db.sqlite3
-│── requirements.txt
-│── runtime.txt
+ngf-knowledge-hub/
+│
+├── static/
+│   ├── images/
+│   ├── css/
+│   └── icons/
 │
 ├── templates/
 │   ├── index.html
 │   ├── login.html
 │   ├── register.html
 │   ├── dashboard.html
-│   ├── btech.html
-│   ├── semester.html
-│   ├── subjects.html
-│   ├── notes.html
-│   ├── upload.html
 │   ├── admin.html
-│   ├── about.html
+│   ├── profile.html
 │   ├── contact.html
-│   ├── privacy.html
-│   ├── terms.html
-│   └── disclaimer.html
+│   ├── about.html
+│   └── ...
 │
-├── static/
-│   ├── images/
-│   ├── icons/
-│   └── js/
-│
-└── uploads/
+├── app.py
+├── config.py
+├── database.db
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## ⚙️ Installation (Local Setup)
+## ⚙️ Installation (Run Locally)
 
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/irahulvashisth01/Notes-Hub.git
-cd NotesHub
+git clone https://github.com/irahulvashisth01/ngf-knowledge-hub.git
+cd ngf-knowledge-hub
 ```
-
----
 
 ### 2️⃣ Install Dependencies
 
@@ -141,79 +104,61 @@ cd NotesHub
 pip install -r requirements.txt
 ```
 
----
-
-### 3️⃣ Run Server
+### 3️⃣ Run Application
 
 ```bash
 python app.py
 ```
 
----
-
-### 4️⃣ Open in Browser
+### 4️⃣ Open Browser
 
 ```
-http://127.0.0.1:10000
+http://127.0.0.1:5000
 ```
 
 ---
 
-## 🌐 Deployment
+## 🚀 Deployment
 
-### 🚀 Render Deployment
+Deployed using **Render**:
 
-* Hosted on Render
-* Uses Gunicorn for production
+```bash
+Build Command:
+pip install -r requirements.txt
 
-### 🔗 Custom Domain
-
-* Domain connected via GoDaddy
-* 🌍 https://btechnotes.online
-
----
-
-## ⚠️ Storage Limitation (Important)
-
-Currently:
-
-* Files uploaded locally are stored in `/uploads`
-
-### 🚨 Issue:
-
-* Local server ≠ deployed server storage
-
-### ✅ Recommended Solution:
-
-* Use **Cloud Storage**:
-
-  * ☁️ Cloudinary
-  * ☁️ AWS S3
-  * ☁️ Render Persistent Disk
+Start Command:
+gunicorn app:app
+```
 
 ---
 
-## 🔒 Access Control
+## 🌍 Domain Setup
 
-| Feature        | Access Level   |
-| -------------- | -------------- |
-| Browse Notes   | Public         |
-| View Notes     | Login Required |
-| Download Notes | Login Required |
-| Upload Notes   | Login Required |
-| Admin Panel    | Admin Only     |
+Custom domain connected:
+
+```
+https://btechnotes.online
+```
+
+DNS Configuration:
+
+* A Record → 216.24.57.1
+* CNAME → ngf-knowledge-hub.onrender.com
 
 ---
 
-## 📈 Future Enhancements
+## 🔍 SEO & Google Indexing
 
-* 🔔 Push Notifications
-* ⭐ Bookmark Notes
-* ☁️ Cloud Storage Integration
-* 🧠 AI Note Recommendations
-* 📊 Analytics Dashboard
-* 🔍 Advanced Search System
-* 🗄 PostgreSQL Migration
+* Website submitted to Google Search Console
+* Sitemap added
+* Meta tags optimized
+* Indexed successfully on Google
+
+---
+
+## 📸 Screenshots
+
+> (Add screenshots here later for better portfolio impact)
 
 ---
 
@@ -221,36 +166,39 @@ Currently:
 
 **Rahul Vashisth**
 🎓 B.Tech Engineering Student
-
-📧 Email: [rahulvashistha97@gmail.com](mailto:rahulvashistha97@gmail.com)
-📞 Phone: +91 7056212054
-
-🔗 Instagram: https://www.instagram.com/irahulvashisth
-🔗 LinkedIn: https://www.linkedin.com/in/rahul-sharma-753879352
+💻 Full Stack Developer
 
 ---
 
-## ⭐ Support & Contribution
+## 📬 Contact
+
+* 📧 Email: [rahulvashistha97@gmail.com](mailto:rahulvashistha97@gmail.com)
+* 📱 Phone: +91 7056212054
+
+---
+
+## 📜 License
+
+This project is developed for educational purposes.
+
+---
+
+## ⭐ Support
 
 If you like this project:
 
-* ⭐ Star this repository
-* 🔁 Share with others
-* 💡 Contribute improvements
+👉 Star the repository ⭐
+👉 Share with friends 🚀
 
 ---
 
-## 🚀 Final Note
+# 🔥 Final Note
 
 This project demonstrates:
 
-* Full-stack web development
-* Authentication & authorization
-* Admin dashboard system
-* Responsive SaaS UI design
-* Cloud deployment
-* AdSense-ready structure
+* Full Stack Development
+* Real Deployment
+* Domain & DNS Handling
+* SEO Optimization
 
-💯 **Portfolio Ready | Production Ready | Monetization Ready**
-
----
+👉 A complete **production-level project** 💯
