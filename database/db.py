@@ -1,4 +1,5 @@
 import sqlite3
+import uuid
 from config import Config
 
 
@@ -38,10 +39,17 @@ def init_db():
         user_id INTEGER NOT NULL,
         status TEXT NOT NULL DEFAULT 'pending',
         downloads INTEGER DEFAULT 0,
+        share_id TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(user_id) REFERENCES users(id)
     )
     """)
+
+    # ---------------- ADD COLUMN SAFELY ----------------
+    try:
+        cur.execute("ALTER TABLE notes ADD COLUMN share_id TEXT")
+    except:
+        pass
 
     # ---------------- SETTINGS TABLE ----------------
     cur.execute("""
@@ -52,7 +60,7 @@ def init_db():
     )
     """)
 
-    # ---------------- INDEXES (PERFORMANCE) ----------------
+    # ---------------- INDEXES ----------------
     cur.execute("CREATE INDEX IF NOT EXISTS idx_notes_subject ON notes(subject)")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_notes_semester ON notes(semester)")
 
@@ -75,6 +83,13 @@ def init_db():
         INSERT INTO settings(site_name, allow_upload)
         VALUES(?,?)
         """, ("Notes Hub", 1))
+
+    # ---------------- GENERATE SHARE ID FOR OLD NOTES ----------------
+    notes = cur.execute("SELECT id FROM notes WHERE share_id IS NULL").fetchall()
+
+    for note in notes:
+        share_id = uuid.uuid4().hex[:10]
+        cur.execute("UPDATE notes SET share_id = ? WHERE id = ?", (share_id, note['id']))
 
     conn.commit()
     conn.close()

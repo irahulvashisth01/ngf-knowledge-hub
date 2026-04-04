@@ -186,6 +186,17 @@ body{
 
 }
 
+.share{
+  background:#10B981;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+.note-card .btn{
+  margin-top:8px;
+}
+
 /* ===== MOBILE ===== */
 @media(max-width:768px){
   .grid{grid-template-columns:1fr;}
@@ -232,6 +243,10 @@ body{
         <a href="/download/{{t['filename']}}" class="btn download">
           <i class="fas fa-download"></i> Download
         </a>
+
+        <button onclick="shareNote('{{ t['share_id'] }}')" class="btn share">
+          <i class="fas fa-share"></i> Share
+        </button>
       </div>
       {% endfor %}
     </div>
@@ -253,6 +268,9 @@ body{
       <a href="/download/{{n['filename']}}" class="btn download">
         <i class="fas fa-download"></i> Download
       </a>
+      <button onclick="shareNote('{{ n['share_id'] }}')" class="btn share">
+        <i class="fas fa-share"></i> Share
+      </button>
     </div>
     {% endfor %}
   </div>
@@ -314,6 +332,26 @@ body{
   <a href="/btech"><i class="fas fa-book"></i>Notes</a>
   <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
   <a href="/login"><i class="fas fa-user"></i>Login</a>
+
+</div>
+
+# SHARE NOTE SCRIPT -->
+<script>
+function shareNote(shareId) {
+    const link = `${window.location.origin}/share/${shareId}`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: "Check this note 📚",
+            text: "Open this note:",
+            url: link
+        });
+    } else {
+        navigator.clipboard.writeText(link);
+        alert("✅ Link copied:\n" + link);
+    }
+}
+</script>
 
 </body>
 </html>
