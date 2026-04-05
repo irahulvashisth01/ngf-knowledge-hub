@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<!-- GOOGLE ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8868062641125071"
      crossorigin="anonymous"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,7 +13,6 @@
 
 <link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -24,11 +26,11 @@
 }
 
 html, body{
-  overflow-x:hidden; /* 🔥 FIX SIDE SCROLL */
+  overflow-x:hidden;
 }
 
 body{
-  background:#F8FAFC;
+  background:linear-gradient(to bottom,#f8fafc,#eef2ff);
   color:#111827;
 }
 
@@ -37,7 +39,8 @@ body{
   position:fixed;
   top:0;
   width:100%;
-  background:white;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.85);
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
   padding:12px 5%;
   z-index:1000;
@@ -70,9 +73,36 @@ body{
   color:#333;
 }
 
+/* HAMBURGER */
+.menu-btn{
+  display:none;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* MOBILE MENU */
+.mobile-menu{
+  display:none;
+  flex-direction:column;
+  position:absolute;
+  top:60px;
+  right:5%;
+  background:white;
+  width:200px;
+  border-radius:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.mobile-menu a{
+  padding:12px;
+  text-decoration:none;
+  color:#333;
+  border-bottom:1px solid #eee;
+}
+
 /* ===== HERO ===== */
 .hero{
-  min-height:80vh; /* FIX HEIGHT */
+  min-height:80vh;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -106,13 +136,19 @@ body{
 }
 
 .primary{
-  background:#FF6F00;
+  background:linear-gradient(135deg,#ff6f00,#ff9800);
   color:white;
 }
 
 .outline{
   border:2px solid white;
   color:white;
+}
+
+/* ===== ADS ===== */
+.ad-container{
+  text-align:center;
+  margin:30px 0;
 }
 
 /* ===== GRID ===== */
@@ -126,7 +162,6 @@ body{
   gap:20px;
 }
 
-/* CARD */
 .card{
   background:white;
   padding:25px;
@@ -137,7 +172,8 @@ body{
 }
 
 .card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 15px 35px rgba(0,0,0,0.1);
 }
 
 /* ===== STATS ===== */
@@ -188,6 +224,11 @@ body{
   background:white;
   padding:20px;
   border-radius:12px;
+  transition:0.3s;
+}
+
+.feature-card:hover{
+  transform:translateY(-5px);
 }
 
 /* ===== CTA ===== */
@@ -200,16 +241,35 @@ body{
 
 /* ===== FOOTER ===== */
 .footer{
-  background:#101218;
+  background:#0f172a;
   color:white;
-  padding:30px 5%;
+  padding:50px 20px;
 }
 
 .footer-container{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:20px;
+  gap:30px;
+  max-width:1200px;
+  margin:auto;
 }
+
+.footer a{
+  display:block;
+  color:#94a3b8;
+  margin:6px 0;
+  text-decoration:none;
+}
+
+.footer a:hover{color:white;}
+
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:10px;
+}
+
 
 /* ===== MOBILE ===== */
 .mobile-nav{display:none;}
@@ -217,6 +277,7 @@ body{
 @media(max-width:768px){
 
   .nav-links{display:none;}
+  .menu-btn{display:block;}
 
   body{padding-bottom:70px;}
 
@@ -262,6 +323,7 @@ body{
 <!-- NAVBAR -->
 <nav class="navbar">
   <div class="nav-container">
+
     <div class="logo">NGF <span>Knowledge Hub</span></div>
 
     <ul class="nav-links">
@@ -270,6 +332,20 @@ body{
       <li><a href="/upload">Upload</a></li>
       <li><a href="/login">Login</a></li>
     </ul>
+
+    <!-- HAMBURGER -->
+    <div class="menu-btn" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/dashboard">Home</a>
+      <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
+      <a href="/login">Login</a>
+    </div>
+
   </div>
 </nav>
 
@@ -325,6 +401,10 @@ body{
     <img src="{{ url_for('static', filename='images/group.jpg') }}">
     <img src="{{ url_for('static', filename='images/library.jpg') }}">
     <img src="{{ url_for('static', filename='images/laptop.jpg') }}">
+    <img src="{{ url_for('static', filename='images/friendly.jpg') }}">
+    <img src="{{ url_for('static', filename='images/notes.jpg') }}">
+    <img src="{{ url_for('static', filename='images/Student 2.jpg') }}">
+    <img src="{{ url_for('static', filename='images/student.jpg') }}">
   </div>
 </section>
 
@@ -345,50 +425,62 @@ body{
   <a href="/btech" class="btn primary">Get Started</a>
 </section>
 
+<!-- FOOTER AD -->
+<div class="ad-container">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-8868062641125071"
+       data-ad-slot="3333333333"
+       data-ad-format="auto"></ins>
+</div>
+
 <!-- FOOTER -->
 <footer class="footer">
 
   <div class="footer-container">
 
+    <!-- ABOUT -->
     <div>
-      <h3>NGF Knowledge Hub</h3>
-      <p>Your central platform for academic resources.</p>
-      <p>© 2026 NGF Knowledge Hub. All rights reserved.</p>
+      <h3>📚 NotesHub</h3>
+      <p style="color:#94a3b8;">
+        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
+      </p>
     </div>
 
+    <!-- QUICK LINKS -->
     <div>
       <h3>Quick Links</h3>
-      <a href="/dashboard">Home</a><br>
-      <a href="/btech">Notes</a><br>
-      <a href="/upload">Upload</a><br>
-      <a href="/login">Login</a><br>
-      <a href="/admin">Admin</a><br>
+      <a href="{{ url_for('dashboard') }}">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
     </div>
 
+    <!-- LEGAL -->
     <div>
       <h3>Legal</h3>
-      <a href="/privacy">Privacy</a><br>
-      <a href="/terms">Terms</a><br>
-      <a href="/disclaimer">Disclaimer</a><br>
-      <a href="/contact">Contact</a><br>
-      <a href="/about">About</a><br>
-      <a href="/contact">Contact</a><br>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
+      <a href="/disclaimer">Disclaimer</a>
     </div>
 
+    <!-- SOCIAL -->
     <div>
-      <h3>Follow</h3>
-      <i class="fab fa-instagram"></i><br>
-      <i class="fab fa-github"></i><br>
-      <i class="fab fa-linkedin"></i><br>
-      <i class="fab fa-twitter"></i><br>
-      <i class="fab fa-facebook"></i><br>
-      <i class="fab fa-youtube"></i><br>
+      <h3>Connect With Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
     </div>
 
   </div>
 
-  <div style="text-align:center;margin-top:20px;">
-    © 2026 NGF Knowledge Hub 📚 | All Rights Reserved
+  <div class="footer-bottom">
+    © 2026 NotesHub 🚀 | All Rights Reserved
   </div>
 
 </footer>
@@ -400,6 +492,15 @@ body{
   <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
   <a href="/login"><i class="fas fa-user"></i>Login</a>
 </div>
+
+<script>
+function toggleMenu(){
+  let menu = document.getElementById("mobileMenu");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 </body>
 </html>
