@@ -70,7 +70,57 @@ SUBJECTS = {
 # HOME
 @app.route("/")
 def home():
-    return render_template("index.html")
+    query = request.args.get("q", "")
+    semester = request.args.get("semester", "")
+    subject = request.args.get("subject", "")
+    page = int(request.args.get("page", 1))
+    per_page = 20   # 🔥 number of notes per page
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    sql = "SELECT * FROM notes WHERE status='approved'"
+    params = []
+
+    if query:
+        sql += " AND title LIKE ?"
+        params.append(f"%{query}%")
+
+    if semester:
+        sql += " AND semester=?"
+        params.append(int(semester))
+
+    if subject:
+        sql += " AND subject=?"
+        params.append(subject)
+
+    # 🔥 Pagination logic
+    offset = (page - 1) * per_page
+    sql += " ORDER BY id DESC LIMIT ? OFFSET ?"
+    params.extend([per_page, offset])
+
+    cur.execute(sql, params)
+    notes = cur.fetchall()
+
+    # 🔥 Total count (for page numbers)
+    count_sql = "SELECT COUNT(*) FROM notes WHERE status='approved'"
+    cur.execute(count_sql)
+    total_notes = cur.fetchone()[0]
+
+    total_pages = (total_notes + per_page - 1) // per_page
+
+    conn.close()
+
+    return render_template(
+        "index.html",
+        notes=notes,
+        subjects=SUBJECTS,
+        page=page,
+        total_pages=total_pages,
+        query=query,
+        selected_sem=semester,
+        selected_sub=subject
+    )
 
 
 # ---------------- REGISTER ----------------

@@ -268,10 +268,21 @@ li{
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
-  <a href="/dashboard"><i class="fas fa-home"></i>Home</a>
-  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
-  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
-  <a href="/login"><i class="fas fa-user"></i>Login</a>
+  <a href="/" class="{% if request.path == '/' %}active{% endif %}">
+    <i class="fas fa-home"></i>Home
+  </a>
+
+  <a href="/btech" class="{% if request.path.startswith('/btech') %}active{% endif %}">
+    <i class="fas fa-book"></i>Notes
+  </a>
+
+  <a href="/upload" class="{% if request.path.startswith('/upload') %}active{% endif %}">
+    <i class="fas fa-upload"></i>Upload
+  </a>
+
+  <a href="/login" class="{% if request.path.startswith('/login') %}active{% endif %}">
+    <i class="fas fa-user"></i>Login
+  </a>
 </div>
 
 </body>
