@@ -1,210 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8868062641125071"
-     crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
 
-<title>Profile - NGF Knowledge Hub</title>
+{% block title %}Profile | NGF Knowledge Hub{% endblock %}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+{% block content %}
 
-<style>
+<section class="profile-page">
 
-/* ===== GLOBAL ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+  <div class="profile-container">
 
-body{
-  background:#F8FAFC;
-  color:#111827;
-}
+    <div class="profile-card">
 
-/* ===== NAVBAR ===== */
-.navbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 5%;
-  background:white;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
+      <!-- COVER -->
+      <div class="profile-cover"></div>
 
-.logo{
-  font-size:22px;
-  font-weight:700;
-  color:#1E88E5;
-}
+      <!-- IMAGE -->
+      <div class="profile-image-box">
+        {% if user['profile_image'] %}
+          <img src="{{ url_for('static', filename='profile/' + user['profile_image']) }}">
+        {% else %}
+          <img src="https://via.placeholder.com/150">
+        {% endif %}
+      </div>
 
-.logo span{
-  color:#FF6F00;
-}
-
-.nav-links a{
-  margin-left:15px;
-  text-decoration:none;
-  color:#374151;
-}
-
-/* ===== PROFILE SECTION ===== */
-.profile-wrapper{
-  display:flex;
-  justify-content:center;
-  margin-top:50px;
-}
-
-/* CARD */
-.profile-card{
-  width:400px;
-  background:white;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
-  text-align:center;
-}
-
-/* HEADER */
-.profile-header{
-  background:linear-gradient(135deg,#1E88E5,#0D47A1);
-  height:120px;
-}
-
-/* IMAGE */
-.profile-img{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  object-fit:cover;
-  margin-top:-60px;
-  border:5px solid white;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* INFO */
-.profile-body{
-  padding:20px;
-}
-
-.profile-body h2{
-  margin-top:10px;
-}
-
-.profile-body p{
-  margin-top:5px;
-  color:#6b7280;
-}
-
-/* UPLOAD */
-.upload-box{
-  margin-top:15px;
-}
-
-input[type="file"]{
-  margin:10px 0;
-}
-
-/* BUTTON */
-.btn{
-  padding:10px 20px;
-  border:none;
-  border-radius:10px;
-  background:#FF6F00;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(0,0,0,0.2);
-}
-
-/* ===== MOBILE ===== */
-.mobile-nav{display:none;}
-
-@media(max-width:768px){
-
-  .profile-card{
-    width:90%;
-  }
-
-  body{padding-bottom:70px;}
-
-  .mobile-nav{
-    display:flex;
-    position:fixed;
-    bottom:0;
-    width:100%;
-    background:#111827;
-    justify-content:space-around;
-    padding:10px 0;
-  }
-
-  .mobile-nav a{
-    color:#9ca3af;
-    font-size:12px;
-    text-decoration:none;
-    text-align:center;
-  }
-
-  .mobile-nav i{
-    display:block;
-    font-size:18px;
-  }
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-<div class="navbar">
-  <div class="logo">NGF <span>Knowledge Hub</span></div>
-
-  <div class="nav-links">
-    <a href="/dashboard">Dashboard</a>
-    <a href="/btech">Notes</a>
-    <a href="/logout">Logout</a>
-  </div>
-</div>
-
-<!-- PROFILE -->
-<div class="profile-wrapper">
-
-  <div class="profile-card">
-
-    <!-- HEADER -->
-    <div class="profile-header"></div>
-
-    <!-- IMAGE -->
-    {% if user['profile_image'] %}
-      <img src="{{ url_for('static', filename='profile/' + user['profile_image']) }}" class="profile-img">
-    {% else %}
-      <img src="https://via.placeholder.com/120" class="profile-img">
-    {% endif %}
-
-    <!-- INFO -->
-    <div class="profile-body">
-
-      <h2>{{ user['name'] }}</h2>
-      <p>{{ user['email'] }}</p>
-      <p>{{ user['mobile'] }}</p>
+      <!-- DETAILS -->
+      <div class="profile-info">
+        <h2>{{ user['name'] }}</h2>
+        <p>📧 {{ user['email'] }}</p>
+        <p>📱 {{ user['mobile'] }}</p>
+      </div>
 
       <!-- UPLOAD -->
-      <div class="upload-box">
+      <div class="profile-upload">
         <form action="/update_profile" method="POST" enctype="multipart/form-data">
           <input type="file" name="image" required>
-          <br>
-          <button type="submit" class="btn">Update Profile</button>
+          <button type="submit" class="btn primary">Update Profile</button>
         </form>
       </div>
 
@@ -212,26 +41,6 @@ input[type="file"]{
 
   </div>
 
-</div>
+</section>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav">
-  <a href="/" class="{% if request.path == '/' %}active{% endif %}">
-    <i class="fas fa-home"></i>Home
-  </a>
-
-  <a href="/btech" class="{% if request.path.startswith('/btech') %}active{% endif %}">
-    <i class="fas fa-book"></i>Notes
-  </a>
-
-  <a href="/upload" class="{% if request.path.startswith('/upload') %}active{% endif %}">
-    <i class="fas fa-upload"></i>Upload
-  </a>
-
-  <a href="/login" class="{% if request.path.startswith('/login') %}active{% endif %}">
-    <i class="fas fa-user"></i>Login
-  </a>
-</div>
-
-</body>
-</html>
+{% endblock %}

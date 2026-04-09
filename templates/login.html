@@ -1,284 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8868062641125071"
-     crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
 
-<title>Login - NGF Knowledge Hub</title>
+{% block title %}Login | NGF Knowledge Hub{% endblock %}
 
-<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% block content %}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<section class="auth-section">
 
-<meta name="theme-color" content="#111827">
+  <div class="auth-container">
 
-<style>
-
-/* ===== RESET ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
-
-/* ===== BACKGROUND ===== */
-body{
-  min-height:100vh;
-  display:flex;
-  background:linear-gradient(135deg,#1E88E5,#0D47A1,#FF6F00);
-  background-size:400% 400%;
-  animation:gradientMove 10s ease infinite;
-}
-
-/* ANIMATION */
-@keyframes gradientMove{
-  0%{background-position:0%}
-  50%{background-position:100%}
-  100%{background-position:0%}
-}
-
-/* ===== CONTAINER ===== */
-.container{
-  display:flex;
-  width:100%;
-}
-
-/* ===== LEFT PANEL ===== */
-.left-panel{
-  flex:1;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:40px;
-}
-
-.left-panel h1{
-  font-size:42px;
-  font-weight:700;
-}
-
-.left-panel p{
-  margin-top:10px;
-  font-size:18px;
-  opacity:0.9;
-}
-
-/* ===== RIGHT PANEL ===== */
-.right-panel{
-  flex:1;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-/* ===== FORM ===== */
-.form-box{
-  background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(25px);
-  padding:40px;
-  border-radius:20px;
-  width:360px;
-  text-align:center;
-  color:white;
-  box-shadow:0 15px 40px rgba(0,0,0,0.3);
-}
-
-/* TITLE */
-.form-box h2{
-  margin-bottom:20px;
-  font-weight:600;
-}
-
-/* INPUT */
-.input-group{
-  position:relative;
-  margin:15px 0;
-}
-
-.input-group i{
-  position:absolute;
-  left:12px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#e5e7eb;
-}
-
-.input-group input{
-  width:100%;
-  padding:12px 12px 12px 40px;
-  border:none;
-  border-radius:10px;
-  outline:none;
-  background:rgba(255,255,255,0.2);
-  color:white;
-  transition:0.3s;
-}
-
-.input-group input:focus{
-  background:rgba(255,255,255,0.3);
-  box-shadow:0 0 0 2px rgba(255,255,255,0.3);
-}
-
-.input-group input::placeholder{
-  color:#e5e7eb;
-}
-
-/* BUTTON */
-.btn{
-  width:100%;
-  padding:12px;
-  margin-top:15px;
-  border:none;
-  border-radius:10px;
-  background:#FF6F00;
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(0,0,0,0.3);
-}
-
-/* LINK */
-.form-box a{
-  color:#dbeafe;
-  text-decoration:none;
-}
-
-.form-box a:hover{
-  text-decoration:underline;
-}
-
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-
-  .container{
-    flex-direction:column;
-  }
-
-  .left-panel{
-    display:none;
-  }
-
-  .right-panel{
-    width:100%;
-    height:100vh;
-  }
-
-  .form-box{
-    width:90%;
-    padding:30px;
-  }
-}
-
-/* ===== MOBILE NAV ===== */
-.mobile-nav{
-  display:none;
-}
-
-@media(max-width:768px){
-
-  body{padding-bottom:70px;}
-
-  .mobile-nav{
-    display:flex;
-    position:fixed;
-    bottom:0;
-    width:100%;
-    background:#111827;
-    justify-content:space-around;
-    padding:10px 0;
-  }
-
-  .mobile-nav a{
-    color:#9ca3af;
-    font-size:12px;
-    text-decoration:none;
-    text-align:center;
-  }
-
-  .mobile-nav i{
-    display:block;
-    font-size:18px;
-  }
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-  <!-- LEFT PANEL -->
-  <div class="left-panel">
-    <div>
+    <!-- LEFT SIDE -->
+    <div class="auth-left">
       <h1>NGF Knowledge Hub</h1>
       <p>Learn Smart. Grow Faster 📚</p>
     </div>
-  </div>
 
-  <!-- RIGHT PANEL -->
-  <div class="right-panel">
+    <!-- RIGHT SIDE -->
+    <div class="auth-right">
 
-    <div class="form-box">
+      <div class="auth-card">
 
-      <h2>🔐 Login</h2>
+        <h2>🔐 Login</h2>
 
-      <form method="POST">
+        <form method="POST">
 
-        <div class="input-group">
-          <i class="fas fa-user"></i>
-          <input type="text" name="name" placeholder="Enter your name" required>
-        </div>
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" name="name" required placeholder=" ">
+            <label>Name</label>
+          </div>
 
-        <div class="input-group">
-          <i class="fas fa-envelope"></i>
-          <input type="email" name="email" placeholder="Enter your email" required>
-        </div>
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" required placeholder=" ">
+            <label>Email</label>
+          </div>
 
-        <button class="btn">Login</button>
+          <button class="btn primary">Login</button>
 
-      </form>
+        </form>
 
-      <p style="margin-top:15px;">
-        Don't have an account?  
-        <a href="/register">Create Account</a>
-      </p>
+        <p class="auth-link">
+          Don't have an account?
+          <a href="/register">Create Account</a>
+        </p>
+
+      </div>
 
     </div>
 
   </div>
 
-</div>
+</section>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav">
-  <a href="/" class="{% if request.path == '/' %}active{% endif %}">
-    <i class="fas fa-home"></i>Home
-  </a>
-
-  <a href="/btech" class="{% if request.path.startswith('/btech') %}active{% endif %}">
-    <i class="fas fa-book"></i>Notes
-  </a>
-
-  <a href="/upload" class="{% if request.path.startswith('/upload') %}active{% endif %}">
-    <i class="fas fa-upload"></i>Upload
-  </a>
-
-  <a href="/login" class="{% if request.path.startswith('/login') %}active{% endif %}">
-    <i class="fas fa-user"></i>Login
-  </a>
-</div>
-
-</body>
-</html>
+{% endblock %}

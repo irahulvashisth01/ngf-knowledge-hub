@@ -1,262 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8868062641125071"
-     crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
 
-<title>Upload Notes - NGF Knowledge Hub</title>
+{% block title %}Upload Notes | NGF Knowledge Hub{% endblock %}
 
-<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% block content %}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<section class="upload-page">
 
-<style>
+  <div class="upload-container">
 
-/* ===== GLOBAL ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+    <div class="upload-card">
 
-body{
-  background:#F8FAFC;
-  padding-top:80px;
-}
+      <h2>⬆ Upload Notes</h2>
 
-/* ===== NAVBAR ===== */
-.navbar{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:white;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-  padding:15px 5%;
-  display:flex;
-  justify-content:space-between;
-}
+      <form method="POST" enctype="multipart/form-data" id="uploadForm">
 
-.logo{
-  font-size:22px;
-  font-weight:700;
-  color:#1E88E5;
-}
+        <!-- SEM -->
+        <label>Semester</label>
+        <select name="semester" id="semester" onchange="updateSubjects()">
+          {% for i in range(1,9) %}
+          <option value="{{i}}">Semester {{i}}</option>
+          {% endfor %}
+        </select>
 
-.logo span{
-  color:#FF6F00;
-}
+        <!-- SUBJECT -->
+        <label>Subject</label>
+        <select name="subject" id="subject"></select>
 
-/* ===== MAIN ===== */
-.main{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:40px;
-}
+        <!-- FILE -->
+        <label>Upload File</label>
 
-/* CARD */
-.upload-card{
-  width:100%;
-  max-width:480px;
-  background:white;
-  border-radius:20px;
-  padding:30px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.08);
-}
+        <div class="drop-area" id="dropArea">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Click or Drag & Drop File</p>
+          <input type="file" name="file" id="fileInput" required>
+        </div>
 
-.upload-card h2{
-  text-align:center;
-  margin-bottom:20px;
-}
+        <div class="file-info" id="fileInfo"></div>
+        <div class="error" id="errorMsg"></div>
 
-/* INPUT */
-label{
-  margin-top:15px;
-  display:block;
-  font-weight:500;
-}
+        <!-- PROGRESS -->
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
 
-select{
-  width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #ddd;
-}
+        <button class="btn primary">Upload Notes</button>
 
-/* DROP AREA */
-.drop-area{
-  margin-top:10px;
-  padding:30px;
-  border:2px dashed #1E88E5;
-  border-radius:12px;
-  text-align:center;
-  cursor:pointer;
-  position:relative;
-  transition:0.3s;
-}
+      </form>
 
-.drop-area:hover{
-  background:#eef6ff;
-}
-
-.drop-area i{
-  font-size:30px;
-  color:#1E88E5;
-}
-
-.drop-area input{
-  position:absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-  opacity:0;
-}
-
-/* FILE INFO */
-.file-info{
-  margin-top:10px;
-  text-align:center;
-  font-size:14px;
-}
-
-/* ERROR */
-.error{
-  color:red;
-  text-align:center;
-}
-
-/* BUTTON */
-.btn{
-  width:100%;
-  margin-top:20px;
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  background:#FF6F00;
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-}
-
-.btn:hover{
-  background:#e65100;
-}
-
-/* PROGRESS */
-.progress-container{
-  margin-top:15px;
-  background:#e2e8f0;
-  border-radius:10px;
-  display:none;
-}
-
-.progress-bar{
-  height:10px;
-  width:0%;
-  background:#1E88E5;
-}
-
-/* ===== MOBILE ===== */
-.mobile-nav{display:none;}
-
-@media(max-width:768px){
-
-  .grid{grid-template-columns:1fr;}
-  .nav-links{display:none;}
-
-  body{padding-bottom:70px;}
-
-  .mobile-nav{
-    display:flex;
-    position:fixed;
-    bottom:0;width:100%;
-    background:#111827;
-    justify-content:space-around;
-    padding:10px 0;
-  }
-
-  .mobile-nav a{
-    color:#9ca3af;
-    font-size:12px;
-    text-decoration:none;
-    text-align:center;
-  }
-
-  .mobile-nav i{
-    display:block;
-    font-size:18px;
-  }
-
-}
-
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-  body{padding-bottom:70px;}
-}
-
-</style>
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-<div class="navbar">
-  <div class="logo">NGF <span>Knowledge Hub</span></div>
-  <div>
-    <a href="/dashboard">Home</a><br>
-    <a href="/btech">Notes</a>
-    <a href="/upload">Upload</a>
-    <a href="/logout">Logout</a>
-  </div>
-</div>
-
-<div class="main">
-  <div class="upload-card">
-
-    <h2>⬆ Upload Notes</h2>
-
-    <form method="POST" enctype="multipart/form-data" id="uploadForm">
-
-      <label>Semester</label>
-      <select name="semester" id="semester" onchange="updateSubjects()">
-        {% for i in range(1,9) %}
-        <option value="{{i}}">Semester {{i}}</option>
-        {% endfor %}
-      </select>
-
-      <label>Subject</label>
-      <select name="subject" id="subject"></select>
-
-      <label>Upload File</label>
-
-      <div class="drop-area" id="dropArea">
-        <i class="fas fa-cloud-upload-alt"></i>
-        <p>Click or Upload File</p>
-        <input type="file" name="file" id="fileInput" required>
-      </div>
-
-      <div class="file-info" id="fileInfo"></div>
-      <div class="error" id="errorMsg"></div>
-
-      <div class="progress-container" id="progressContainer">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-
-      <button class="btn">Upload Notes</button>
-
-    </form>
+    </div>
 
   </div>
-</div>
+
+</section>
 
 <script>
-
-/* SUBJECT */
 const SUBJECTS = {{ subjects | tojson if subjects else '{}' }};
 
 function updateSubjects(){
@@ -267,7 +64,8 @@ function updateSubjects(){
   if(SUBJECTS[sem]){
     SUBJECTS[sem].forEach(s=>{
       let opt=document.createElement("option");
-      opt.value=s; opt.text=s;
+      opt.value=s;
+      opt.text=s;
       subject.appendChild(opt);
     });
   }
@@ -300,15 +98,16 @@ const dropArea=document.getElementById("dropArea");
 
 dropArea.addEventListener("dragover",(e)=>{
   e.preventDefault();
-  dropArea.style.background="#eef6ff";
+  dropArea.classList.add("active");
 });
 
 dropArea.addEventListener("dragleave",()=>{
-  dropArea.style.background="transparent";
+  dropArea.classList.remove("active");
 });
 
 dropArea.addEventListener("drop",(e)=>{
   e.preventDefault();
+  dropArea.classList.remove("active");
   fileInput.files=e.dataTransfer.files;
 });
 
@@ -316,6 +115,7 @@ dropArea.addEventListener("drop",(e)=>{
 document.getElementById("uploadForm").addEventListener("submit",()=>{
   let bar=document.getElementById("progressBar");
   let box=document.getElementById("progressContainer");
+
   box.style.display="block";
 
   let w=0;
@@ -325,27 +125,6 @@ document.getElementById("uploadForm").addEventListener("submit",()=>{
     bar.style.width=w+"%";
   },150);
 });
-
 </script>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav">
-  <a href="/" class="{% if request.path == '/' %}active{% endif %}">
-    <i class="fas fa-home"></i>Home
-  </a>
-
-  <a href="/btech" class="{% if request.path.startswith('/btech') %}active{% endif %}">
-    <i class="fas fa-book"></i>Notes
-  </a>
-
-  <a href="/upload" class="{% if request.path.startswith('/upload') %}active{% endif %}">
-    <i class="fas fa-upload"></i>Upload
-  </a>
-
-  <a href="/login" class="{% if request.path.startswith('/login') %}active{% endif %}">
-    <i class="fas fa-user"></i>Login
-  </a>
-</div>
-
-</body>
-</html>
+{% endblock %}

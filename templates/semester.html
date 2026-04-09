@@ -1,285 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8868062641125071"
-     crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
 
-<title>Semesters - NGF Knowledge Hub</title>
+{% block title %}Semesters | NGF Knowledge Hub{% endblock %}
 
-<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% block content %}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<section class="semester-page">
 
-<style>
-
-/* ===== GLOBAL ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
-
-body{
-  background:#F8FAFC;
-  color:#111827;
-  padding-top:80px;
-}
-
-/* ===== NAVBAR ===== */
-.navbar{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:white;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-  padding:15px 5%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:1000;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:700;
-  color:#1E88E5;
-}
-
-.logo span{
-  color:#FF6F00;
-}
-
-.nav-links a{
-  margin-left:15px;
-  text-decoration:none;
-  color:#374151;
-}
-
-/* ===== MAIN ===== */
-.main{
-  max-width:1200px;
-  margin:auto;
-  padding:40px 20px;
-  text-align:center;
-}
-
-.main h1{
-  font-size:32px;
-  margin-bottom:10px;
-}
-
-.main p{
-  color:#6b7280;
-  margin-bottom:30px;
-}
-
-/* ===== GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-/* ===== CARD ===== */
-.card{
-  background:white;
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.05);
-  transition:0.3s;
-}
-
-.card i{
-  font-size:30px;
-  color:#1E88E5;
-  margin-bottom:10px;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 15px 40px rgba(0,0,0,0.1);
-}
-
-.card h3{
-  margin:10px 0;
-}
-
-/* BUTTON */
-.btn{
-  display:inline-block;
-  margin-top:10px;
-  padding:8px 15px;
-  background:#FF6F00;
-  color:white;
-  border-radius:8px;
-  text-decoration:none;
-  transition:0.3s;
-}
-
-.btn:hover{
-  background:#e65100;
-}
-
-/* ===== FOOTER ===== */
-.footer{
-  background:#111827;
-  color:white;
-  padding:40px;
-  margin-top:40px;
-}
-
-.footer-container{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-}
-
-.footer a{
-  display:block;
-  color:#9ca3af;
-  margin:6px 0;
-  text-decoration:none;
-}
-
-/* ===== MOBILE ===== */
-.mobile-nav{display:none;}
-
-@media(max-width:768px){
-
-  .footer-container{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-
-  body{padding-bottom:70px;}
-
-  .mobile-nav{
-    display:flex;
-    position:fixed;
-    bottom:0;
-    width:100%;
-    background:#111827;
-    justify-content:space-around;
-    padding:10px 0;
-  }
-
-  .mobile-nav a{
-    color:#9ca3af;
-    font-size:12px;
-    text-decoration:none;
-    text-align:center;
-  }
-
-  .mobile-nav i{
-    display:block;
-    font-size:18px;
-  }
-
-}
-
-</style>
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-<div class="navbar">
-  <div class="logo">NGF <span>Knowledge Hub</span></div>
-
-  <div class="nav-links">
-    <a href="/dashboard">Dashboard</a>
-    <a href="/btech">Notes</a>
-    <a href="/upload">Upload</a>
-    <a href="/logout">Logout</a>
+  <div class="semester-header">
+    <h1>🎓 B.Tech CSE Notes</h1>
+    <p>Select your semester to explore notes</p>
   </div>
-</div>
 
-<!-- MAIN -->
-<div class="main">
-
-  <h1>🎓 B.Tech CSE Notes</h1>
-  <p>Select your semester to explore notes</p>
-
-  <div class="grid">
+  <div class="semester-grid">
 
     {% for i in range(1,9) %}
-    <div class="card">
+    <div class="semester-card">
       <i class="fas fa-book-open"></i>
       <h3>Semester {{ i }}</h3>
       <p>Subjects & Notes</p>
-      <a href="/semester/{{i}}" class="btn">Explore</a>
+      <a href="/semester/{{i}}" class="btn primary">Explore</a>
     </div>
     {% endfor %}
 
   </div>
 
-</div>
+</section>
 
-<!-- FOOTER -->
-<footer class="footer">
-
-  <div class="footer-container">
-
-    <div>
-      <h3>NGF Knowledge Hub</h3>
-      <p>Smart platform for academic resources</p>
-    </div>
-
-    <div>
-      <h3>Quick Links</h3>
-      <a href="/dashboard">Home</a>
-      <a href="/btech">Notes</a>
-      <a href="/upload">Upload</a>
-    </div>
-
-    <div>
-      <h3>Legal</h3>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms & Conditions </a>
-      <a href="/disclaimer">Disclaimer</a>
-      <a href="/contact">Contact Us</a>
-      <a href="/about">About</a>
-    </div>
-
-    <div>
-      <h3>Social</h3>
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">GitHub</a>
-      <a href="#">Twitter</a>
-      <a href="#">Facebook</a>
-    </div>
-
-  </div>
-
-  <div style="text-align:center;margin-top:20px;">
-    © 2026 NGF Knowledge Hub 📚
-  </div>
-
-</footer>
-
-<!-- MOBILE NAV -->
-<div class="mobile-nav">
-  <a href="/" class="{% if request.path == '/' %}active{% endif %}">
-    <i class="fas fa-home"></i>Home
-  </a>
-
-  <a href="/btech" class="{% if request.path.startswith('/btech') %}active{% endif %}">
-    <i class="fas fa-book"></i>Notes
-  </a>
-
-  <a href="/upload" class="{% if request.path.startswith('/upload') %}active{% endif %}">
-    <i class="fas fa-upload"></i>Upload
-  </a>
-
-  <a href="/login" class="{% if request.path.startswith('/login') %}active{% endif %}">
-    <i class="fas fa-user"></i>Login
-  </a>
-</div>
-
-</body>
-</html>
+{% endblock %}

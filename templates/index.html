@@ -1,582 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
 
-<!-- GOOGLE ADSENSE -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9251214893649855"
-     crossorigin="anonymous"></script>
+{% block title %}Home | NGF Knowledge Hub{% endblock %}
 
-<meta name="google-adsense-account" content="ca-pub-9251214893649855">     
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NGF Knowledge Hub</title>
-
-<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<style>
-
-/* ===== GLOBAL ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
-
-html, body{
-  overflow-x:hidden;
-}
-
-body{
-  background:linear-gradient(to bottom,#f8fafc,#eef2ff);
-  color:#111827;
-}
-
-/* ===== NAVBAR ===== */
-.navbar{
-  position:fixed;
-  top:0;
-  width:100%;
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.85);
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-  padding:12px 5%;
-  z-index:1000;
-}
-
-.nav-container{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.logo{
-  font-size:20px;
-  font-weight:700;
-  color:#1E88E5;
-}
-
-.logo span{
-  color:#FF6F00;
-}
-
-.nav-links{
-  display:flex;
-  gap:15px;
-  list-style:none;
-}
-
-.nav-links a{
-  text-decoration:none;
-  color:#333;
-}
-
-/* HAMBURGER */
-.menu-btn{
-  display:none;
-  font-size:22px;
-  cursor:pointer;
-}
-
-/* MOBILE MENU */
-.mobile-menu{
-  display:none;
-  flex-direction:column;
-  position:absolute;
-  top:60px;
-  right:5%;
-  background:white;
-  width:200px;
-  border-radius:10px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.1);
-}
-
-.mobile-menu a{
-  padding:12px;
-  text-decoration:none;
-  color:#333;
-  border-bottom:1px solid #eee;
-}
-
-/* ===== HERO ===== */
-.hero{
-  min-height:80vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:white;
-  padding:20px;
-
-  background:
-  linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-  url('{{ url_for("static", filename="images/library.jpg") }}');
-  background-size:cover;
-  background-position:center;
-}
-
-.hero h1{
-  font-size:36px;
-}
-
-.hero p{
-  margin:10px 0;
-}
-
-/* BUTTON */
-.btn{
-  padding:10px 18px;
-  border-radius:8px;
-  text-decoration:none;
-  margin:6px;
-  display:inline-block;
-  font-size:14px;
-}
-
-.primary{
-  background:linear-gradient(135deg,#ff6f00,#ff9800);
-  color:white;
-}
-
-.outline{
-  border:2px solid white;
-  color:white;
-}
-
-/* ===== ADS ===== */
-.ad-container{
-  text-align:center;
-  margin:30px 0;
-}
-
-/* ===== GRID ===== */
-.container{
-  padding:60px 5%;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.card{
-  background:white;
-  padding:25px;
-  text-align:center;
-  border-radius:15px;
-  transition:0.3s;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
-}
-
-.card:hover{
-  transform:translateY(-8px) scale(1.02);
-  box-shadow:0 15px 35px rgba(0,0,0,0.1);
-}
-
-.notes-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;   /* ADD THIS */
-    padding: 20px;
-}
-
-/* ===== STATS ===== */
-.stats{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  padding:30px;
-  flex-wrap:wrap;
-}
-
-.stat-box{
-  background:white;
-  padding:15px 20px;
-  border-radius:10px;
-}
-
-/* ===== GALLERY ===== */
-.gallery{
-  padding:40px 5%;
-  text-align:center;
-}
-
-.gallery-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-}
-
-.gallery img{
-  width:100%;
-  border-radius:10px;
-}
-
-/* ===== FEATURES ===== */
-.features{
-  padding:40px 5%;
-  text-align:center;
-}
-
-.feature-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.feature-card{
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  transition:0.3s;
-}
-
-.feature-card:hover{
-  transform:translateY(-5px);
-}
-
-.feature-card:hover{
-  transform:translateY(-5px);
-}
-
-/* ===== SEARCH FILTER CONTAINER ===== */
-.search-box {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* ===== INPUT + SELECT ===== */
-.search-box input,
-.search-box select {
-  flex: 1;
-  min-width: 180px;
-
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-
-  font-size: 14px;
-  background: #f9fafb;
-
-  transition: 0.3s;
-}
-
-/* FOCUS EFFECT */
-.search-box input:focus,
-.search-box select:focus {
-  border-color: #2563eb;
-  background: #fff;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
-}
-
-/* ===== BUTTON ===== */
-.search-box button {
-  padding: 12px 20px;
-  border-radius: 10px;
-  border: none;
-
-  background: linear-gradient(135deg,#2563eb,#1e40af);
-  color: #fff;
-
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-
-  transition: 0.3s;
-}
-
-.search-box button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(37,99,235,0.3);
-}
-
-/* ===== LABEL STYLE (OPTIONAL HEADER FIX) ===== */
-.search-title {
-  text-align: center;
-  font-weight: 600;
-  margin-top: 40px;
-  color: #374151;
-}
-
-@media (max-width: 768px) {
-
-  .search-box {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 15px;
-    gap: 10px;
-  }
-
-  .search-box input,
-  .search-box select,
-  .search-box button {
-    width: 100%;
-    font-size: 15px;
-  }
-
-  .search-box button {
-    padding: 14px;
-  }
-
-}
-
-/* ===== NOTES GRID ===== */
-.notes-container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 10px;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 22px;
-}
-
-/* ===== NOTE CARD ===== */
-.note-card {
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 18px;
-
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* HOVER EFFECT */
-.note-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-}
-
-/* ===== TITLE ===== */
-.note-card h3 {
-  font-size: 15px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 10px;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* ===== INFO TEXT ===== */
-.note-card p {
-  font-size: 13px;
-  color: #6b7280;
-  margin: 4px 0;
-}
-
-/* ICON STYLE */
-.note-card p::before {
-  margin-right: 5px;
-}
-
-/* ===== BUTTON CONTAINER ===== */
-.note-actions {
-  margin-top: 12px;
-  display: flex;
-  gap: 8px;
-}
-
-/* ===== BUTTONS ===== */
-.note-card a {
-  flex: 1;
-  text-align: center;
-
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 13px;
-  text-decoration: none;
-  font-weight: 500;
-
-  transition: 0.3s;
-}
-
-/* VIEW BUTTON */
-.note-card a:first-child {
-  background: #e0f2fe;
-  color: #0369a1;
-}
-
-.note-card a:first-child:hover {
-  background: #bae6fd;
-}
-
-/* DOWNLOAD BUTTON */
-.note-card a:last-child {
-  background: linear-gradient(135deg,#2563eb,#1e40af);
-  color: white;
-}
-
-.note-card a:last-child:hover {
-  transform: scale(1.05);
-}
-
-.pagination {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.pagination a {
-  display: inline-block;
-  margin: 5px;
-  padding: 8px 14px;
-  border-radius: 8px;
-  text-decoration: none;
-  background: #e5e7eb;
-  color: #111;
-}
-
-.pagination a.active {
-  background: #2563eb;
-  color: #fff;
-}
-
-.pagination a:hover {
-  background: #1e40af;
-  color: #fff;
-}
-
-/* ===== CTA ===== */
-.cta{
-  background:linear-gradient(135deg,#1E88E5,#0D47A1);
-  color:white;
-  padding:40px 20px;
-  text-align:center;
-}
-
-/* ===== FOOTER ===== */
-.footer{
-  background:#0f172a;
-  color:white;
-  padding:50px 20px;
-}
-
-.footer-container{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:30px;
-  max-width:1200px;
-  margin:auto;
-}
-
-.footer a{
-  display:block;
-  color:#94a3b8;
-  margin:6px 0;
-  text-decoration:none;
-}
-
-.footer a:hover{color:white;}
-
-.footer-bottom{
-  text-align:center;
-  margin-top:20px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:10px;
-}
-
-
-/* ===== MOBILE ===== */
-.mobile-nav{display:none;}
-
-@media(max-width:768px){
-
-  .nav-links{display:none;}
-  .menu-btn{display:block;}
-
-  body{padding-bottom:70px;}
-
-  .grid{grid-template-columns:1fr;}
-  .gallery-grid{grid-template-columns:1fr;}
-  .feature-grid{grid-template-columns:1fr;}
-  .footer-container{grid-template-columns:1fr;}
-  .stats{flex-direction:column; align-items:center;}
-
-  .hero h1{font-size:26px;}
-  .hero p{font-size:14px;}
-
-  .mobile-nav{
-    display:flex;
-    position:fixed;
-    bottom:0;
-    width:100%;
-    background:#111827;
-    justify-content:space-around;
-    padding:10px 0;
-  }
-
-  .mobile-nav a{
-    color:#9ca3af;
-    font-size:12px;
-    text-decoration:none;
-    text-align:center;
-  }
-
-  .mobile-nav i{
-    display:block;
-    font-size:18px;
-  }
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-container">
-
-    <div class="logo">NGF <span>Knowledge Hub</span></div>
-
-    <ul class="nav-links">
-      <li><a href="{{ url_for('home') }}">Home</a></li>
-      <li><a href="/btech">Notes</a></li>
-      <li><a href="/upload">Upload</a></li>
-      <li><a href="/login">Login</a></li>
-    </ul>
-
-    <!-- HAMBURGER -->
-    <div class="menu-btn" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
-
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="/dashboard">Home</a>
-      <a href="/btech">Notes</a>
-      <a href="/upload">Upload</a>
-      <a href="/login">Login</a>
-    </div>
-
-  </div>
-</nav>
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero fade-show">
   <div>
     <h1>NGF Knowledge Hub</h1>
     <p>Learn Smart. Grow Faster 📚</p>
@@ -588,7 +18,7 @@ body{
 
 <!-- CARDS -->
 <div class="container">
-  <div class="grid">
+  <div class="grid zoom">
 
     <a href="/btech" class="card">
       <i class="fas fa-book"></i>
@@ -601,7 +31,7 @@ body{
     </a>
 
     {% if session.get('role') == 'admin' %}
-    <a href="/admin" class="card admin">
+    <a href="/admin" class="card">
       <i class="fas fa-user-shield"></i>
       <h3>Admin Panel</h3>
     </a>
@@ -610,36 +40,15 @@ body{
   </div>
 </div>
 
-<!-- ALL PAGES -->
-<section class="container">
-<h2>Explore All Pages</h2>
-<div class="grid">
-<a href="/" class="card">🏠 Home</a>
-<a href="/btech" class="card">📚 Notes</a>
-<a href="/upload" class="card">⬆ Upload</a>
-<a href="/about" class="card">ℹ About</a>
-<a href="/contact" class="card">📞 Contact</a>
-<a href="/privacy" class="card">🔒 Privacy</a>
-<a href="/terms" class="card">📄 Terms</a>
-<a href="/disclaimer" class="card">⚠️ Disclaimer</a>
-<a href="/admin" class="card">👑 Admin</a>
-<a href="/dashboard" class="card">📊 Dashboard</a>
-<a href="/login" class="card">🔐 Login</a>
-<a href="/register" class="card">📝 Register</a>
-</div>
-</section>
+<!-- SEARCH -->
+<form method="GET" action="/" class="search-box fade-up">
 
-<!-- ---------------- SEARCH & FILTER ---------------- -->
-<form method="GET" action="/" class="search-box">
-
-    <input type="text" name="q" placeholder="Search notes..."
-           value="{{ query }}">
+    <input type="text" name="q" placeholder="Search notes..." value="{{ query }}">
 
     <select name="semester">
         <option value="">All Semesters</option>
         {% for sem in subjects.keys() %}
-        <option value="{{ sem }}"
-            {% if selected_sem == sem|string %}selected{% endif %}>
+        <option value="{{ sem }}" {% if selected_sem == sem|string %}selected{% endif %}>
             Semester {{ sem }}
         </option>
         {% endfor %}
@@ -649,8 +58,7 @@ body{
         <option value="">All Subjects</option>
         {% for sem, subs in subjects.items() %}
             {% for sub in subs %}
-            <option value="{{ sub }}"
-                {% if selected_sub == sub %}selected{% endif %}>
+            <option value="{{ sub }}" {% if selected_sub == sub %}selected{% endif %}>
                 {{ sub }}
             </option>
             {% endfor %}
@@ -661,17 +69,15 @@ body{
 
 </form>
 
-
-<!-- NOTES LIST -->
-<div class="notes-container">
+<!-- NOTES -->
+<div class="notes-container fade-up">
 
     {% for note in notes %}
-    <div class="note-card">
+    <div class="note-card zoom">
         <h3>{{ note.title }}</h3>
-
-        <p>📘 Subject: {{ note.subject }}</p>
-        <p>🎓 Semester: {{ note.semester }}</p>
-        <p>⬇ Downloads: {{ note.downloads }}</p>
+        <p>📘 {{ note.subject }}</p>
+        <p>🎓 Semester {{ note.semester }}</p>
+        <p>⬇ {{ note.downloads }}</p>
 
         <div class="note-actions">
             <a href="/view/{{ note.filename }}">View</a>
@@ -686,15 +92,15 @@ body{
 
 </div>
 
-<div class="pagination">
+<!-- PAGINATION -->
+<div class="pagination fade-up">
 
     {% if page > 1 %}
     <a href="?page={{ page-1 }}">⬅ Prev</a>
     {% endif %}
 
     {% for p in range(1, total_pages+1) %}
-        <a href="?page={{ p }}"
-           class="{% if p == page %}active{% endif %}">
+        <a href="?page={{ p }}" class="{% if p == page %}active{% endif %}">
            {{ p }}
         </a>
     {% endfor %}
@@ -706,14 +112,14 @@ body{
 </div>
 
 <!-- STATS -->
-<section class="stats">
-  <div class="stat-box"><h2>500+</h2><p>Notes</p></div>
-  <div class="stat-box"><h2>100+</h2><p>Subjects</p></div>
-  <div class="stat-box"><h2>10K+</h2><p>Downloads</p></div>
+<section class="stats fade-up">
+  <div class="stat-box">500+ Notes</div>
+  <div class="stat-box">100+ Subjects</div>
+  <div class="stat-box">10K+ Downloads</div>
 </section>
 
 <!-- GALLERY -->
-<section class="gallery">
+<section class="gallery fade-up">
   <h2>Campus Life 📸</h2>
 
   <div class="gallery-grid">
@@ -721,205 +127,22 @@ body{
     <img src="{{ url_for('static', filename='images/study1.jpg') }}">
     <img src="{{ url_for('static', filename='images/group.jpg') }}">
     <img src="{{ url_for('static', filename='images/library.jpg') }}">
-    <img src="{{ url_for('static', filename='images/laptop.jpg') }}">
-    <img src="{{ url_for('static', filename='images/friendly.jpg') }}">
-    <img src="{{ url_for('static', filename='images/notes.jpg') }}">
-    <img src="{{ url_for('static', filename='images/Student 2.jpg') }}">
-    <img src="{{ url_for('static', filename='images/student.jpg') }}">
   </div>
 </section>
 
-<style>
-.section{
-  max-width:1100px;
-  margin:60px auto;
-  padding:0 20px;
-}
-
-.card-box{
-  background:#ffffff;
-  border-radius:18px;
-  padding:35px;
-  margin-bottom:30px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.06);
-  transition:0.3s;
-}
-
-.card-box:hover{
-  transform:translateY(-5px);
-}
-
-.card-box h2{
-  color:#1e40af;
-  margin-bottom:15px;
-  font-size:24px;
-}
-
-.card-box p{
-  color:#444;
-  line-height:1.8;
-}
-
-.card-box ul{
-  margin-top:15px;
-  padding-left:20px;
-}
-
-.card-box li{
-  margin-bottom:10px;
-  color:#444;
-}
-
-.highlight{
-  color:#2563eb;
-  font-weight:600;
-}
-</style>
-
-
-<div class="section">
-
-<!-- ABOUT -->
-<div class="card-box">
-<h2>📚 About NGF Knowledge Hub</h2>
-<p>
-<span class="highlight">NGF Knowledge Hub</span> is a modern educational platform designed specifically for BTech students. 
-We provide <b>high-quality, semester-wise notes</b>, subject materials, and academic resources for branches like 
-Computer Science (CSE), Mechanical (ME), and Electronics (ECE).
-</p>
-
-<p>
-Our mission is to create a centralized ecosystem where students can 
-<b>learn faster, access reliable study materials, and collaborate</b> by sharing notes. 
-The platform is structured to simplify complex topics and improve exam preparation efficiency.
-</p>
-</div>
-
-
-<!-- WHY US -->
-<div class="card-box">
-<h2>🚀 Why Choose Our Platform?</h2>
-<ul>
-<li>✔ Structured semester-wise notes</li>
-<li>✔ Easy and fast access to study material</li>
-<li>✔ Free downloads with no hidden charges</li>
-<li>✔ Community-driven learning (upload & share notes)</li>
-<li>✔ Mobile-friendly and fast-loading design</li>
-</ul>
-</div>
-
-
-<!-- PRIVACY -->
-<div class="card-box">
-<h2>🔒 Privacy Policy</h2>
-<p>
-We are committed to protecting your personal information and maintaining a secure experience.
-</p>
-
-<ul>
-<li>We collect basic information like name and email for account functionality</li>
-<li>Your data is never sold, rented, or shared with third parties</li>
-<li>Cookies are used to enhance performance and analyze usage</li>
-<li>All user data is protected with standard security practices</li>
-</ul>
-</div>
-
-
-<!-- TERMS -->
-<div class="card-box">
-<h2>📄 Terms & Conditions</h2>
-<ul>
-<li>Platform is intended for educational purposes only</li>
-<li>Users must not upload copyrighted or illegal content</li>
-<li>Users are responsible for maintaining account security</li>
-<li>We reserve the right to remove content violating guidelines</li>
-</ul>
-</div>
-
-
-<!-- DISCLAIMER -->
-<div class="card-box">
-<h2>⚠️ Disclaimer</h2>
-<p>
-All resources provided on NGF Knowledge Hub are for educational purposes only. 
-We do not guarantee absolute accuracy or completeness of the materials. 
-Users are advised to verify information independently before use.
-</p>
-</div>
-
-
-<!-- CONTACT -->
-<div class="card-box">
-<h2>📞 Contact Us</h2>
-<p>
-Have questions or suggestions? We’d love to hear from you.
-</p>
-
-<ul>
-<li><b>Email:</b> rahulvashistha97@gmail.com</li>
-<li><b>Phone:</b> +91-7056212054</li>
-</ul>
-</div>
-
-
-<!-- FAQ -->
-<div class="card-box">
-<h2>❓ Frequently Asked Questions</h2>
-<ul>
-<li><b>Are notes free?</b> Yes, all notes are completely free to download.</li>
-<li><b>Can I upload notes?</b> Yes, registered users can upload and share notes.</li>
-<li><b>Is login required?</b> Only for uploading content.</li>
-<li><b>Is the website mobile-friendly?</b> Yes, fully responsive design.</li>
-</ul>
-</div>
-
-
-<!-- HOW TO USE -->
-<div class="card-box">
-<h2>📘 How to Use NGF Knowledge Hub</h2>
-<ul>
-<li>Browse notes by subject or semester</li>
-<li>Download PDFs instantly</li>
-<li>Upload your notes and help others</li>
-<li>Stay updated with new content regularly</li>
-</ul>
-</div>
-
-
-<!-- SOCIAL PROOF -->
-<div class="card-box">
-<h2>💬 Student Feedback</h2>
-<p>
-Students across different branches trust NGF Knowledge Hub for reliable and easy-to-understand notes.
-Our platform continues to grow with contributions from learners like you.
-</p>
-</div>
-
-
-<!-- FINAL CTA -->
-<div class="card-box" style="text-align:center;">
-<h2>🚀 Start Learning Today</h2>
-<p>Explore notes and boost your academic performance.</p>
-<a href="/btech" style="background:#2563eb;color:white;padding:12px 20px;border-radius:8px;text-decoration:none;">
-Explore Notes
-</a>
-</div>
-
-</div>
-
 <!-- FEATURES -->
-<section class="features">
+<section class="features fade-up">
   <h2>Why NGF Knowledge Hub?</h2>
 
   <div class="feature-grid">
     <div class="feature-card">📚 All Subjects</div>
     <div class="feature-card">⚡ Fast Access</div>
-    <div class="feature-card">🔐 Secure Platform</div>
+    <div class="feature-card">🔐 Secure</div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta">
+<section class="cta fade-up">
   <h2>Start Learning Today 🚀</h2>
   <a href="/btech" class="btn primary">Get Started</a>
 </section>
@@ -933,93 +156,18 @@ data-ad-slot="1234567890"
 data-ad-format="auto"></ins>
 </div>
 
-<!-- FOOTER AD -->
-<div class="ad-container">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-8868062641125071"
-       data-ad-slot="3333333333"
-       data-ad-format="auto"></ins>
-</div>
-
-<!-- FOOTER -->
-<footer class="footer">
-
-  <div class="footer-container">
-
-    <!-- ABOUT -->
-    <div>
-      <h3>📚 NotesHub</h3>
-      <p style="color:#94a3b8;">
-        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
-      </p>
-    </div>
-
-    <!-- QUICK LINKS -->
-    <div>
-      <h3>Quick Links</h3>
-      <a href="{{ url_for('dashboard') }}">Home</a>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/btech">Notes</a>
-      <a href="/upload">Upload</a>
-    </div>
-
-    <!-- LEGAL -->
-    <div>
-      <h3>Legal</h3>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms & Conditions</a>
-      <a href="/disclaimer">Disclaimer</a>
-    </div>
-
-    <!-- SOCIAL -->
-    <div>
-      <h3>Connect With Us</h3>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    © 2026 NotesHub 🚀 | All Rights Reserved
-  </div>
-
-</footer>
-
-<!-- MOBILE NAV -->
-<div class="mobile-nav">
-  <a href="/" class="{% if request.path == '/' %}active{% endif %}">
-    <i class="fas fa-home"></i>Home
-  </a>
-
-  <a href="/btech" class="{% if request.path.startswith('/btech') %}active{% endif %}">
-    <i class="fas fa-book"></i>Notes
-  </a>
-
-  <a href="/upload" class="{% if request.path.startswith('/upload') %}active{% endif %}">
-    <i class="fas fa-upload"></i>Upload
-  </a>
-
-  <a href="/login" class="{% if request.path.startswith('/login') %}active{% endif %}">
-    <i class="fas fa-user"></i>Login
-  </a>
-</div>
-
 <script>
-function toggleMenu(){
-  let menu = document.getElementById("mobileMenu");
-  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
-}
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+});
 
-(adsbygoogle = window.adsbygoogle || []).push({});
+document.querySelectorAll('.fade-up, .zoom').forEach(el=>{
+  observer.observe(el);
+});
 </script>
 
-</body>
-</html>
+{% endblock %}

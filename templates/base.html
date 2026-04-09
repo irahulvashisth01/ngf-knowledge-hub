@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9251214893649855"
+crossorigin="anonymous"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{% block title %}NGF Knowledge Hub{% endblock %}</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="icon" href="{{ url_for('static', filename='icons/image.png') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+
+    <!-- LOGO -->
+    <a href="/" class="logo">NGF Knowledge Hub</a>
+
+    <!-- DESKTOP MENU -->
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/btech">Notes</a></li>
+      <li><a href="/upload">Upload</a></li>
+      <li><a href="/login">Login</a></li>
+    </ul>
+
+    <!-- MOBILE BUTTON -->
+    <div class="menu-btn" id="menuBtn">
+      <i class="fas fa-bars"></i>
+    </div>
+
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/">Home</a>
+    <a href="/btech">Notes</a>
+    <a href="/upload">Upload</a>
+    <a href="/login">Login</a>
+  </div>
+
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <div>
+      <h3>📚 NotesHub</h3>
+      <p class="muted">
+        A modern platform for B.Tech students to access notes, PYQs and study resources anytime.
+      </p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/btech">Notes</a>
+      <a href="/upload">Upload</a>
+    </div>
+
+    <div>
+      <h3>Legal</h3>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+
+    <div>
+      <h3>Connect</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 NGF Knowledge Hub 🚀
+  </div>
+
+</footer>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
+  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
+  <a href="/login"><i class="fas fa-user"></i>Login</a>
+</div>
+
+<!-- JS -->
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+  });
+
+  /* SCROLL ANIMATION */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
+    });
+  });
+
+  document.querySelectorAll('.fade-up, .zoom').forEach(el=>{
+    observer.observe(el);
+  });
+
+});
+
+</script>
+
+</body>
+</html>
