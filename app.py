@@ -244,37 +244,15 @@ def notes(subject, sem):
 
 
 # ---------------- VIEW (LOGIN REQUIRED) ----------------
-@app.route("/view/<filename>")
+@app.route('/view/<filename>')
 def view_file(filename):
-    if not login_required():
-        return login_required_redirect()
-
-    return send_from_directory(
-        Config.UPLOAD_FOLDER,
-        filename
-    )
+    return send_from_directory('uploads', filename)
 
 
-# ---------------- DOWNLOAD (LOGIN REQUIRED) ----------------
-@app.route("/download/<filename>")
+# ---------------- DOWNLOAD (PUBLIC) ----------------
+@app.route('/download/<filename>')
 def download_file(filename):
-    if not login_required():
-        return login_required_redirect()
-
-    conn = get_db_connection()
-    conn.execute("""
-        UPDATE notes 
-        SET downloads = downloads + 1 
-        WHERE filename=?
-    """, (filename,))
-    conn.commit()
-    conn.close()
-
-    return send_from_directory(
-        Config.UPLOAD_FOLDER,
-        filename,
-        as_attachment=True
-    )
+    return send_from_directory('uploads', filename, as_attachment=True)
 
 
 # ---------------- SHARE (PUBLIC) ----------------
