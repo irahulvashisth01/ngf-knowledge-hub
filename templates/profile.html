@@ -1,46 +1,20 @@
 {% extends "base.html" %}
 
-{% block title %}Profile | NGF Knowledge Hub{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block content %}
 
-<section class="profile-page">
+<div class="profile-container">
 
-  <div class="profile-container">
+    <h2>👤 My Profile</h2>
 
     <div class="profile-card">
-
-      <!-- COVER -->
-      <div class="profile-cover"></div>
-
-      <!-- IMAGE -->
-      <div class="profile-image-box">
-        {% if user['profile_image'] %}
-          <img src="{{ url_for('static', filename='profile/' + user['profile_image']) }}">
-        {% else %}
-          <img src="https://via.placeholder.com/150">
-        {% endif %}
-      </div>
-
-      <!-- DETAILS -->
-      <div class="profile-info">
-        <h2>{{ user['name'] }}</h2>
-        <p>📧 {{ user['email'] }}</p>
-        <p>📱 {{ user['mobile'] }}</p>
-      </div>
-
-      <!-- UPLOAD -->
-      <div class="profile-upload">
-        <form action="/update_profile" method="POST" enctype="multipart/form-data">
-          <input type="file" name="image" required>
-          <button type="submit" class="btn primary">Update Profile</button>
-        </form>
-      </div>
-
+        <p><strong>Name:</strong> {{ user }}</p>
+        <p><strong>Role:</strong> {{ session.get('role') }}</p>
     </div>
 
-  </div>
+    <a href="/logout" class="logout-btn">Logout</a>
 
-</section>
+</div>
 
 {% endblock %}

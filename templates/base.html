@@ -24,18 +24,42 @@ crossorigin="anonymous"></script>
 <!-- NAVBAR -->
 <nav class="navbar">
   <div class="nav-container">
+    <button onclick="goBack()" class="back-btn">⬅ Back</button>
+
+    <script>
+    function goBack() {
+        window.history.back();
+    }
+    </script>
 
     <!-- LOGO -->
     <a href="/" class="logo">NGF Knowledge Hub</a>
 
-    <!-- DESKTOP MENU -->
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="/btech">Notes</a></li>
       <li><a href="/upload">Upload</a></li>
-      <li><a href="/login">Login</a></li>
-      <li><a href="/logout">Logout</a></li>
+
+      {% if session.get('user') %}
+        <!-- Profile Dropdown -->
+        <li class="profile-menu">
+          <button onclick="toggleMenu()" class="profile-btn">
+            👤 {{ session['user'] }}
+          </button>
+
+          <div id="dropdown" class="dropdown">
+            <a href="/profile">My Profile</a>
+            <a href="/upload">Upload Notes</a>
+            <a href="/logout">Logout</a>
+          </div>
+        </li>
+
+      {% else %}
+        <li><a href="/login">Login</a></li>
+      {% endif %}
     </ul>
+
+
 
     <!-- MOBILE BUTTON -->
     <div class="menu-btn" id="menuBtn">
@@ -49,8 +73,13 @@ crossorigin="anonymous"></script>
     <a href="/">Home</a>
     <a href="/btech">Notes</a>
     <a href="/upload">Upload</a>
-    <a href="/login">Login</a>
-    <a href="/logout">Logout</a>
+    {% if session.get('user') %}
+      <a href="/profile">My Profile</a>
+      <a href="/upload">Upload Notes</a>
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/login">Login</a>
+    {% endif %}
   </div>
 
 </nav>
@@ -142,6 +171,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+</script>
+
+<script>
+function toggleMenu() {
+  const dropdown = document.getElementById("dropdown");
+  dropdown.style.display =
+    dropdown.style.display === "block" ? "none" : "block";
+}
 </script>
 
 </body>

@@ -175,7 +175,15 @@ def login():
 
     return render_template("login.html")
 
+@app.route("/profile")
+def profile():
+    if "user" not in session:
+        return redirect(url_for("login"))
 
+    return render_template("profile.html", user=session.get("user"))
+
+
+    
 # ---------------- LOGOUT ----------------
 @app.route("/logout")
 def logout():
