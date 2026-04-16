@@ -1,0 +1,27 @@
+<h2>{{ note.title }}</h2>
+
+<p>📖 Subject: {{ note.subject }}</p>
+<p>🏛️ Semester: {{ note.semester }}</p>
+<p>📑 Unit: {{ note.unit }}</p>
+<p>👨‍🏫 Teacher: {{ note.teacher }}</p>
+
+<hr>
+
+<a href="/download/{{ note.share_id }}">
+    ⬇️ Download Notes
+</a>
+
+<br><br>
+
+<button onclick="copyText()">📤 Copy Share Text</button>
+
+<a href="https://wa.me/?text={{ share_text | urlencode }}" target="_blank">
+    📲 WhatsApp Share
+</a>
+
+<script>
+function copyText() {
+    navigator.clipboard.writeText(`{{ share_text }}`);
+    alert("Copied!");
+}
+</script>

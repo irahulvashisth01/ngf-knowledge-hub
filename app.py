@@ -263,23 +263,36 @@ def download_file(filename):
     return send_from_directory('uploads', filename, as_attachment=True)
 
 
-# ---------------- SHARE (PUBLIC) ----------------
 @app.route('/share/<share_id>')
 def share_note(share_id):
-    conn = get_db_connection()
+    mode = request.args.get("mode")  # ?mode=download
+
+    conn = get_db()
     cur = conn.cursor()
 
     note = cur.execute(
-        "SELECT * FROM notes WHERE share_id = ?",
+        "SELECT * FROM notes WHERE share_id=?",
         (share_id,)
     ).fetchone()
 
     if not note:
         return "Note not found ❌", 404
 
-    return send_from_directory(
-        Config.UPLOAD_FOLDER,
-        note['filename']
+    # 🔥 Direct download mode
+    if mode == "download":
+        return send_from_directory(
+            Config.UPLOAD_FOLDER,
+            note['filename'],
+            as_attachment=True
+        )
+
+    # 🔥 Default: preview page
+    share_text = generate_share_text(note)
+
+    return render_template(
+        "share.html",
+        note=note,
+        share_text=share_text
     )
 
 # ---------------- UPLOAD (LOGIN REQUIRED) ----------------
