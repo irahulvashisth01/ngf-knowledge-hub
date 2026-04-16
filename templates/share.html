@@ -1,33 +1,89 @@
-<h2>{{ note.title or 'Untitled Note' }}</h2>
+<div style="
+    max-width: 520px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    font-family: 'Segoe UI', sans-serif;
+">
 
-<p>📖 Subject: {{ note.subject or 'N/A' }}</p>
-<p>🏛️ Semester: {{ note.semester or 'N/A' }}</p>
-<p>📑 Unit: {{ note.unit or 'N/A' }}</p>
-<p>👨‍🏫 Teacher: {{ note.teacher or 'N/A' }}</p>
+    <!-- Title -->
+    <h2 style="text-align:center; margin-bottom: 20px; color:#333;">
+        📚 {{ note.title or 'Untitled Note' }}
+    </h2>
 
-<hr>
+    <!-- Details -->
+    <div style="line-height: 1.8; font-size: 15px; color:#555;">
+        <p><strong>📖 Subject:</strong> {{ note.subject or 'N/A' }}</p>
+        <p><strong>🏛️ Semester:</strong> {{ note.semester or 'N/A' }}</p>
+        <p><strong>📑 Unit:</strong> {{ note.unit or 'N/A' }}</p>
+        <p><strong>👨‍🏫 Teacher:</strong> {{ note.teacher or 'N/A' }}</p>
+    </div>
 
-{% if note.share_id %}
-<a href="/share/{{ note.share_id }}?mode=download">
-    ⬇️ Download Notes
-</a>
-{% else %}
-<p style="color:red;">⚠️ Download not available</p>
-{% endif %}
+    <hr style="margin: 20px 0; border:none; border-top:1px solid #eee;">
 
-<br><br>
+    <!-- Download Button -->
+    {% if note.share_id %}
+    <a href="/share/{{ note.share_id }}?mode=download"
+       style="
+        display:block;
+        text-align:center;
+        padding:12px;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color:white;
+        border-radius:8px;
+        text-decoration:none;
+        font-weight:600;
+        transition:0.3s;
+       "
+       onmouseover="this.style.opacity='0.9'"
+       onmouseout="this.style.opacity='1'"
+    >
+        ⬇️ Download Notes
+    </a>
+    {% else %}
+    <p style="color:red; text-align:center;">⚠️ Download not available</p>
+    {% endif %}
 
-<button onclick="copyText()">📤 Copy Share Text</button>
+    <!-- Actions -->
+    <div style="margin-top:20px; display:flex; gap:10px; flex-direction:column;">
 
-<br><br>
+        <button onclick="copyText()"
+            style="
+            padding:10px;
+            border:none;
+            border-radius:8px;
+            background:#007bff;
+            color:white;
+            font-weight:500;
+            cursor:pointer;
+        ">
+            📤 Copy Share Text
+        </button>
 
-<a href="https://wa.me/?text={{ share_text | urlencode }}%20{{ request.url }}" target="_blank">
-    📲 WhatsApp Share
-</a>
+        <a href="https://wa.me/?text={{ share_text | urlencode }}%20{{ request.url }}"
+           target="_blank"
+           style="
+            display:block;
+            text-align:center;
+            padding:10px;
+            background:#25D366;
+            color:white;
+            border-radius:8px;
+            text-decoration:none;
+            font-weight:500;
+        ">
+            📲 Share on WhatsApp
+        </a>
+
+    </div>
+
+</div>
 
 <script>
 function copyText() {
     navigator.clipboard.writeText({{ share_text | tojson }});
-    alert("Copied!");
+    alert("✅ Copied!");
 }
 </script>

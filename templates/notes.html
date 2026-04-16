@@ -18,13 +18,19 @@
     <div class="notes-grid">
       {% for t in top_notes %}
       <div class="note-card">
-        <h4>{{ t['title'] }}</h4>
-        <p>📊 {{ t['downloads'] }} Downloads</p>
+        <h4>{{ t['title'] or 'Untitled' }}</h4>
+        <p>📊 {{ t['downloads'] or 0 }} Downloads</p>
 
         <div class="note-actions">
           <a href="/view/{{ t['filename'] }}" target="_blank">View</a>
           <a href="/download/{{ t['filename'] }}">Download</a>
-          <button onclick="shareNote('{{ t['share_id'] }}')">Share</button>
+
+          <button onclick="shareNote(
+            '{{ t['share_id'] }}',
+            '{{ t['subject'] }}',
+            '{{ t['semester'] }}',
+            '{{ t['unit'] or "N/A" }}'
+          )">Share</button>
         </div>
       </div>
       {% endfor %}
@@ -37,13 +43,19 @@
   <div class="notes-grid">
     {% for n in notes %}
     <div class="note-card">
-      <h4>{{ n['title'] }}</h4>
-      <p>📊 {{ n['downloads'] }} Downloads</p>
+      <h4>{{ n['title'] or 'Untitled' }}</h4>
+      <p>📊 {{ n['downloads'] or 0 }} Downloads</p>
 
       <div class="note-actions">
         <a href="/view/{{ n['filename'] }}">View</a>
         <a href="/download/{{ n['filename'] }}">Download</a>
-        <button onclick="shareNote('{{ n['share_id'] }}')">Share</button>
+
+        <button onclick="shareNote(
+          '{{ n['share_id'] }}',
+          '{{ n['subject'] }}',
+          '{{ n['semester'] }}',
+          '{{ n['unit'] or "N/A" }}'
+        )">Share</button>
       </div>
     </div>
     {% endfor %}
@@ -58,18 +70,49 @@
 </section>
 
 <script>
-function shareNote(shareId) {
-  const link = `${window.location.origin}/share/${shareId}`;
+function shareNote(shareId, subject, semester, unit) {
 
+  if (!shareId) {
+    alert("❌ Share link not available");
+    return;
+  }
+
+  const baseUrl = window.location.origin;
+
+  const downloadLink = `${baseUrl}/share/${shareId}?mode=download`;
+  const sharePageLink = `${baseUrl}/share/${shareId}`;
+
+  const message = `📚 *Notes Details* 📚
+
+🏛️ *Semester:* ${semester || 'N/A'}
+📖 *Subject:* ${subject || 'N/A'}
+📑 *Unit:* ${unit || 'N/A'}
+💰 *Status:* Free
+
+⬇️ *Download Notes:* ${downloadLink}
+
+---
+🔗 *Important Links:*
+
+🌐 *Official Website:* https://btechnotes.online
+📢 *Telegram Channel:* https://t.me/btechnotesonline
+👥 *WhatsApp Group:* https://chat.whatsapp.com/LeLjTBzZ5en7EJ3LTjPiV6?mode=gi_t
+
+#BTechNotes #EngineeringNotes #StudyMaterial
+
+${sharePageLink}`;
+
+  // ✅ Mobile Native Share
   if (navigator.share) {
     navigator.share({
-      title: "Check this note 📚",
-      text: "Open this note:",
-      url: link
-    });
-  } else {
-    navigator.clipboard.writeText(link);
-    alert("✅ Link copied:\n" + link);
+      title: "Notes Details 📚",
+      text: message
+    }).catch(err => console.log("Share cancelled", err));
+  } 
+  // ✅ Desktop / fallback → WhatsApp
+  else {
+    const url = "https://wa.me/?text=" + encodeURIComponent(message);
+    window.open(url, "_blank");
   }
 }
 </script>
