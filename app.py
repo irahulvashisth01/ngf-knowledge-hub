@@ -262,18 +262,20 @@ def view_file(filename):
 def download_file(filename):
     return send_from_directory('uploads', filename, as_attachment=True)
 
-
+# ---------------- SHARE (PUBLIC) ----------------
 @app.route('/share/<share_id>')
 def share_note(share_id):
     mode = request.args.get("mode")  # ?mode=download
 
-    conn = get_db()
+    conn = get_db_connection()
     cur = conn.cursor()
 
     note = cur.execute(
         "SELECT * FROM notes WHERE share_id=?",
         (share_id,)
     ).fetchone()
+
+    conn.close()
 
     if not note:
         return "Note not found ❌", 404
@@ -286,8 +288,25 @@ def share_note(share_id):
             as_attachment=True
         )
 
-    # 🔥 Default: preview page
-    share_text = generate_share_text(note)
+    # 🔥 Generate Share Text (SAFE)
+    share_text = f"""📚 *Notes Details* 📚
+
+🏛️ *Semester:* {note['semester']}
+📖 *Subject:* {note['subject']}
+📑 *Unit:* {note['unit'] if 'unit' in note.keys() else 'N/A'}
+💰 *Status:* Free
+
+⬇️ *Download Notes:* https://ngf-knowledge-hub.onrender.com/share/{note['share_id']}?mode=download
+
+---
+🔗 *Important Links:*
+
+🌐 *Official Website:* https://btechnotes.online
+📢 *Telegram Channel:* https://t.me/btechnotesonline
+👥 *WhatsApp Group:* https://chat.whatsapp.com/LeLjTBzZ5en7EJ3LTjPiV6?mode=gi_t
+
+#BTechNotes #EngineeringNotes #StudyMaterial
+"""
 
     return render_template(
         "share.html",
