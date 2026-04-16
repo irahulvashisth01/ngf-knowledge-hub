@@ -1,89 +1,175 @@
-<div style="
-    max-width: 520px;
+<style>
+/* ---------- GLOBAL ---------- */
+.share-container {
+    max-width: 600px;
     margin: 40px auto;
     padding: 25px;
-    border-radius: 16px;
+}
+
+.share-card {
     background: #ffffff;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    font-family: 'Segoe UI', sans-serif;
-">
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 25px;
+    transition: 0.3s;
+}
 
-    <!-- Title -->
-    <h2 style="text-align:center; margin-bottom: 20px; color:#333;">
-        📚 {{ note.title or 'Untitled Note' }}
-    </h2>
+.share-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
 
-    <!-- Details -->
-    <div style="line-height: 1.8; font-size: 15px; color:#555;">
-        <p><strong>📖 Subject:</strong> {{ note.subject or 'N/A' }}</p>
-        <p><strong>🏛️ Semester:</strong> {{ note.semester or 'N/A' }}</p>
-        <p><strong>📑 Unit:</strong> {{ note.unit or 'N/A' }}</p>
-        <p><strong>👨‍🏫 Teacher:</strong> {{ note.teacher or 'N/A' }}</p>
-    </div>
+/* ---------- TITLE ---------- */
+.share-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #222;
+}
 
-    <hr style="margin: 20px 0; border:none; border-top:1px solid #eee;">
+/* ---------- DETAILS ---------- */
+.share-details p {
+    margin: 8px 0;
+    color: #555;
+    font-size: 15px;
+}
 
-    <!-- Download Button -->
-    {% if note.share_id %}
-    <a href="/share/{{ note.share_id }}?mode=download"
-       style="
-        display:block;
-        text-align:center;
-        padding:12px;
-        background: linear-gradient(135deg, #28a745, #20c997);
-        color:white;
-        border-radius:8px;
-        text-decoration:none;
-        font-weight:600;
-        transition:0.3s;
-       "
-       onmouseover="this.style.opacity='0.9'"
-       onmouseout="this.style.opacity='1'"
-    >
-        ⬇️ Download Notes
-    </a>
-    {% else %}
-    <p style="color:red; text-align:center;">⚠️ Download not available</p>
-    {% endif %}
+/* ---------- BUTTONS ---------- */
+.btn {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
 
-    <!-- Actions -->
-    <div style="margin-top:20px; display:flex; gap:10px; flex-direction:column;">
+.btn-download {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
 
-        <button onclick="copyText()"
-            style="
-            padding:10px;
-            border:none;
-            border-radius:8px;
-            background:#007bff;
-            color:white;
-            font-weight:500;
-            cursor:pointer;
-        ">
-            📤 Copy Share Text
-        </button>
+.btn-download:hover {
+    opacity: 0.9;
+}
 
-        <a href="https://wa.me/?text={{ share_text | urlencode }}%20{{ request.url }}"
-           target="_blank"
-           style="
-            display:block;
-            text-align:center;
-            padding:10px;
-            background:#25D366;
-            color:white;
-            border-radius:8px;
-            text-decoration:none;
-            font-weight:500;
-        ">
-            📲 Share on WhatsApp
+.btn-copy {
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-copy:hover {
+    background: #0069d9;
+}
+
+.btn-whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    background: #1ebe5d;
+}
+
+/* ---------- ACTIONS ---------- */
+.actions {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+    .share-container {
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    .share-title {
+        font-size: 18px;
+    }
+
+    .share-details p {
+        font-size: 14px;
+    }
+}
+</style>
+
+
+<div class="share-container">
+
+    <div class="share-card">
+
+        <!-- Title -->
+        <h2 class="share-title">
+            📚 {{ note.title or 'Untitled Note' }}
+        </h2>
+
+        <!-- Details -->
+        <div class="share-details">
+            <p><strong>📖 Subject:</strong> {{ note.subject or 'N/A' }}</p>
+            <p><strong>🏛️ Semester:</strong> {{ note.semester or 'N/A' }}</p>
+            <p><strong>📑 Unit:</strong> {{ note.unit or 'N/A' }}</p>
+            <p><strong>👨‍🏫 Teacher:</strong> {{ note.teacher or 'N/A' }}</p>
+            <p><strong>📥 Downloads:</strong> {{ note.downloads or 0 }}</p>
+        </div>
+
+        <hr style="margin:20px 0; border:none; border-top:1px solid #eee;">
+
+        <!-- Download -->
+        {% if note.share_id %}
+        <a href="/share/{{ note.share_id }}?mode=download" class="btn btn-download">
+            ⬇️ Download Notes
         </a>
+        {% else %}
+        <p style="color:red; text-align:center;">⚠️ Download not available</p>
+        {% endif %}
+
+        <!-- Actions -->
+        <div class="actions">
+
+            <button onclick="copyText()" class="btn btn-copy">
+                📤 Copy Share Text
+            </button>
+
+            <a href="https://wa.me/?text={{ share_text | urlencode }}%20{{ request.url }}"
+               target="_blank"
+               class="btn btn-whatsapp">
+                📲 Share on WhatsApp
+            </a>
+
+        </div>
 
     </div>
 
 </div>
 
+
 <script>
 function copyText() {
     navigator.clipboard.writeText({{ share_text | tojson }});
-    alert("✅ Copied!");
+    
+    // better UX than alert
+    const msg = document.createElement("div");
+    msg.innerText = "✅ Copied!";
+    msg.style.position = "fixed";
+    msg.style.bottom = "20px";
+    msg.style.left = "50%";
+    msg.style.transform = "translateX(-50%)";
+    msg.style.background = "#333";
+    msg.style.color = "#fff";
+    msg.style.padding = "10px 20px";
+    msg.style.borderRadius = "6px";
+    msg.style.zIndex = "9999";
+
+    document.body.appendChild(msg);
+
+    setTimeout(() => {
+        msg.remove();
+    }, 2000);
 }
 </script>
