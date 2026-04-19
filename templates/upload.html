@@ -16,7 +16,7 @@
 
         <!-- SEM -->
         <label>Semester</label>
-        <select name="semester" id="semester" onchange="updateSubjects()">
+        <select name="semester" id="semester">
           {% for i in range(1,9) %}
           <option value="{{i}}">Semester {{i}}</option>
           {% endfor %}
@@ -54,76 +54,122 @@
 </section>
 
 <script>
+/* =========================
+   SUBJECT HANDLER
+========================= */
 const SUBJECTS = {{ subjects | tojson if subjects else '{}' }};
 
 function updateSubjects(){
-  let sem = document.getElementById("semester").value;
-  let subject = document.getElementById("subject");
-  subject.innerHTML="";
+  const sem = document.getElementById("semester").value;
+  const subject = document.getElementById("subject");
+
+  subject.innerHTML = "";
 
   if(SUBJECTS[sem]){
-    SUBJECTS[sem].forEach(s=>{
-      let opt=document.createElement("option");
-      opt.value=s;
-      opt.text=s;
+    SUBJECTS[sem].forEach(s => {
+      let opt = document.createElement("option");
+      opt.value = s;
+      opt.text = s;
       subject.appendChild(opt);
     });
   }
 }
 
-window.onload=updateSubjects;
+window.onload = updateSubjects;
+document.getElementById("semester").addEventListener("change", updateSubjects);
 
-/* FILE VALIDATION */
-const fileInput=document.getElementById("fileInput");
-const fileInfo=document.getElementById("fileInfo");
-const errorMsg=document.getElementById("errorMsg");
 
-fileInput.addEventListener("change",()=>{
-  let file=fileInput.files[0];
+/* =========================
+   FILE HANDLER
+========================= */
+const fileInput = document.getElementById("fileInput");
+const fileInfo = document.getElementById("fileInfo");
+const errorMsg = document.getElementById("errorMsg");
 
-  if(file){
-    if(file.size > 100*1024*1024){
-      errorMsg.innerText="File too large (Max 100MB)";
-      fileInput.value="";
-      return;
-    }
+function handleFile(file){
+  if(!file) return;
 
-    errorMsg.innerText="";
-    fileInfo.innerText="Selected: "+file.name;
+  // size check
+  if(file.size > 100 * 1024 * 1024){
+    errorMsg.innerText = "File too large (Max 100MB)";
+    fileInput.value = "";
+    fileInfo.innerText = "";
+    return;
+  }
+
+  // type check (optional)
+  if(!file.name.toLowerCase().endsWith(".pdf")){
+    errorMsg.innerText = "Only PDF files allowed";
+    fileInput.value = "";
+    fileInfo.innerText = "";
+    return;
+  }
+
+  errorMsg.innerText = "";
+  const size = (file.size / (1024*1024)).toFixed(2);
+  fileInfo.innerText = `Selected: ${file.name} (${size} MB)`;
+}
+
+/* input change */
+fileInput.addEventListener("change", () => {
+  handleFile(fileInput.files[0]);
+});
+
+
+/* =========================
+   DRAG & DROP (FIXED)
+========================= */
+const dropArea = document.getElementById("dropArea");
+
+["dragenter","dragover"].forEach(evt => {
+  dropArea.addEventListener(evt, e => {
+    e.preventDefault();
+    e.stopPropagation();
+    dropArea.classList.add("active");
+  });
+});
+
+["dragleave","drop"].forEach(evt => {
+  dropArea.addEventListener(evt, e => {
+    e.preventDefault();
+    e.stopPropagation();
+    dropArea.classList.remove("active");
+  });
+});
+
+/* DROP EVENT */
+dropArea.addEventListener("drop", e => {
+  const files = e.dataTransfer.files;
+
+  if(files.length > 0){
+    const file = files[0];
+
+    // SAFE assignment (important fix)
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    fileInput.files = dt.files;
+
+    handleFile(file);
   }
 });
 
-/* DRAG DROP */
-const dropArea=document.getElementById("dropArea");
 
-dropArea.addEventListener("dragover",(e)=>{
-  e.preventDefault();
-  dropArea.classList.add("active");
-});
+/* =========================
+   PROGRESS (FAKE UI)
+========================= */
+document.getElementById("uploadForm").addEventListener("submit", () => {
+  const bar = document.getElementById("progressBar");
+  const box = document.getElementById("progressContainer");
 
-dropArea.addEventListener("dragleave",()=>{
-  dropArea.classList.remove("active");
-});
+  box.style.display = "block";
 
-dropArea.addEventListener("drop",(e)=>{
-  e.preventDefault();
-  dropArea.classList.remove("active");
-  fileInput.files=e.dataTransfer.files;
-});
+  let width = 0;
 
-/* PROGRESS */
-document.getElementById("uploadForm").addEventListener("submit",()=>{
-  let bar=document.getElementById("progressBar");
-  let box=document.getElementById("progressContainer");
-
-  box.style.display="block";
-
-  let w=0;
-  let i=setInterval(()=>{
-    if(w>=95) clearInterval(i);
-    w+=5;
-    bar.style.width=w+"%";
-  },150);
+  const interval = setInterval(() => {
+    if(width >= 95) clearInterval(interval);
+    width += 3;
+    bar.style.width = width + "%";
+  }, 120);
 });
 </script>
 

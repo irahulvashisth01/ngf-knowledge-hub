@@ -124,13 +124,8 @@ crossorigin="anonymous"></script>
       <div class="social-icons">
 
         <!-- Instagram -->
-        <a href="https://instagram.com/your_username" target="_blank">
+        <a href="https://instagram.com/ngf_knowledge_hub" target="_blank">
           <i class="fab fa-instagram"></i>
-        </a>
-
-        <!-- GitHub -->
-        <a href="https://github.com/irahulvashisth01" target="_blank">
-          <i class="fab fa-github"></i>
         </a>
 
         <!-- Telegram -->
@@ -156,10 +151,32 @@ crossorigin="anonymous"></script>
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
-  <a href="/"><i class="fas fa-home"></i>Home</a>
-  <a href="/btech"><i class="fas fa-book"></i>Notes</a>
-  <a href="/upload"><i class="fas fa-upload"></i>Upload</a>
-  <a href="/login"><i class="fas fa-user"></i>Login</a>
+  <a href="/" class="nav-item">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+
+  <a href="/btech" class="nav-item">
+    <i class="fas fa-book"></i>
+    <span>Notes</span>
+  </a>
+
+  <a href="/upload" class="nav-item">
+    <i class="fas fa-upload"></i>
+    <span>Upload</span>
+  </a>
+
+  {% if session.get('user') %}
+    <a href="/profile" class="nav-item">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </a>
+  {% else %}
+    <a href="/login" class="nav-item">
+      <i class="fas fa-user"></i>
+      <span>Login</span>
+    </a>
+  {% endif %}
 </div>
 
 <!-- JS -->
