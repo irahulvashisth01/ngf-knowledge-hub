@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | NGF Knowledge Hub{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+  <!-- HERO -->
+  <div class="dashboard-hero">
+    <h2>Welcome {{ session['user'] }} 👋</h2>
+    <p>Explore, upload and manage your notes easily</p>
+  </div>
+
+  <!-- CARDS -->
+  <div class="dashboard-container">
+    <div class="dashboard-grid">
+
+      <a href="/btech" class="dashboard-card">
+        <i class="fas fa-book"></i>
+        <h3>B.Tech Notes</h3>
+      </a>
+
+      <a href="/upload" class="dashboard-card">
+        <i class="fas fa-upload"></i>
+        <h3>Upload Notes</h3>
+      </a>
+
+      {% if session.get('role') == 'admin' %}
+      <a href="/admin" class="dashboard-card admin">
+        <i class="fas fa-user-shield"></i>
+        <h3>Admin Panel</h3>
+      </a>
+      {% endif %}
+
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="dashboard-gallery">
+    <h3>📸 Student Experience</h3>
+
+    <div class="gallery-grid">
+      <img src="{{ url_for('static', filename='images/study1.jpg') }}" alt="Study">
+      <img src="{{ url_for('static', filename='images/group.jpg') }}" alt="Group">
+      <img src="{{ url_for('static', filename='images/laptop.jpg') }}" alt="Laptop">
+      <img src="{{ url_for('static', filename='images/student.jpg') }}" alt="Student">
+    </div>
+  </div>
+
+</section>
+
+{% endblock %}

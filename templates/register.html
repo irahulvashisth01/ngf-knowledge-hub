@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Register | NGF Knowledge Hub{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+  <div class="auth-container">
+
+    <!-- LEFT -->
+    <div class="auth-left">
+      <h1>NGF Knowledge Hub</h1>
+      <p>Create your account & start learning 📚</p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="auth-right">
+
+      <div class="auth-card">
+
+        <h2>📝 Register</h2>
+
+        <form method="POST">
+
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" name="name" required placeholder=" ">
+            <label>Full Name</label>
+          </div>
+
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" required placeholder=" ">
+            <label>Email Address</label>
+          </div>
+
+          <div class="input-group">
+            <i class="fas fa-phone"></i>
+            <input type="text" name="mobile" required placeholder=" ">
+            <label>Mobile Number</label>
+          </div>
+
+          <button class="btn primary">Create Account</button>
+
+        </form>
+
+        <p class="auth-link">
+          Already have an account?
+          <a href="/login">Login</a>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}

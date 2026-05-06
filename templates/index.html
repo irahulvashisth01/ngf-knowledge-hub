@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Home | NGF Knowledge Hub{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- HERO -->
+<section class="hero fade-show">
+  <div>
+    <h1>NGF Knowledge Hub</h1>
+    <p>Learn Smart. Grow Faster 📚</p>
+
+    <a href="/btech" class="btn primary">Explore Notes</a>
+  </div>
+</section>
+
+<!-- CARDS -->
+<div class="container">
+  <div class="grid zoom">
+
+    <a href="/btech" class="card">
+      <i class="fas fa-book"></i>
+      <h3>B.Tech Notes</h3>
+    </a>
+
+    <a href="/upload" class="card">
+      <i class="fas fa-upload"></i>
+      <h3>Upload Notes</h3>
+    </a>
+
+    {% if session.get('role') == 'admin' %}
+    <a href="/admin" class="card">
+      <i class="fas fa-user-shield"></i>
+      <h3>Admin Panel</h3>
+    </a>
+    {% endif %}
+
+  </div>
+</div>
+
+<section class="btech-page">
+
+  <!-- MAIN -->
+  <div class="container">
+
+    <div class="grid">
+      {% for i in range(1,9) %}
+      <a href="/semester/{{i}}" class="card">
+        <div class="card-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h3>Semester {{i}}</h3>
+        <p>Notes • PYQs • Syllabus</p>
+      </a>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SEARCH -->
+<form method="GET" action="/" class="search-box fade-up">
+
+    <input type="text" name="q" placeholder="Search notes..." value="{{ query }}">
+
+    <select name="semester">
+        <option value="">All Semesters</option>
+        {% for sem in subjects.keys() %}
+        <option value="{{ sem }}" {% if selected_sem == sem|string %}selected{% endif %}>
+            Semester {{ sem }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <select name="subject">
+        <option value="">All Subjects</option>
+        {% for sem, subs in subjects.items() %}
+            {% for sub in subs %}
+            <option value="{{ sub }}" {% if selected_sub == sub %}selected{% endif %}>
+                {{ sub }}
+            </option>
+            {% endfor %}
+        {% endfor %}
+    </select>
+
+    <button type="submit">Search</button>
+
+</form>
+
+<!-- NOTES -->
+<div class="notes-container fade-up">
+
+    {% for note in notes %}
+    <div class="note-card zoom">
+        <h3>{{ note.title }}</h3>
+        <p>📘 {{ note.subject }}</p>
+        <p>🎓 Semester {{ note.semester }}</p>
+        <p>⬇ {{ note.downloads }}</p>
+
+        <div class="note-actions">
+            <a href="/view/{{ note.filename }}">View</a>
+            <a href="/download/{{ note.filename }}">Download</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if not notes %}
+    <p style="text-align:center;">No notes found 😢</p>
+    {% endif %}
+
+</div>
+
+<!-- PAGINATION -->
+<div class="pagination fade-up">
+
+    {% if page > 1 %}
+    <a href="?page={{ page-1 }}">⬅ Prev</a>
+    {% endif %}
+
+    {% for p in range(1, total_pages+1) %}
+        <a href="?page={{ p }}" class="{% if p == page %}active{% endif %}">
+           {{ p }}
+        </a>
+    {% endfor %}
+
+    {% if page < total_pages %}
+    <a href="?page={{ page+1 }}">Next ➡</a>
+    {% endif %}
+
+</div>
+
+<!-- STATS -->
+<section class="stats fade-up">
+  <div class="stat-box">500+ Notes</div>
+  <div class="stat-box">100+ Subjects</div>
+  <div class="stat-box">10K+ Downloads</div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery fade-up">
+  <h2>Campus Life 📸</h2>
+
+  <div class="gallery-grid">
+    <img src="{{ url_for('static', filename='images/Radio_NGF.jpg') }}">
+    <img src="{{ url_for('static', filename='images/study1.jpg') }}">
+    <img src="{{ url_for('static', filename='images/group.jpg') }}">
+    <img src="{{ url_for('static', filename='images/library.jpg') }}">
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features fade-up">
+  <h2>Why NGF Knowledge Hub?</h2>
+
+  <div class="feature-grid">
+    <div class="feature-card">📚 All Subjects</div>
+    <div class="feature-card">⚡ Fast Access</div>
+    <div class="feature-card">🔐 Secure</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta fade-up">
+  <h2>Start Learning Today 🚀</h2>
+  <a href="/btech" class="btn primary">Get Started</a>
+</section>
+
+<!-- ADS -->
+<div style="text-align:center;margin:30px;">
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-9251214893649855"
+data-ad-slot="1234567890"
+data-ad-format="auto"></ins>
+</div>
+
+<script>
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+document.querySelectorAll('.fade-up, .zoom').forEach(el=>{
+  observer.observe(el);
+});
+</script>
+
+{% endblock %}

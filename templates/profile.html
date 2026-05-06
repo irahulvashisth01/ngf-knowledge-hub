@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<div class="profile-wrapper">
+
+    <div class="profile-card">
+
+        <!-- Avatar -->
+        <div class="profile-avatar">
+            <img src="https://ui-avatars.com/api/?name={{ user }}&background=4CAF50&color=fff&size=120" alt="Profile">
+        </div>
+
+        <!-- Info -->
+        <h2>{{ user }}</h2>
+        <p class="role-badge">{{ session.get('role') }}</p>
+
+        <div class="profile-details">
+            <div class="detail">
+                <span>Name</span>
+                <strong>{{ user }}</strong>
+            </div>
+
+            <div class="detail">
+                <span>Role</span>
+                <strong>{{ session.get('role') }}</strong>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <a href="/logout" class="logout-btn">Logout</a>
+
+    </div>
+
+</div>
+
+{% endblock %}

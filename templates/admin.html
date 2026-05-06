@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard | NGF Knowledge Hub{% endblock %}
+
+{% block content %}
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>👑 Admin</h2>
+
+    <a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
+    <a href="#pending"><i class="fas fa-clock"></i> Pending</a>
+    <a href="#approved"><i class="fas fa-check"></i> Approved</a>
+    <a href="#users"><i class="fas fa-users"></i> Users</a>
+    <a href="/dashboard"><i class="fas fa-arrow-left"></i> Back</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+
+    <!-- HEADER -->
+    <div class="admin-header">
+      <h1>Admin Dashboard</h1>
+      <p>Manage platform efficiently ⚡</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat-card">📄 {{pending_notes|length}} <span>Pending</span></div>
+      <div class="stat-card">📚 {{approved_notes|length}} <span>Approved</span></div>
+      <div class="stat-card">👥 {{users|length}} <span>Users</span></div>
+    </div>
+
+    <!-- PENDING -->
+    <div class="section" id="pending">
+      <h3>📄 Pending Notes</h3>
+
+      <table>
+        <tr>
+          <th>Title</th>
+          <th>Subject</th>
+          <th>Sem</th>
+          <th>Action</th>
+        </tr>
+
+        {% for n in pending_notes %}
+        <tr>
+          <td>{{n['title']}}</td>
+          <td>{{n['subject']}}</td>
+          <td>{{n['semester']}}</td>
+          <td>
+            <a href="/approve/{{n['id']}}" class="btn success">Approve</a>
+            <a href="/delete/{{n['id']}}" class="btn danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <!-- APPROVED -->
+    <div class="section" id="approved">
+      <h3>📚 Approved Notes</h3>
+
+      <table>
+        {% for n in approved_notes %}
+        <tr>
+          <td>{{n['title']}}</td>
+          <td>
+            <a href="/delete/{{n['id']}}" class="btn danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <!-- USERS -->
+    <div class="section" id="users">
+      <h3>👥 Users</h3>
+
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+
+        {% for u in users %}
+        <tr>
+          <td>{{u['name']}}</td>
+          <td>{{u['role']}}</td>
+          <td>
+            {% if u['role']=='user' %}
+              <a href="/make_admin/{{u['id']}}" class="btn primary">Make Admin</a>
+            {% else %}
+              <a href="/remove_admin/{{u['id']}}" class="btn danger">Remove</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+  </main>
+
+</div>
+
+{% endblock %}

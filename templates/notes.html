@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Notes | NGF Knowledge Hub{% endblock %}
+
+{% block content %}
+
+<section class="notes-page">
+
+  <!-- HEADER -->
+  <div class="notes-header">
+    <h2>📚 {{ subject }} Resources</h2>
+  </div>
+
+  <!-- 🔥 TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('notes')">📚 Notes</button>
+    <button class="tab" onclick="switchTab('pyqs')">📄 PYQs</button>
+    <button class="tab" onclick="switchTab('projects')">🚀 Projects</button>
+  </div>
+
+  <!-- 🎯 FILTERS -->
+  <div class="filters">
+    <select onchange="applyFilter(this.value, 'lang')">
+      <option value="">All Languages</option>
+      <option>Python</option>
+      <option>C</option>
+      <option>C++</option>
+      <option>Java</option>
+      <option>JavaScript</option>
+      <option>React</option>
+    </select>
+
+    <select onchange="applyFilter(this.value, 'level')">
+      <option value="">All Levels</option>
+      <option>Beginner</option>
+      <option>Intermediate</option>
+      <option>Advanced</option>
+    </select>
+  </div>
+
+  <!-- 🔥 TRENDING -->
+  {% if top_notes %}
+  <div class="top-section">
+    <h3>🔥 Trending</h3>
+
+    <div class="notes-grid">
+      {% for t in top_notes %}
+      <div class="note-card trending">
+        <span class="badge">🔥 Trending</span>
+        <h4>{{ t['title'] }}</h4>
+        <p>👀 {{ t['views'] }} ⬇ {{ t['downloads'] }}</p>
+
+        <div class="note-actions">
+          <a href="/view/{{ t['filename'] }}" target="_blank">View</a>
+          <a href="/download/{{ t['filename'] }}">Download</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- 📚 NOTES -->
+  <div id="notesTab" class="tab-content active">
+    <div class="notes-grid">
+      {% for n in notes %}
+      <div class="note-card">
+        <span class="badge green">📚</span>
+
+        <h4>{{ n['title'] }}</h4>
+
+        <p class="meta">
+          👀 {{ n['views'] }} &nbsp; ⬇ {{ n['downloads'] }}
+        </p>
+
+        <div class="note-actions">
+          <a href="/view/{{ n['filename'] }}">View</a>
+          <a href="/download/{{ n['filename'] }}">Download</a>
+          <button onclick="shareNote('{{ n['share_id'] }}','{{ n['subject'] }}','{{ n['semester'] }}','{{ n['unit'] or "N/A" }}')">Share</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 📄 PYQS -->
+  <div id="pyqsTab" class="tab-content">
+    <div class="notes-grid">
+      {% for n in pyqs %}
+      <div class="note-card">
+        <span class="badge blue">📄</span>
+        <h4>{{ n['title'] }}</h4>
+        <p>👀 {{ n['views'] }} ⬇ {{ n['downloads'] }}</p>
+
+        <a href="/download/{{ n['filename'] }}">Download</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 🚀 PROJECTS -->
+  <div id="projectsTab" class="tab-content">
+    <div class="notes-grid">
+      {% for n in projects %}
+      <div class="note-card">
+        <span class="badge orange">🚀</span>
+        <h4>{{ n['title'] }}</h4>
+        <p>{{ n['language'] }} • {{ n['level'] }}</p>
+
+        <a href="/view/{{ n['filename'] }}">View</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</section>
+
+<!-- 🔥 JS -->
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'))
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'))
+
+  document.getElementById(tab + "Tab").classList.add('active')
+  event.target.classList.add('active')
+}
+
+function applyFilter(value, type) {
+  const url = new URL(window.location)
+  url.searchParams.set(type, value)
+  window.location = url
+}
+</script>
+
+{% endblock %}

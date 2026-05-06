@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Notes | NGF Knowledge Hub{% endblock %}
+
+{% block content %}
+
+<section class="upload-page">
+
+  <div class="upload-container">
+
+    <div class="upload-card">
+
+      <h2>⬆ Upload Notes</h2>
+
+      <form method="POST" enctype="multipart/form-data" id="uploadForm">
+
+        <!-- SEM -->
+        <label>Semester</label>
+        <select name="semester" id="semester">
+          {% for i in range(1,9) %}
+          <option value="{{i}}">Semester {{i}}</option>
+          {% endfor %}
+        </select>
+
+        <!-- SUBJECT -->
+        <label>Subject</label>
+        <select name="subject" id="subject"></select>
+
+        <!-- FILE -->
+        <label>Upload File</label>
+
+        <div class="drop-area" id="dropArea">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Click or Drag & Drop File</p>
+          <input type="file" name="file" id="fileInput" required>
+        </div>
+
+        <div class="file-info" id="fileInfo"></div>
+        <div class="error" id="errorMsg"></div>
+
+        <!-- PROGRESS -->
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <button class="btn primary">Upload Notes</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+/* =========================
+   SUBJECT HANDLER
+========================= */
+const SUBJECTS = {{ subjects | tojson if subjects else '{}' }};
+
+function updateSubjects(){
+  const sem = document.getElementById("semester").value;
+  const subject = document.getElementById("subject");
+
+  subject.innerHTML = "";
+
+  if(SUBJECTS[sem]){
+    SUBJECTS[sem].forEach(s => {
+      let opt = document.createElement("option");
+      opt.value = s;
+      opt.text = s;
+      subject.appendChild(opt);
+    });
+  }
+}
+
+window.onload = updateSubjects;
+document.getElementById("semester").addEventListener("change", updateSubjects);
+
+
+/* =========================
+   FILE HANDLER
+========================= */
+const fileInput = document.getElementById("fileInput");
+const fileInfo = document.getElementById("fileInfo");
+const errorMsg = document.getElementById("errorMsg");
+
+function handleFile(file){
+  if(!file) return;
+
+  // size check
+  if(file.size > 100 * 1024 * 1024){
+    errorMsg.innerText = "File too large (Max 100MB)";
+    fileInput.value = "";
+    fileInfo.innerText = "";
+    return;
+  }
+
+  // type check (optional)
+  if(!file.name.toLowerCase().endsWith(".pdf")){
+    errorMsg.innerText = "Only PDF files allowed";
+    fileInput.value = "";
+    fileInfo.innerText = "";
+    return;
+  }
+
+  errorMsg.innerText = "";
+  const size = (file.size / (1024*1024)).toFixed(2);
+  fileInfo.innerText = `Selected: ${file.name} (${size} MB)`;
+}
+
+/* input change */
+fileInput.addEventListener("change", () => {
+  handleFile(fileInput.files[0]);
+});
+
+
+/* =========================
+   DRAG & DROP (FIXED)
+========================= */
+const dropArea = document.getElementById("dropArea");
+
+["dragenter","dragover"].forEach(evt => {
+  dropArea.addEventListener(evt, e => {
+    e.preventDefault();
+    e.stopPropagation();
+    dropArea.classList.add("active");
+  });
+});
+
+["dragleave","drop"].forEach(evt => {
+  dropArea.addEventListener(evt, e => {
+    e.preventDefault();
+    e.stopPropagation();
+    dropArea.classList.remove("active");
+  });
+});
+
+/* DROP EVENT */
+dropArea.addEventListener("drop", e => {
+  const files = e.dataTransfer.files;
+
+  if(files.length > 0){
+    const file = files[0];
+
+    // SAFE assignment (important fix)
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    fileInput.files = dt.files;
+
+    handleFile(file);
+  }
+});
+
+
+/* =========================
+   PROGRESS (FAKE UI)
+========================= */
+document.getElementById("uploadForm").addEventListener("submit", () => {
+  const bar = document.getElementById("progressBar");
+  const box = document.getElementById("progressContainer");
+
+  box.style.display = "block";
+
+  let width = 0;
+
+  const interval = setInterval(() => {
+    if(width >= 95) clearInterval(interval);
+    width += 3;
+    bar.style.width = width + "%";
+  }, 120);
+});
+</script>
+
+{% endblock %}

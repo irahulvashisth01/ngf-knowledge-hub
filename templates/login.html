@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Login | NGF Knowledge Hub{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+  <div class="auth-container">
+
+    <!-- LEFT SIDE -->
+    <div class="auth-left">
+      <h1>NGF Knowledge Hub</h1>
+      <p>Learn Smart. Grow Faster 📚</p>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="auth-right">
+
+      <div class="auth-card">
+
+        <h2>🔐 Login</h2>
+
+        <form method="POST">
+
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" name="name" required placeholder=" ">
+            <label>Name</label>
+          </div>
+
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" required placeholder=" ">
+            <label>Email</label>
+          </div>
+
+          <button class="btn primary">Login</button>
+
+        </form>
+
+        <p class="auth-link">
+          Don't have an account?
+          <a href="/register">Create Account</a>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}

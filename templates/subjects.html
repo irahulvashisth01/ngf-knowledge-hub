@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Subjects | NGF Knowledge Hub{% endblock %}
+
+{% block content %}
+
+<section class="subjects-page">
+
+  <div class="subjects-header">
+    <h2>📘 Semester {{ sem }} Subjects</h2>
+  </div>
+
+  <div class="subjects-grid">
+
+    {% for sub in subjects %}
+    <a href="/notes/{{sub}}/{{sem}}" class="subject-card">
+      <i class="fas fa-book"></i>
+      <span>{{ sub }}</span>
+    </a>
+    {% endfor %}
+
+  </div>
+
+</section>
+
+{% endblock %}
