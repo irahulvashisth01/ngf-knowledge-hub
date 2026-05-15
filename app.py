@@ -254,13 +254,46 @@ def notes(subject, sem):
 # ---------------- VIEW (LOGIN REQUIRED) ----------------
 @app.route('/view/<filename>')
 def view_file(filename):
-    return send_from_directory('uploads', filename)
+
+    # Optional login protection
+    # if not login_required():
+    #     return login_required_redirect()
+
+    conn = get_db_connection()
+
+    conn.execute(
+        "UPDATE notes SET views = views + 1 WHERE filename=?",
+        (filename,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return send_from_directory(
+        Config.UPLOAD_FOLDER,
+        filename
+    )
 
 
 # ---------------- DOWNLOAD (PUBLIC) ----------------
 @app.route('/download/<filename>')
 def download_file(filename):
-    return send_from_directory('uploads', filename, as_attachment=True)
+
+    conn = get_db_connection()
+
+    conn.execute(
+        "UPDATE notes SET downloads = downloads + 1 WHERE filename=?",
+        (filename,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return send_from_directory(
+        Config.UPLOAD_FOLDER,
+        filename,
+        as_attachment=True
+    )
 
 # ---------------- SHARE (PUBLIC) ----------------
 @app.route('/share/<share_id>')
@@ -348,6 +381,7 @@ def upload():
 # ---------------- ADMIN PANEL ----------------
 @app.route("/admin")
 def admin():
+
     if not login_required():
         return login_required_redirect()
 
@@ -357,24 +391,65 @@ def admin():
     conn = get_db_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM notes WHERE status='pending'")
+    # Pending Notes
+    cur.execute(
+        "SELECT * FROM notes WHERE status='pending'"
+    )
     pending_notes = cur.fetchall()
 
-    cur.execute("SELECT * FROM notes WHERE status='approved'")
+    # Approved Notes
+    cur.execute(
+        "SELECT * FROM notes WHERE status='approved'"
+    )
     approved_notes = cur.fetchall()
 
+    # Users
     cur.execute("SELECT * FROM users")
     users = cur.fetchall()
+
+    # Total Views
+    total_views = cur.execute(
+        "SELECT SUM(views) FROM notes"
+    ).fetchone()[0] or 0
+
+    # Total Downloads
+    total_downloads = cur.execute(
+        "SELECT SUM(downloads) FROM notes"
+    ).fetchone()[0] or 0
+
+    # Top Viewed Notes
+    top_viewed = cur.execute("""
+        SELECT *
+        FROM notes
+        WHERE status='approved'
+        ORDER BY views DESC
+        LIMIT 5
+    """).fetchall()
+
+    # Top Downloaded Notes
+    top_downloaded = cur.execute("""
+        SELECT *
+        FROM notes
+        WHERE status='approved'
+        ORDER BY downloads DESC
+        LIMIT 5
+    """).fetchall()
 
     conn.close()
 
     return render_template(
         "admin.html",
+
         pending_notes=pending_notes,
         approved_notes=approved_notes,
-        users=users
-    )
+        users=users,
 
+        total_views=total_views,
+        total_downloads=total_downloads,
+
+        top_viewed=top_viewed,
+        top_downloaded=top_downloaded
+    )
 
 # ---------------- ADMIN ACTIONS ----------------
 @app.route("/approve/<int:id>")
