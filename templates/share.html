@@ -1,104 +1,136 @@
-<style>
-/* ---------- GLOBAL ---------- */
-.share-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 25px;
-}
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Notes</title>
 
-.share-card {
-    background: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    padding: 25px;
-    transition: 0.3s;
-}
+    <style>
 
-.share-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-}
+    /* ---------- GLOBAL ---------- */
+    body{
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        margin: 0;
+        padding: 0;
+    }
 
-/* ---------- TITLE ---------- */
-.share-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 22px;
-    color: #222;
-}
-
-/* ---------- DETAILS ---------- */
-.share-details p {
-    margin: 8px 0;
-    color: #555;
-    font-size: 15px;
-}
-
-/* ---------- BUTTONS ---------- */
-.btn {
-    display: block;
-    text-align: center;
-    padding: 12px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-download {
-    background: linear-gradient(135deg, #28a745, #20c997);
-    color: white;
-}
-
-.btn-download:hover {
-    opacity: 0.9;
-}
-
-.btn-copy {
-    background: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-copy:hover {
-    background: #0069d9;
-}
-
-.btn-whatsapp {
-    background: #25D366;
-    color: white;
-}
-
-.btn-whatsapp:hover {
-    background: #1ebe5d;
-}
-
-/* ---------- ACTIONS ---------- */
-.actions {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* ---------- MOBILE ---------- */
-@media (max-width: 600px) {
     .share-container {
-        padding: 15px;
-        margin: 20px auto;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 25px;
     }
 
+    .share-card {
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        padding: 25px;
+        transition: 0.3s;
+    }
+
+    .share-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    }
+
+    /* ---------- TITLE ---------- */
     .share-title {
-        font-size: 18px;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #222;
     }
 
+    /* ---------- DETAILS ---------- */
     .share-details p {
-        font-size: 14px;
+        margin: 10px 0;
+        color: #555;
+        font-size: 15px;
     }
-}
-</style>
 
+    /* ---------- BUTTONS ---------- */
+    .btn {
+        display: block;
+        text-align: center;
+        padding: 14px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+        border: none;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    .btn-download {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+    }
+
+    .btn-download:hover {
+        opacity: 0.9;
+    }
+
+    .btn-copy {
+        background: #007bff;
+        color: white;
+    }
+
+    .btn-copy:hover {
+        background: #0069d9;
+    }
+
+    .btn-share {
+        background: #6f42c1;
+        color: white;
+    }
+
+    .btn-share:hover {
+        background: #5a32a3;
+    }
+
+    .btn-whatsapp {
+        background: #25D366;
+        color: white;
+    }
+
+    .btn-whatsapp:hover {
+        background: #1ebe5d;
+    }
+
+    /* ---------- ACTIONS ---------- */
+    .actions {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 600px) {
+
+        .share-container {
+            padding: 15px;
+            margin: 20px auto;
+        }
+
+        .share-title {
+            font-size: 20px;
+        }
+
+        .share-details p {
+            font-size: 14px;
+        }
+
+    }
+
+    </style>
+
+</head>
+
+<body>
 
 <div class="share-container">
 
@@ -111,35 +143,65 @@
 
         <!-- Details -->
         <div class="share-details">
+
             <p><strong>📖 Subject:</strong> {{ note.subject or 'N/A' }}</p>
+
             <p><strong>🏛️ Semester:</strong> {{ note.semester or 'N/A' }}</p>
+
             <p><strong>📑 Unit:</strong> {{ note.unit or 'N/A' }}</p>
+
             <p><strong>👨‍🏫 Teacher:</strong> {{ note.teacher or 'N/A' }}</p>
+
             <p><strong>📥 Downloads:</strong> {{ note.downloads or 0 }}</p>
+
         </div>
 
         <hr style="margin:20px 0; border:none; border-top:1px solid #eee;">
 
-        <!-- Download -->
+        <!-- Download Button -->
         {% if note.share_id %}
-        <a href="/share/{{ note.share_id }}?mode=download" class="btn btn-download">
+
+        <a href="/share/{{ note.share_id }}?mode=download"
+           class="btn btn-download">
+
             ⬇️ Download Notes
+
         </a>
+
         {% else %}
-        <p style="color:red; text-align:center;">⚠️ Download not available</p>
+
+        <p style="color:red; text-align:center;">
+            ⚠️ Download not available
+        </p>
+
         {% endif %}
 
         <!-- Actions -->
         <div class="actions">
 
-            <button onclick="copyText()" class="btn btn-copy">
-                📤 Copy Share Text
+            <!-- Native Share -->
+            <button onclick="nativeShare()"
+                    class="btn btn-share">
+
+                🚀 Share Anywhere
+
             </button>
 
-            <a href="https://wa.me/?text={{ share_text | urlencode }}%20{{ request.url }}"
+            <!-- Copy -->
+            <button onclick="copyText()"
+                    class="btn btn-copy">
+
+                📋 Copy Share Text
+
+            </button>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/?text={{ share_text | urlencode }}%20{{ request.url | urlencode }}"
                target="_blank"
                class="btn btn-whatsapp">
+
                 📲 Share on WhatsApp
+
             </a>
 
         </div>
@@ -150,26 +212,93 @@
 
 
 <script>
+
+const shareText = `{{ share_text | safe }}`;
+
+const shareUrl = window.location.href;
+
+
+// ---------- Native Share ----------
+async function nativeShare() {
+
+    const shareData = {
+
+        title: "NGF Knowledge Hub",
+
+        text: shareText,
+
+        url: shareUrl
+
+    };
+
+    try {
+
+        if (navigator.share) {
+
+            await navigator.share(shareData);
+
+            showToast("✅ Shared Successfully");
+
+        } else {
+
+            navigator.clipboard.writeText(shareText);
+
+            showToast("✅ Share text copied!");
+
+        }
+
+    } catch (err) {
+
+        console.log(err);
+
+        showToast("❌ Sharing cancelled");
+
+    }
+
+}
+
+
+// ---------- Copy ----------
 function copyText() {
-    navigator.clipboard.writeText({{ share_text | tojson }});
-    
-    // better UX than alert
+
+    navigator.clipboard.writeText(shareText);
+
+    showToast("✅ Copied Successfully");
+
+}
+
+
+// ---------- Toast ----------
+function showToast(message) {
+
     const msg = document.createElement("div");
-    msg.innerText = "✅ Copied!";
+
+    msg.innerText = message;
+
     msg.style.position = "fixed";
     msg.style.bottom = "20px";
     msg.style.left = "50%";
     msg.style.transform = "translateX(-50%)";
     msg.style.background = "#333";
     msg.style.color = "#fff";
-    msg.style.padding = "10px 20px";
-    msg.style.borderRadius = "6px";
+    msg.style.padding = "12px 20px";
+    msg.style.borderRadius = "8px";
+    msg.style.fontSize = "14px";
     msg.style.zIndex = "9999";
+    msg.style.boxShadow = "0 5px 15px rgba(0,0,0,0.2)";
 
     document.body.appendChild(msg);
 
     setTimeout(() => {
+
         msg.remove();
+
     }, 2000);
+
 }
+
 </script>
+
+</body>
+</html>
+```

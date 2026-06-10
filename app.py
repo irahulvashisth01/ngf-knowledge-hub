@@ -298,53 +298,68 @@ def download_file(filename):
 # ---------------- SHARE (PUBLIC) ----------------
 @app.route('/share/<share_id>')
 def share_note(share_id):
-    mode = request.args.get("mode")  # ?mode=download
+
+    mode = request.args.get("mode")
 
     conn = get_db_connection()
-    cur = conn.cursor()
 
-    note = cur.execute(
+    note = conn.execute(
         "SELECT * FROM notes WHERE share_id=?",
         (share_id,)
     ).fetchone()
 
     conn.close()
 
+    # Note not found
     if not note:
-        return "Note not found ❌", 404
+        return "❌ Note not found", 404
 
-    # 🔥 Direct download mode
+    # Direct Download
     if mode == "download":
+
         return send_from_directory(
             Config.UPLOAD_FOLDER,
-            note['filename'],
+            note["filename"],
             as_attachment=True
         )
 
-    # 🔥 Generate Share Text (SAFE)
-    share_text = f"""📚 *Notes Details* 📚
+    # Safe Unit Handling
+    unit = note["unit"] if "unit" in note.keys() and note["unit"] else "N/A"
 
-🏛️ *Semester:* {note['semester']}
-📖 *Subject:* {note['subject']}
-📑 *Unit:* {note['unit'] if 'unit' in note.keys() else 'N/A'}
-💰 *Status:* Free
+    # Share URL
+    share_url = f"https://ngf-knowledge-hub.onrender.com/share/{note['share_id']}"
 
-⬇️ *Download Notes:* https://ngf-knowledge-hub.onrender.com/share/{note['share_id']}?mode=download
+    # Share Text
+    share_text = f"""
+📚 Notes Details
 
----
-🔗 *Important Links:*
+🏛️ Semester: {note['semester']}
+📖 Subject: {note['subject']}
+📑 Unit: {unit}
+💰 Status: Free
 
-🌐 *Official Website:* https://btechnotes.online
-📢 *Telegram Channel:* https://t.me/btechnotesonline
-👥 *WhatsApp Group:* https://chat.whatsapp.com/LeLjTBzZ5en7EJ3LTjPiV6?mode=gi_t
+⬇️ Download Notes:
+{share_url}?mode=download
 
-#BTechNotes #EngineeringNotes #StudyMaterial
+━━━━━━━━━━━━━━━
+
+🌐 Website:
+https://btechnotes.online
+
+📢 Telegram:
+https://t.me/btechnotesonline
+
+👥 WhatsApp:
+https://chat.whatsapp.com/LeLjTBzZ5en7EJ3LTjPiV6
+
+#BTechNotes #EngineeringNotes
 """
 
     return render_template(
         "share.html",
         note=note,
-        share_text=share_text
+        share_text=share_text,
+        share_url=share_url
     )
 
 # ---------------- UPLOAD (LOGIN REQUIRED) ----------------
