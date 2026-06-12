@@ -314,7 +314,13 @@ def share_note(share_id):
     if not note:
         return "❌ Note not found", 404
 
-    # Direct Download
+    # Share URL
+    share_url = (
+        f"https://ngf-knowledge-hub.onrender.com/share/"
+        f"{note['share_id']}"
+    )
+
+    # Download mode
     if mode == "download":
 
         return send_from_directory(
@@ -323,36 +329,17 @@ def share_note(share_id):
             as_attachment=True
         )
 
-    # Safe Unit Handling
-    unit = note["unit"] if "unit" in note.keys() and note["unit"] else "N/A"
+    # Clean Share Text
+    share_text = f"""📚 {note['title']}
 
-    # Share URL
-    share_url = f"https://ngf-knowledge-hub.onrender.com/share/{note['share_id']}"
-
-    # Share Text
-    share_text = f"""
-📚 Notes Details
-
-🏛️ Semester: {note['semester']}
 📖 Subject: {note['subject']}
-📑 Unit: {unit}
-💰 Status: Free
-
-⬇️ Download Notes:
-{share_url}?mode=download
-
-━━━━━━━━━━━━━━━
+🏛️ Semester: {note['semester']}
 
 🌐 Website:
 https://btechnotes.online
 
-📢 Telegram:
-https://t.me/btechnotesonline
-
-👥 WhatsApp:
-https://chat.whatsapp.com/LeLjTBzZ5en7EJ3LTjPiV6
-
-#BTechNotes #EngineeringNotes
+🔗 Open Note:
+{share_url}
 """
 
     return render_template(

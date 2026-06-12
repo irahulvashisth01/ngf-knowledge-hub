@@ -3039,3 +3039,154 @@ hr {
     margin-bottom: 2px;
   }
 }
+
+
+.note-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.note-actions a{
+    text-decoration:none;
+    color:white;
+    padding:10px 16px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.note-actions a:hover{
+    transform:translateY(-2px);
+}
+
+.btn-view{
+    background:linear-gradient(
+        135deg,
+        #6366f1,
+        #4f46e5
+    );
+}
+
+.btn-download{
+    background:linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+}
+
+.btn-share{
+    background:linear-gradient(
+        135deg,
+        #8b5cf6,
+        #7c3aed
+    );
+}
+
+/* ===== WELCOME SECTION ===== */
+
+.welcome-section{
+    padding:70px 20px;
+    text-align:center;
+    background:linear-gradient(
+        135deg,
+        #f8fbff,
+        #eef5ff
+    );
+    border-radius:25px;
+    margin:25px auto;
+}
+
+.welcome-content{
+    max-width:850px;
+    margin:auto;
+}
+
+.welcome-badge{
+    display:inline-block;
+    padding:8px 18px;
+    background:#dbeafe;
+    color:#2563eb;
+    border-radius:50px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.welcome-content h1{
+    font-size:48px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:15px;
+}
+
+.welcome-content h1 span{
+    color:#2563eb;
+}
+
+.welcome-content p{
+    font-size:18px;
+    color:#6b7280;
+    line-height:1.8;
+    max-width:700px;
+    margin:auto;
+}
+
+.welcome-buttons{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn-primary,
+.btn-secondary{
+    padding:14px 28px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+}
+
+.btn-secondary{
+    background:white;
+    color:#2563eb;
+    border:2px solid #2563eb;
+}
+
+.btn-secondary:hover{
+    background:#2563eb;
+    color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .welcome-section{
+        padding:50px 15px;
+    }
+
+    .welcome-content h1{
+        font-size:34px;
+    }
+
+    .welcome-content p{
+        font-size:16px;
+    }
+
+}
