@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, session, url_for, send_from_directory
+from werkzeug.utils import secure_filename
 import sqlite3
 import os
 
 from config import Config
-from database.db import init_db
+from database.db import init_db, create_user, verify_user, create_note
 
 # ---------------- APP SETUP ----------------
 app = Flask(__name__)
@@ -13,30 +14,26 @@ os.makedirs(Config.UPLOAD_FOLDER, exist_ok=True)
 
 init_db()
 
+# NOTE: the old create_default_admin() here was removed — init_db() in
+# db.py already seeds the default admin, and this copy would have crashed
+# with a NOT NULL constraint on `password` if it had ever actually run
+# (it never inserted a password).
+
+ALLOWED_EXTENSIONS = {"pdf", "doc", "docx", "ppt", "pptx", "txt", "zip"}
+
+
+def allowed_file(filename):
+    return (
+        "." in filename
+        and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+    )
+
 
 # ---------------- DB HELPER ----------------
 def get_db_connection():
     conn = sqlite3.connect(Config.DATABASE)
     conn.row_factory = sqlite3.Row
     return conn
-
-
-# ---------------- CREATE DEFAULT ADMIN ----------------
-def create_default_admin():
-    conn = get_db_connection()
-    cur = conn.cursor()
-
-    cur.execute("SELECT * FROM users WHERE email=?", ("admin@gmail.com",))
-    if not cur.fetchone():
-        cur.execute("""
-        INSERT INTO users(name,email,mobile,role)
-        VALUES(?,?,?,?)
-        """, ("Admin", "admin@gmail.com", "9999999999", "admin"))
-        conn.commit()
-
-    conn.close()
-
-create_default_admin()
 
 
 # ---------------- AUTH HELPERS ----------------
@@ -130,21 +127,15 @@ def register():
         name = request.form.get("name")
         email = request.form.get("email")
         mobile = request.form.get("mobile")
+        password = request.form.get("password")
 
-        conn = get_db_connection()
-        cur = conn.cursor()
+        if not name or not email or not mobile or not password:
+            return "⚠️ All fields are required"
 
-        cur.execute("SELECT * FROM users WHERE email=?", (email,))
-        if cur.fetchone():
-            conn.close()
+        user_id = create_user(name, email, mobile, password)
+
+        if user_id is None:
             return "⚠️ Email already exists"
-
-        cur.execute(
-            "INSERT INTO users(name,email,mobile) VALUES(?,?,?)",
-            (name, email, mobile)
-        )
-        conn.commit()
-        conn.close()
 
         return redirect(url_for("login"))
 
@@ -156,17 +147,13 @@ def register():
 def login():
     if request.method == "POST":
         email = request.form.get("email")
-        name = request.form.get("name")
+        password = request.form.get("password")
 
-        conn = get_db_connection()
-        cur = conn.cursor()
+        user = verify_user(email, password)
 
-        cur.execute("SELECT * FROM users WHERE email=?", (email,))
-        user = cur.fetchone()
-        conn.close()
-
-        if user and user["name"] == name:
+        if user:
             session["user"] = user["name"]
+            session["user_id"] = user["id"]
             session["role"] = user["role"]
 
             return redirect(request.args.get("next") or url_for("dashboard"))
@@ -316,7 +303,7 @@ def share_note(share_id):
 
     # Share URL
     share_url = (
-        f"https://ngf-knowledge-hub.onrender.com/share/"
+        f"https://btechnotes.online/share/"
         f"{note['share_id']}"
     )
 
@@ -357,23 +344,48 @@ def upload():
 
     if request.method == "POST":
         file = request.files.get("file")
+        title = request.form.get("title")
         subject = request.form.get("subject")
         semester = request.form.get("semester")
+        unit = request.form.get("unit")
+        teacher = request.form.get("teacher")
 
         if not file or file.filename == "":
             return "❌ No file selected"
 
-        filename = file.filename
-        file.save(os.path.join(Config.UPLOAD_FOLDER, filename))
+        if not allowed_file(file.filename):
+            return "❌ File type not allowed"
 
-        conn = get_db_connection()
-        conn.execute("""
-            INSERT INTO notes(title, filename, subject, semester, uploaded_by)
-            VALUES(?,?,?,?,?)
-        """, (filename, filename, subject, semester, session["user"]))
+        if not subject or not semester:
+            return "❌ Subject and semester are required"
 
-        conn.commit()
-        conn.close()
+        filename = secure_filename(file.filename)
+
+        # Avoid overwriting an existing file with the same name
+        base, ext = os.path.splitext(filename)
+        save_path = os.path.join(Config.UPLOAD_FOLDER, filename)
+        counter = 1
+        while os.path.exists(save_path):
+            filename = f"{base}_{counter}{ext}"
+            save_path = os.path.join(Config.UPLOAD_FOLDER, filename)
+            counter += 1
+
+        file.save(save_path)
+
+        file_size = os.path.getsize(save_path)
+        file_type = ext.lstrip(".").lower()
+
+        create_note(
+            title=title or filename,
+            filename=filename,
+            subject=subject,
+            semester=int(semester),
+            user_id=session["user_id"],
+            unit=unit,
+            teacher=teacher,
+            file_size=file_size,
+            file_type=file_type
+        )
 
         return "✅ Uploaded (Pending Approval)"
 
@@ -502,6 +514,7 @@ def remove_admin(id):
     user = conn.execute("SELECT * FROM users WHERE id=?", (id,)).fetchone()
 
     if user["name"] == session["user"]:
+        conn.close()
         return "⚠️ Cannot remove yourself"
 
     conn.execute("UPDATE users SET role='user' WHERE id=?", (id,))
@@ -509,12 +522,6 @@ def remove_admin(id):
     conn.close()
 
     return redirect("/admin")
-
-
-# ---------------- ERROR ----------------
-@app.errorhandler(404)
-def page_not_found(e):
-    return "<h2>404 - Page Not Found</h2>", 404
 
 
 # ---------------- LEGAL & INFO PAGES ----------------

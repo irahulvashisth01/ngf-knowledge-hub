@@ -1,7 +1,7 @@
 import sqlite3
 import uuid
 from config import Config
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # ---------------- DB CONNECTION ----------------
 def get_db():
@@ -27,6 +27,8 @@ def init_db():
         email TEXT UNIQUE NOT NULL,
         mobile TEXT NOT NULL,
 
+        password TEXT NOT NULL,
+
         role TEXT NOT NULL DEFAULT 'user',
 
         profile_image TEXT DEFAULT NULL,
@@ -34,6 +36,10 @@ def init_db():
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
+    # NOTE: password is already defined in CREATE TABLE above.
+    # Removed the redundant/always-failing ALTER TABLE ADD COLUMN password
+    # that used to sit here — it never did anything useful and its bare
+    # except swallowed all errors, not just "duplicate column".
 
     # ==================================================
     # NOTES TABLE
@@ -154,14 +160,15 @@ def init_db():
     if not cur.fetchone():
 
         cur.execute("""
-        INSERT INTO users(name,email,mobile,role)
-        VALUES(?,?,?,?)
+        INSERT INTO users(name,email,mobile,password,role)
+        VALUES(?,?,?,?,?)
         """, (
-            "Admin",
-            "admin@gmail.com",
-            "9999999999",
-            "admin"
-        ))
+                "Admin",
+                "admin@gmail.com",
+                "9999999999",
+                generate_password_hash("Admin@123"),
+                "admin"
+            ))
 
         print("✅ Default admin created")
 
@@ -230,6 +237,63 @@ def generate_unique_share_id(cur):
 
         if not exists:
             return share_id
+
+
+# ==================================================
+# CREATE USER  (handles registration properly, with hashed password)
+# ==================================================
+def create_user(name, email, mobile, password):
+    """
+    Creates a new user with a securely hashed password.
+    Returns the new user's id, or None if the email is already taken.
+    """
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("SELECT id FROM users WHERE email=?", (email,))
+    if cur.fetchone():
+        conn.close()
+        return None
+
+    cur.execute("""
+    INSERT INTO users(name, email, mobile, password)
+    VALUES(?,?,?,?)
+    """, (
+        name,
+        email,
+        mobile,
+        generate_password_hash(password)
+    ))
+
+    conn.commit()
+    user_id = cur.lastrowid
+    conn.close()
+
+    return user_id
+
+
+# ==================================================
+# VERIFY USER  (for login — actually checks the password)
+# ==================================================
+def verify_user(email, password):
+    """
+    Looks up a user by email and checks the given password against
+    the stored hash. Returns the user row on success, None otherwise.
+    """
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM users WHERE email=?", (email,))
+    user = cur.fetchone()
+
+    conn.close()
+
+    if user and check_password_hash(user["password"], password):
+        return user
+
+    return None
 
 
 # ==================================================
